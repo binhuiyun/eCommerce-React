@@ -70,14 +70,24 @@ const UserInfoForm = ({ status, msg }) => {
     else if (status == "forgot-password") forgotPassword(e);
   };
 
-  function login(e) {
+  async function login(e) {
     e.preventDefault();
-    axios.post("/login", { email, password });
+    try {
+      await axios.post("/", { email, password });
+      console.log("Login successful");
+    } catch (err) {
+      console.log("Login failed", err);
+    }
   }
 
-  function signUp(e) {
+  async function signUp(e) {
     e.preventDefault();
-    axios.post("/signup", { email, password });
+    try {
+      await axios.post("/signup", { email, password });
+      console.log("Sign up successful");
+    } catch (err) {
+      console.log("Sign up failed", err);
+    }
   }
 
   function forgotPassword(e) {
