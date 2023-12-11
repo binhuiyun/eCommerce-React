@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const UserInfoForm = ({ status, msg }) => {
@@ -61,12 +62,38 @@ const UserInfoForm = ({ status, msg }) => {
 
     if (!isEmailValid(emailValidation.email)) return;
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (status == "login") login(e);
+    else if (status == "signup") signUp(e);
+    else if (status == "forgot-password") forgotPassword(e);
+  };
+
+  function login(e) {
+    e.preventDefault();
+    axios.post("/login", { email, password });
+  };
+
+  function signUp(e) {
+    e.preventDefault();
+    axios.post("/signup", { email, password });
+  };
+
+  function forgotPassword(e) {
+    e.preventDefault();
+    axios.post("/forgot-password", { email });
+  };
+
   return (
     <div className="flex m-auto">
       <div className="">
         <div className="flex text-sm">
           <div className="min-w-sm max-w-xl w-screen">
-            <form className="bg-white shadow-lg rounded px-10 pt-6 pb-8 mb-4">
+            <form
+              className="bg-white shadow-lg rounded px-10 pt-6 pb-8 mb-4"
+              onSubmit={handleSubmit}
+            >
               <label className="flex text-3xl font-bold justify-center mt-8">
                 {msg.title}
               </label>
@@ -128,7 +155,6 @@ const UserInfoForm = ({ status, msg }) => {
                 <button
                   className="flex w-full font-bold text-sm bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center py-3 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
-                  onClick={onSubmit}
                 >
                   {msg.buttonText}
                 </button>
