@@ -73,17 +73,17 @@ const UserInfoForm = ({ status, msg }) => {
   function login(e) {
     e.preventDefault();
     axios.post("/login", { email, password });
-  };
+  }
 
   function signUp(e) {
     e.preventDefault();
     axios.post("/signup", { email, password });
-  };
+  }
 
   function forgotPassword(e) {
     e.preventDefault();
     axios.post("/forgot-password", { email });
-  };
+  }
 
   return (
     <div className="flex m-auto">
