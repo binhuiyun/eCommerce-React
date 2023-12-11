@@ -2,19 +2,18 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import UserInfoForm from "./layout/UserInfoForm";
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   return (
     <div className="w-screen h-screen flex flex-col">
       <Header />
 
       <UserInfoForm
-        status="login"
+        status="forgot-password"
         msg={{
-          title: "Sign in into your account",
-          buttonText: "Sign in",
-          message: "Don't have an account?",
-          linkText: "Sign up",
-          link: "/signup",
+          title: "Update your password",
+          buttonText: "Update password",
+          message:
+            "Enter your email address, we will send you a link to reset your password.",
         }}
       />
 

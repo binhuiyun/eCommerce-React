@@ -38,7 +38,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center pr-14 space-x-8">
-          <Link to={'/login'} className="flex items-center space-x-3">
+          <Link to={"/login"} className="flex items-center space-x-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -58,7 +58,7 @@ export default function Header() {
             </span>
           </Link>
 
-          <Link to={'/cart'} className="flex space-x-3 items-center">
+          <Link to={"/cart"} className="flex space-x-3 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
