@@ -5,7 +5,7 @@ export default function Footer() {
         <p className="text-base text-white caret-transparent">
           ©2022 All Rights Reserved.
         </p>
-        <div class="flex flex-row justify-center items-center space-x-6">
+        <div className="flex flex-row justify-center items-center space-x-6">
           <a href="#!" className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"

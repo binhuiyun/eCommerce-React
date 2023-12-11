@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
     <header className="bg-black">
@@ -35,7 +38,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center pr-14 space-x-8">
-          <button className="flex items-center space-x-3">
+          <Link to={'/login'} className="flex items-center space-x-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -53,9 +56,9 @@ export default function Header() {
             <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
               Sign In
             </span>
-          </button>
+          </Link>
 
-          <button className="flex space-x-3 items-center">
+          <Link to={'/cart'} className="flex space-x-3 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -73,7 +76,7 @@ export default function Header() {
             <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
               $0.00
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>
