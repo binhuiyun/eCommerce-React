@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const UserInfoForm = ({ status, msg }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [buttonText, setButtonText] = useState("Show");
-
+  const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate();
   const [passwordValidation, setPasswordValidation] = useState({
     password: ``,
     errorPasswordMessage: ``,
@@ -15,6 +17,11 @@ const UserInfoForm = ({ status, msg }) => {
   const [emailValidation, setEmailValidation] = useState({
     email: ``,
     errorEmailMessage: ``,
+  });
+
+  useEffect(() => {
+    if(redirect)
+      return navigate("/products");
   });
 
   const handleToggle = () => {
@@ -73,8 +80,9 @@ const UserInfoForm = ({ status, msg }) => {
   async function login(e) {
     e.preventDefault();
     try {
-      await axios.post("/", { email, password });
-      console.log("Login successful");
+      const { data: response } = await axios.post("/", { email, password });
+      setRedirect(true);
+      console.log("Login successful", response);
     } catch (err) {
       console.log("Login failed", err);
     }
@@ -90,7 +98,7 @@ const UserInfoForm = ({ status, msg }) => {
     }
   }
 
-  function forgotPassword(e) {
+  async function forgotPassword(e) {
     e.preventDefault();
     axios.post("/forgot-password", { email });
   }
