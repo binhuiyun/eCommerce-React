@@ -1,6 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { UserContext } from "../../UserContext";
+import { useDispatch, useSelector } from "react-redux";
+import { login_ } from "../../redux/auth.slice";
 
 const UserInfoForm = ({ status, msg }) => {
   const [email, setEmail] = useState("");
@@ -8,7 +11,9 @@ const UserInfoForm = ({ status, msg }) => {
   const [type, setType] = useState("password");
   const [buttonText, setButtonText] = useState("Show");
   const [redirect, setRedirect] = useState(false);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [passwordValidation, setPasswordValidation] = useState({
     password: ``,
     errorPasswordMessage: ``,
@@ -20,9 +25,15 @@ const UserInfoForm = ({ status, msg }) => {
   });
 
   useEffect(() => {
-    if(redirect)
-      return navigate("/products");
+    if (redirect) return navigate("/products");
   });
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      console.log(localStorage.getItem("user"));
+    }
+  }, []);
 
   const handleToggle = () => {
     console.log(password);
@@ -80,8 +91,17 @@ const UserInfoForm = ({ status, msg }) => {
   async function login(e) {
     e.preventDefault();
     try {
-      const { data: response } = await axios.post("/", { email, password });
+      const { data: response } = await axios.post("/api/auth/login", {
+        email,
+        password,
+      });
+
       setRedirect(true);
+      {
+        /*setUser(response); */
+      }
+      dispatch(login_({ email: email, password: password }));
+      localStorage.setItem("user", JSON.stringify(response.user));
       console.log("Login successful", response);
     } catch (err) {
       console.log("Login failed", err);

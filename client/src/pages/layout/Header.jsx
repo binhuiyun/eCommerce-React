@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login_, logout_, selectUser } from "../../redux/auth.slice";
 
 export default function Header() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout_(null));
+  };
+
   return (
     <header className="bg-black">
       <div className="w-full p-2 flex justify-between">
@@ -38,25 +48,52 @@ export default function Header() {
         </div>
 
         <div className="flex items-center pr-14 space-x-8">
-          <Link to={"/"} className="flex items-center space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="white"
-              className="w-8 h-8"
+          {user && (
+            <Link
+              to="/"
+              onClick={(e) => handleLogout(e)}
+              className="flex items-center space-x-3"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-              />
-            </svg>
-            <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
-              Sign In
-            </span>
-          </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="white"
+                className="w-8 h-8"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                />
+              </svg>
+              <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
+                {user.email}
+              </span>
+            </Link>
+          )}
+          {!user && (
+            <Link to="/login" className="flex items-center space-x-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="white"
+                className="w-8 h-8"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                />
+              </svg>
+              <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
+                Sign In
+              </span>
+            </Link>
+          )}
 
           <Link to={"/cart"} className="flex space-x-3 items-center">
             <svg

@@ -6,7 +6,7 @@ export default function ProductsPage() {
   return (
     <div className="w-screen h-screen flex flex-col">
       <Header />
-      <div class="bg-gray-200 flex-grow"></div>
+      <div className="bg-gray-200 flex-grow"></div>
       <Footer />
     </div>
   );
