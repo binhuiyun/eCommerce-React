@@ -31,7 +31,7 @@ const UserInfoForm = ({ status, msg }) => {
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
-      console.log(localStorage.getItem("user"));
+      console.log('hello from log in: ', localStorage.getItem("user"));
     }
   }, []);
 
@@ -101,7 +101,7 @@ const UserInfoForm = ({ status, msg }) => {
         /*setUser(response); */
       }
       dispatch(login_({ email: email, password: password }));
-      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("user", response.loginToken);
       console.log("Login successful", response);
     } catch (err) {
       console.log("Login failed", err);
@@ -111,7 +111,7 @@ const UserInfoForm = ({ status, msg }) => {
   async function signUp(e) {
     e.preventDefault();
     try {
-      await axios.post("/signup", { email, password });
+      await axios.post("/api/auth/signup", { email, password });
       console.log("Sign up successful");
     } catch (err) {
       console.log("Sign up failed", err);

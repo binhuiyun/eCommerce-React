@@ -7,7 +7,7 @@ const userSchema = new Schema({
     unique: true,
   },
   password: String,
-  resetToken: {
+  token: {
     type: String,
     default: "",
   },

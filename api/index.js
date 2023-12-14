@@ -1,10 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const bcryptSalt = bcrypt.genSaltSync(10);
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 const Users = require("./models/User");
-const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "dsadsadS43tr4rwfdg";
 const generateResetToken = require("./middlewares/AuthToken");
 const generateLoginToken = require("./middlewares/AuthToken");

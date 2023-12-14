@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const bcryptSalt = bcrypt.genSaltSync(10);
 const Users = require("../models/User");
 const generateResetToken = require("../middlewares/AuthToken");
 const generateLoginToken = require("../middlewares/AuthToken");
+
 require("dotenv").config();
 
 const login = async (req, res, next) => {
@@ -21,7 +23,7 @@ const login = async (req, res, next) => {
             httpOnly: true,
           })
           .status(200)
-          .json(others);
+          .json({others, loginToken});
       } else res.status(422).json("Wrong password");
     } else res.status(422).json("User not found");
   } catch (err) {
@@ -35,7 +37,9 @@ const signUp = async (req, res, next) => {
     const user = await Users.create({
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
+      token: "",
     });
+    console.log(user);
     res.json(user);
   } catch (err) {
     res.status(422).json(err);

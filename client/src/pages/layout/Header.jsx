@@ -49,7 +49,7 @@ export default function Header() {
 
         <div className="flex items-center pr-14 space-x-8">
           {user && (
-            <Link
+            <div
               to="/"
               onClick={(e) => handleLogout(e)}
               className="flex items-center space-x-3"
@@ -71,7 +71,7 @@ export default function Header() {
               <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
                 {user.email}
               </span>
-            </Link>
+            </div>
           )}
           {!user && (
             <Link to="/login" className="flex items-center space-x-3">
