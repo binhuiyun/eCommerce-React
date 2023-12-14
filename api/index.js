@@ -21,7 +21,7 @@ app.get("/api/test", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/product", require("./routes/product"));
+/*app.use("/api/product", require("./routes/product"));
 
 /** 
 app.post("/signup", async (req, res) => {
