@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/login", login);
 router.post("/signup", signUp);
-router.post("/forget-password", forgotPassword);
+router.post("/forgot-password", forgotPassword);
 
 module.exports = router;

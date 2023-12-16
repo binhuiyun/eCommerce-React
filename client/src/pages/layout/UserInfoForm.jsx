@@ -31,7 +31,7 @@ const UserInfoForm = ({ status, msg }) => {
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
-      console.log('hello from log in: ', localStorage.getItem("user"));
+      console.log("hello from log in: ", localStorage.getItem("user"));
     }
   }, []);
 

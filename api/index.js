@@ -23,6 +23,9 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", require("./routes/auth"));
 /*app.use("/api/product", require("./routes/product"));
 
+
+
+
 /** 
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
