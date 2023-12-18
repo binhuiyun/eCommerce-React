@@ -14,7 +14,7 @@ export default function SignUpPage() {
           buttonText: "Create account",
           message: "Already have an account?",
           linkText: "Sign in",
-          link: "/",
+          link: "/login",
         }}
       />
 

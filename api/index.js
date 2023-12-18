@@ -1,42 +1,32 @@
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const bcryptSalt = bcrypt.genSaltSync(10);
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 const Users = require("./models/User");
-const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "dsadsadS43tr4rwfdg";
+const generateResetToken = require("./middlewares/AuthToken");
+const generateLoginToken = require("./middlewares/AuthToken");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
-
+const userRouter = require("./routes/user");
 mongoose.connect(process.env.MONGODB_URL);
-
-app.get("/", (req, res) => {
-  res.json("Hello World!");
+app.use(cookieParser());
+app.get("/api/test", (req, res) => {
+  res.send("Hello World!");
 });
+app.use("/api/user", userRouter);
+app.use("/api/auth", require("./routes/auth"));
+/*app.use("/api/product", require("./routes/product"));
 
-app.post("/", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await Users.findOne({ email });
-  if (user) {
-    const passwordMatch = bcrypt.compareSync(password, user.password);
-    if (passwordMatch) {
-      jwt.sign(
-        { email: user.email, id: user._id },
-        jwtSecret,
-        {},
-        (err, token) => {
-          if (err) throw err;
-          else res.cookie("token", token).json("Password OK");
-        }
-      );
-    } else res.status(422).json("Wrong password");
-    res.json("User Find");
-  } else res.json("User not found");
-});
 
+
+
+/** 
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -48,6 +38,26 @@ app.post("/signup", async (req, res) => {
   } catch (err) {
     res.status(422).json(err);
   }
+});
+
+app.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
+  const user = await Users.findOne({ email });
+
+  if (user) {
+    const resetToken = await generateResetToken(user);
+    user.resetToken = resetToken;
+    await Users.findOneAndUpdate({ email }, user);
+    console.log("Reset link", user);
+  } else {
+    console.log("User not found");
+    res.json("User not found");
+  }
+});
+*/
+
+app.get("/products", async (req, res) => {
+  const { token } = req.cookies;
 });
 
 app.listen(4000, () => console.log("Server running on port 4000"));
