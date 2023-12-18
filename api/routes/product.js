@@ -1,5 +1,14 @@
 const express = require("express");
+const {
+    getAllProducts,
+    createProduct,
+    updateProduct,
+    } = require("../controllers/product");
+
 const router = express.Router();
 
-router.post("/product", jwt, signUp);
-router.post("/product/details", jwt, signUp);
+router.get("/products", getAllProducts);
+router.post("/products", createProduct);
+router.put("/products/:id", updateProduct);
+
+module.exports = router;

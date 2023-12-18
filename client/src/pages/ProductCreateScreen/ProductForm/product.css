@@ -1,0 +1,16 @@
+
+
+.content-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:120px;
+    padding: 20px;
+    
+    
+}
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
