@@ -1,25 +1,55 @@
-
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Dropdown from 'react-bootstrap/Dropdown';
+import ProductCardItem from './ProductCardItem';
 import "./card.css"
+import PaginationBasic from './PaginationBasic';
 
-const ProductCard = ()=> {
-  return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-model-unselect-gallery-1-202309?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693010533609"/>
-      <Card.Body>
-        <Card.Title>Apple iPhone 15, 128G</Card.Title>
-        <Card.Text>
-         $999
-        </Card.Text>
-        <Row>
-        <Col>  <button className='btn btn-primary' >Add</button> </Col>
-        <Col> <button className='btn btn-light'>Edit</button></Col>
-      </Row>         
-      </Card.Body>
-    </Card>
-  );
+const ProductCard = () =>{
+    return (
+        <>
+            <div className="row ml-10 mt-10 mb-4">
+                <div className='col-4 p-title'>Products</div>
+                <div className='col-4'></div>
+                <div className='col-2'>
+                <Dropdown>
+                    <Dropdown.Toggle className='btn-white'>
+                        Sort By
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">Last added</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">Price: Low to High</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Price: High to Low</Dropdown.Item>
+              
+                    </Dropdown.Menu>
+                </Dropdown>
+           </div>
+                <div className='col-2'>
+                <button className="btn btn-primary">Add Product</button>
+             </div>
+                </div>
+
+        <div className="display-field justify-content-between">
+            <div className="d-flex ">
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            
+            </div>
+            <div className="d-flex ">
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            <ProductCardItem /> 
+            </div>
+        </div>
+        <div className="d-flex justify-content-end m-5">
+         <PaginationBasic />
+             </div>
+        </>
+    )
+
 }
 
 export default ProductCard;

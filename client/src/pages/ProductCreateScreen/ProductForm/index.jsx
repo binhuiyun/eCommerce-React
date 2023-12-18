@@ -7,11 +7,12 @@ import "./product.css"
 
 const ProductForm = () => {
   return (
-    <Container className='content-field'>
+    <Container fluid>
+      <div className='content-field'>
   
-    <h1 className='title'>Create Product</h1>
+        <h1 className='title'>Create Product</h1>
 
-    <Form>
+    <Form className='form-field'>
      
       <Form.Group className="mb-3">
         <Form.Label>Product name</Form.Label>
@@ -65,11 +66,11 @@ const ProductForm = () => {
       />
     </div>
       </Form.Group>
-      <button className="btn btn-primary" >
+      <button className="btn btn-primary btn-size" >
         Add Product
       </button>
     </Form>
-
+</div>
     </Container>
   );
 }
