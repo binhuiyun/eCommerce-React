@@ -22,7 +22,9 @@ export default function ProductDetailPage({ productId }) {
           Product Detail
         </h2>
         <div className="w-[90%] h-[682px] flex flex-row bg-white shadow-lg items-center">
-          <div className="w-1/2  h-[90%] ml-[5%]"></div>
+          <div className="w-1/2 h-[90%] ml-[5%] flex justify-center items-center">
+            <img src="/product.jpg" />
+          </div>
           <div className="w-[45%]  h-full flex justify-center items-center">
             <div className=" w-[80%] h-[90%]">
               <h3 className="text-[#6B7280] mt-10 text-lg">{category}</h3>
