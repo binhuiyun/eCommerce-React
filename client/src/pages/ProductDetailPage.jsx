@@ -11,7 +11,7 @@ const mockInfo = {
   link: "",
 };
 
-export default function ProductDetailPage({ productId }) {
+export default function ProductDetailPage() {
   const { productName, productDescription, category, price, quantity, link } =
     mockInfo;
   return (
