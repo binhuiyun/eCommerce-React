@@ -24,7 +24,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="w-screen sm:w-20 h-screen flex flex-col">
       <Header />
       {user && (
         <div className="flex flex-grow">

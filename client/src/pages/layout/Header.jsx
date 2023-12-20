@@ -13,10 +13,10 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-black">
+    <header className="bg-black w-full">
       <div className="w-full p-2 flex justify-between">
         <a href="/" className="space-x-3 pl-14">
-          <span className="text-white text-3xl font-bold">Management</span>
+          <span className="text-white text-3xl font-bold sm:text-clip">Management</span>
           <span className="text-white text-sm font-bold">Chuwa</span>
         </a>
 
