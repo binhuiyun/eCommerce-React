@@ -1,0 +1,25 @@
+.content-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin: 20px 350px 20px 350px; 
+   
+        
+}
+.btn-size{
+    width:25%;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 30px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
+}
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-left: 20px;
+}
