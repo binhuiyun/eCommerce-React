@@ -9,8 +9,12 @@ export default {
     "./src/**/*.tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        sm: "350px",
+        md: "700px",
+      },
+    },
   },
   plugins: [],
-}
-
+};
