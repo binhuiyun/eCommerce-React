@@ -9,7 +9,7 @@ import "./product.css";
 const ProductForm = () => {
   return (
     <div className="container">
-      <h1 className="title mb-4">Create Product</h1>
+      <h1 className="title mb-4 text-center">Create Product</h1>
 
       <Form className="form-field">
         <Form.Group className="mb-3">
@@ -58,7 +58,9 @@ const ProductForm = () => {
           </div>
           <div>Image Preview!</div>
         </Form.Group>
-        <button className="btn btn-primary btn-size"> Add Product</button>
+        <button className="btn btn-primary btn-size d-block mx-auto mx-md-0">
+          Add Product
+        </button>
       </Form>
     </div>
   );
