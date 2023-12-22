@@ -1,26 +1,26 @@
-/* .btn{
-    background-color: blue;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-} */
+.btn-light{
+    width: 160px;
+    border: 1px solid grey;
+
+}
 .p-title{
     font-size: 30px;
     font-weight: bold;
 
 }
+.title-font{
+    font-size: 16px;
+
+}
 .display-field {
     display: flex;
     flex-direction: column;
-    padding: 0 5px 10px 15px;
-    margin: 10px 60px 10px 60px;
+    padding: 0 0 10px 15px;
+    margin: 10px 40px 10px 60px;
     box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
 }
-.btn-white{
+.btn-search{
+    width: 150px;
     background-color: white;
     border: solid 1px grey;
     border-radius: 5px;
@@ -31,3 +31,12 @@
     display: inline-block;
     font-size: 16px;
 }
+.btn-wide{
+    width: 50%;
+}
+
+.card-width{
+    width: 226px;
+
+}
+   

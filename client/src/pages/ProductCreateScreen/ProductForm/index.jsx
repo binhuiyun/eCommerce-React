@@ -1,78 +1,67 @@
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup';
-import "./product.css"
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import InputGroup from "react-bootstrap/InputGroup";
+import { Button } from "antd";
+import { FileImageOutlined } from "@ant-design/icons";
+import "./product.css";
 
 const ProductForm = () => {
   return (
-    <Container fluid>
-      <div className='content-field'>
-  
-        <h1 className='title'>Create Product</h1>
+    <div className="container">
+      <h1 className="title mb-4">Create Product</h1>
 
-    <Form className='form-field'>
-     
-      <Form.Group className="mb-3">
-        <Form.Label>Product name</Form.Label>
-        <Form.Control/>
-      </Form.Group>
-       
-      <Form.Group className="mb-3">
-        <Form.Label>Product Description</Form.Label>
-        <Form.Control as="textarea" style={{ height: '120px' }}  />
-      </Form.Group>
-
-      <Row className="mb-3">
-    
-        <Form.Group as={Col}>
-          <Form.Label>Catagory</Form.Label>
-          <Form.Select defaultValue="Choose...">
-            <option>Choose...</option>
-            <option>...</option>
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group as={Col}>
-          <Form.Label>Price</Form.Label>
+      <Form className="form-field">
+        <Form.Group className="mb-3">
+          <Form.Label>Product name</Form.Label>
           <Form.Control />
         </Form.Group>
-      </Row>
 
-      <Row className="mb-3">
-    
-        <Form.Group as={Col }>
-          <Form.Label>In Stock Quantity</Form.Label>
-            <Form.Control />    
+        <Form.Group className="mb-3">
+          <Form.Label>Product Description</Form.Label>
+          <Form.Control as="textarea" style={{ height: "100px" }} />
         </Form.Group>
 
-        <Form.Group as= {Col} md = {8}>
-          <Form.Label>Add Image Link</Form.Label>  
-          <InputGroup>
-            <Form.Control type="text" placeholder="http://" />
-         
-             <button className='btn btn-primary'>Upload</button>
-       
-             </InputGroup>
+        <Row className="mb-3">
+          <Form.Group as={Col} md={6}>
+            <Form.Label>Catagory</Form.Label>
+            <Form.Select defaultValue="Choose...">
+              <option>Choose...</option>
+              <option>...</option>
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group as={Col} md={6}>
+            <Form.Label>Price</Form.Label>
+            <Form.Control />
+          </Form.Group>
+        </Row>
+
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>In Stock Quantity</Form.Label>
+            <Form.Control />
+          </Form.Group>
+
+          <Form.Group as={Col} md={8}>
+            <Form.Label>Add Image Link</Form.Label>
+            <InputGroup>
+              <Form.Control type="text" placeholder="http://" />
+
+              <button className="btn btn-primary">Upload</button>
+            </InputGroup>
+          </Form.Group>
+        </Row>
+        <Form.Group className="image-field mb-3">
+          <div className="image-icon">
+            <FileImageOutlined />
+          </div>
+          <div>Image Preview!</div>
         </Form.Group>
-      </Row>
-      <Form.Group className="mb-3">
-        <div>
-      <img
-        src="https://placekitten.com/200/200"
-        alt="Image Preview"
-        style={{ maxWidth: '100%', height: 'auto' }}
-      />
+        <button className="btn btn-primary btn-size"> Add Product</button>
+      </Form>
     </div>
-      </Form.Group>
-      <button className="btn btn-primary btn-size" >
-        Add Product
-      </button>
-    </Form>
-</div>
-    </Container>
   );
-}
+};
 
 export default ProductForm;

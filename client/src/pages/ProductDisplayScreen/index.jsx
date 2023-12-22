@@ -1,18 +1,19 @@
-import Header from "../layout/Header"; 
-import Footer from "../layout/Footer";
+
 import ProductCard from "./ProductCard";
-const ProductDisplayScreen = () =>{
-    return (
-
-            <div>
-            <Header />
-            
-            <ProductCard />
-            <Footer />
-           </div>
-  
-
-    )
-}
+import { Layout} from "antd";
+const { Header, Footer, Content } = Layout;
+const ProductDisplayScreen = () => {
+  return (
+    <Layout>
+      <Header></Header>
+      <Content>
+        <ProductCard />
+      </Content>
+      <Footer>
+        footer
+      </Footer>
+    </Layout>
+  );
+};
 
 export default ProductDisplayScreen;
