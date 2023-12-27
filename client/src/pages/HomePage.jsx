@@ -39,8 +39,8 @@ export default function HomePage() {
             Click me to log in
           </button>
         </div>
-      )}
-      <Footer /> */}
+      )} */}
+      <Footer />
     </div>
   );
 }

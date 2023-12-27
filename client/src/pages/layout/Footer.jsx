@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-black">
-      <div className="w-full mx-auto pl-14 py-6 flex md:items-center md:justify-between">
-        <p className="text-base text-white caret-transparent">
+    <footer className="bg-black w-full px-4 py-3">
+      <div className="grid grid-rows-1 xs:grid-rows-3 sm:grid-rows-1 grid-cols-3 xs:grid-cols-1 sm:grid-cols-3 xs:place-items-center">
+        <p className="xs:row-start-3 sm:row-start-1 text-base text-white caret-transparent">
           ©2022 All Rights Reserved.
         </p>
         <div className="flex flex-row justify-center items-center space-x-6">
@@ -67,14 +67,14 @@ export default function Footer() {
             </svg>
           </a>
         </div>
-        <ul className="flex flex-wrap items-center text-base text-white font-base sm:mt-0 pr-14">
+       
+        <ul className="flex text-base text-white font-base">
           <li>
             <a
               href="#"
               className="mx-3 transition-colors duration-300 hover:text-gray-300"
             >
-              {" "}
-              Contact us{" "}
+              Contact us
             </a>
           </li>
           <li>
@@ -82,8 +82,7 @@ export default function Footer() {
               href="#"
               className="mx-3 transition-colors duration-300 hover:text-gray-300"
             >
-              {" "}
-              Privacy Policies{" "}
+              Privacy Policies
             </a>
           </li>
           <li>
@@ -91,8 +90,7 @@ export default function Footer() {
               href="#"
               className="mx-3 transition-colors duration-300 hover:text-gray-300"
             >
-              {" "}
-              Help{" "}
+              Help
             </a>
           </li>
         </ul>
