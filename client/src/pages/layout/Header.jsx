@@ -13,21 +13,28 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-black w-full">
-      <div className="w-full p-2 flex justify-between">
-        <a href="/" className="space-x-3 pl-14">
-          <span className="text-white text-3xl font-bold sm:text-clip">Management</span>
-          <span className="text-white text-sm font-bold">Chuwa</span>
-        </a>
+    <header className="bg-black w-full px-4 py-3">
+      <div className="grid gap-y-4 grid-rows-1 xs:grid-rows-2 sm:grid-rows-1 grid-cols-3 xs:grid-cols-2 sm:grid-cols-3">
+        <div className="flex pl-14 xs:pl-0 sm:pl-14 bg-pink-20">
+          <a href="/" className="w-full">
+            <p className="sm:space-x-3">
+              <span className="hidden text-white text-3xl font-bold sm:inline overflow-hidden">
+                Management
+              </span>
+              <span className="text-white text-3xl font-bold sm:hidden">M</span>
+              <span className="text-white text-sm font-bold ">Chuwa</span>
+            </p>
+          </a>
+        </div>
 
-        <div className="sm:flex w-1/3 items-center bg-white px-1 rounded-sm overflow-hidden">
+        <div className="xs:row-start-2 xs:col-span-2 sm:row-start-1 sm:col-span-1 sm:col-start-2 flex w-full items-center bg-white rounded-md">
           <input
-            className="text-base text-gray-400 flex-grow outline-none px-2 py-2"
+            className="text-base w-full text-gray-400 outline-none px-2 py-2 rounded-md"
             type="search"
             name="search"
             placeholder="Search"
           />
-          <div className="ms:flex items-center px-2 space-x-4 mx-auto">
+          <div className=" items-center px-2 space-x-4 mx-auto">
             <button type="submit" className="flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +54,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex items-center pr-14 space-x-8">
+        <div className="flex items-center justify-end pr-14 xs:pr-0 sm:pr-14 space-x-8">
           {user && (
             <div
               to="/"
@@ -89,9 +96,9 @@ export default function Header() {
                   d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                 />
               </svg>
-              <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
+              <p className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300 hidden sm:block">
                 Sign In
-              </span>
+              </p>
             </Link>
           )}
 

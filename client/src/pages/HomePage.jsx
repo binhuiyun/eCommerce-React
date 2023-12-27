@@ -24,9 +24,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-screen sm:w-20 h-screen flex flex-col">
+    <div className="w-screen h-screen flex flex-col">
       <Header />
-      {user && (
+      {/* {user && (
         <div className="flex flex-grow">
           <button className="m-auto" type="button" onClick={handleLogout}>
             Click me to log out
@@ -40,7 +40,7 @@ export default function HomePage() {
           </button>
         </div>
       )}
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }
