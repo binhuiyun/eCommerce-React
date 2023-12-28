@@ -11,6 +11,7 @@ import { UserContextProvider } from "./UserContext";
 import { PrivateRoute } from "./PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import ProductDetailPage from "./pages/ProductDetailPage";
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route
           path="/products"
           element={<PrivateRoute children={<ProductsPage />} />}
