@@ -22,7 +22,7 @@ const mockDiscount = -20;
 const ShoppingCart = ({ handleCartClick }) => {
   return (
     <>
-      <div className="absolute top-0 right-0 w-1/3 bg-indigo-600">
+      <div className="absolute top-0 right-0 sm:w-full md:w-1/3 bg-indigo-600 z-50">
         <div className="flex justify-between">
           <h2 className="mt-4 mb-4 ml-8 text-2xl font-bold text-white flex items-center">
             Cart

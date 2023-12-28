@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-black">
+    <footer className="bg-black sticky">
       <div className="w-full mx-auto pl-14 py-6 flex md:items-center md:justify-between">
         <p className="text-base text-white caret-transparent">
           ©2022 All Rights Reserved.

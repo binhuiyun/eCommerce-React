@@ -151,7 +151,7 @@ export default function Header() {
       </div>
       {isCartOpen && (
         <>
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"></div>
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 md:z-30"></div>
           <ShoppingCart handleCartClick={handleCartClick} />
         </>
       )}
