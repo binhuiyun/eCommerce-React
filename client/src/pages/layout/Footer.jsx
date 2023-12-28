@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-black w-full px-4 py-3">
-      <div className="grid grid-rows-1 xs:grid-rows-3 sm:grid-rows-1 grid-cols-3 xs:grid-cols-1 sm:grid-cols-3 xs:place-items-center">
-        <p className="xs:row-start-3 sm:row-start-1 text-base text-white caret-transparent">
+    <footer className="bg-black w-full py-3">
+      <div className="grid grid-rows-1 xs:grid-rows-3 md:grid-rows-1 grid-cols-3 xs:grid-cols-1 md:grid-cols-3 xs:place-items-center">
+        <p className="xs:row-start-3 md:row-start-1 text-base text-white caret-transparent">
           ©2022 All Rights Reserved.
         </p>
         <div className="flex flex-row justify-center items-center space-x-6">
