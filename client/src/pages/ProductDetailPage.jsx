@@ -1,5 +1,7 @@
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import { Layout } from "antd";
+const { Content } = Layout;
 
 const mockInfo = {
   productName: "Apple Macbook Pro",
@@ -15,8 +17,9 @@ export default function ProductDetailPage() {
   const { productName, productDescription, category, price, quantity, link } =
     mockInfo;
   return (
-    <>
+    <Layout style={{ height: "100vh" }}>
       <Header />
+
       <div className="flex flex-col w-screen h-screen items-center mb-12">
         <h2 className="w-[90%] mt-12 mb-6 text-3xl font-bold text-black xs:text-center md:text-left">
           Products Detail
@@ -58,6 +61,6 @@ export default function ProductDetailPage() {
       </div>
 
       <Footer />
-    </>
+    </Layout>
   );
 }

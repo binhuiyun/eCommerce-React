@@ -1,24 +1,32 @@
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import UserInfoForm from "../layout/UserInfoForm";
+import { Layout } from "antd";
+const { Content } = Layout;
 
 export default function SignUpPage() {
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <Layout style={{ height: "100vh" }}>
       <Header />
-
-      <UserInfoForm
-        status="signup"
-        msg={{
-          title: "Sign up account",
-          buttonText: "Create account",
-          message: "Already have an account?",
-          linkText: "Sign in",
-          link: "/login",
+      <Content
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
-
+      >
+        <UserInfoForm
+          status="signup"
+          msg={{
+            title: "Sign up account",
+            buttonText: "Create account",
+            message: "Already have an account?",
+            linkText: "Sign in",
+            link: "/login",
+          }}
+        />
+      </Content>
       <Footer />
-    </div>
+    </Layout>
   );
 }

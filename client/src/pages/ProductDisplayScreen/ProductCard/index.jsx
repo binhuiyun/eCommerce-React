@@ -14,7 +14,7 @@ const ProductCard = () => {
   };
 
   return (
-    <>
+    <div className="">
       <div className="row ml-10 mt-10 mb-4">
         <p className="col-md-8 p-title">Products</p>
         <Flex className="col-md-4" wrap="wrap" gap="small">
@@ -36,7 +36,7 @@ const ProductCard = () => {
           <PaginationBasic />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

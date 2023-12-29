@@ -1,6 +1,8 @@
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { useNavigate } from "react-router-dom";
+import { Layout } from "antd";
+const { Content } = Layout;
 import React, { useEffect, useState } from "react";
 
 export default function HomePage() {

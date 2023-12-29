@@ -13,8 +13,8 @@ const siderStyle = {
 
   const ProductCreateScreen = () => {
   return (
-    <Layout>
-      <Header></Header>
+    <Layout style={{ height: "100vh" }}>
+      <Header/>
       <Layout>
         <Sider width="25%" breakpoint="md" collapsedWidth='0' style={siderStyle} trigger={null} ></Sider>
       <Content style={siderStyle}>
@@ -22,9 +22,7 @@ const siderStyle = {
       </Content>
       <Sider width="25%" breakpoint="md" collapsedWidth='0' style={siderStyle} trigger={null}></Sider>
       </Layout>
-      <Footer>
-        footer
-      </Footer>
+      <Footer/>
     </Layout>
   );
 };
