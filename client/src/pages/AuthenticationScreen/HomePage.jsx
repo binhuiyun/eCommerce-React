@@ -1,5 +1,5 @@
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 

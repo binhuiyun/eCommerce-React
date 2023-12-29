@@ -25,7 +25,7 @@ const UserInfoForm = ({ status, msg }) => {
   });
 
   useEffect(() => {
-    if (redirect) return navigate("/products");
+    if (redirect) return navigate("/display-product");
   });
 
   useEffect(() => {

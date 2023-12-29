@@ -4,8 +4,15 @@ import ProductCardItem from "./ProductCardItem";
 import { Flex } from "antd";
 import "./card.css";
 import PaginationBasic from "./PaginationBasic";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/create-product");
+  };
+
   return (
     <>
       <div className="row ml-10 mt-10 mb-4">
@@ -17,7 +24,7 @@ const ProductCard = () => {
             <Dropdown.Item href="#/action-3">Price: High to Low</Dropdown.Item>
           </DropdownButton>
 
-          <button className="btn btn-primary">Add Product</button>
+          <button className="btn btn-primary" onClick={handleClick}>Add Product</button>
         </Flex>
       </div>
 

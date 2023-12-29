@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import HomePage from "./pages/AuthenticationScreen/HomePage";
+import LoginPage from "./pages/AuthenticationScreen/LoginPage";
+import SignUpPage from "./pages/AuthenticationScreen/SignUpPage";
+import ForgotPasswordPage from "./pages/AuthenticationScreen/ForgotPasswordPage";
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContextProvider } from "./UserContext";
 import { PrivateRoute } from "./PrivateRoute";
 import { Provider } from "react-redux";
@@ -18,20 +18,20 @@ axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
 function App() {
+  var isLoggedIn = localStorage.getItem("user");
+
   return (
     <Provider store={store}>
       <Routes>
-        <Route index element={<HomePage />} />
+        <Route index element={isLoggedIn ? <ProductDisplayScreen /> : <HomePage />} />
+        {/* <Route index element={<HomePage />} /> */}
         <Route path="/login" element={<LoginPage />} />
+
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route
-          path="/create-product"
-          element={<ProductCreateScreen />} />
-          <Route
-          path="/display-product"
-          element={<ProductDisplayScreen />} />
+        <Route path="/create-product" element={<ProductCreateScreen />} />
+        <Route path="/display-product" element={<ProductDisplayScreen />} />
       </Routes>
     </Provider>
   );

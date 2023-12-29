@@ -1,6 +1,6 @@
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import UserInfoForm from "./layout/UserInfoForm";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
+import UserInfoForm from "../layout/UserInfoForm";
 
 export default function LoginPage() {
   return (

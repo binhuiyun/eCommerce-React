@@ -2,7 +2,9 @@
 import ProductForm from "./ProductForm";
 import "./ProductForm/product.css";
 import { Layout} from "antd";
-const { Header, Footer, Content, Sider } = Layout;
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
+const { Content, Sider } = Layout;
 
 const siderStyle = {
   backgroundColor: "#f0f0f0",

@@ -3,10 +3,19 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import "./product.css";
 
 const ProductForm = () => {
+  const navigate = useNavigate();
+  
+  const handleClick = () =>{ 
+    // TODO: Add product to database
+    console.log(`TODO: Add product to database`);
+    navigate(`/`);
+  }
+
   return (
     <div className="container">
       <h1 className="title mb-4 text-center">Create Product</h1>
@@ -58,7 +67,7 @@ const ProductForm = () => {
           </div>
           <div>Image Preview!</div>
         </Form.Group>
-        <button className="btn btn-primary btn-size d-block mx-auto mx-md-0">
+        <button className="btn btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleClick}>
           Add Product
         </button>
       </Form>
