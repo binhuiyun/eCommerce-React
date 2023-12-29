@@ -1,0 +1,42 @@
+.btn-light{
+    width: 160px;
+    border: 1px solid grey;
+    ;
+
+}
+.btn-primary{
+    height: 40px;
+}
+.p-title{
+    font-size: 30px;
+    font-weight: bold;
+
+}
+.title-font{
+    font-size: 16px;
+
+}
+.display-field {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px ;
+    margin: 1% 3%;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
+}
+
+.custom-card{
+    margin-top: 12px;
+
+}
+@media(min-width: 768px){   
+    .custom-card{
+        width: 19%;
+    
+    }
+}
+@media(max-width: 768px){
+    .custom-card{
+        width: 98%;
+    
+    }
+}
