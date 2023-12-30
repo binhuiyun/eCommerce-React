@@ -1,17 +1,17 @@
-
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 import ProductCard from "./ProductCard";
 import { Layout} from "antd";
-const { Header, Footer, Content } = Layout;
+const { Content } = Layout;
 const ProductDisplayScreen = () => {
   return (
     <Layout>
-      <Header></Header>
+      <Header/>
       <Content>
         <ProductCard />
       </Content>
-      <Footer>
-        footer
-      </Footer>
+   
+      <Footer />
     </Layout>
   );
 };
