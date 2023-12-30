@@ -4,6 +4,7 @@ import ProductCardItem from "./ProductCardItem";
 import { Flex } from "antd";
 import "./card.css";
 import PaginationBasic from "./PaginationBasic";
+import { useNavigate } from "react-router-dom";
 
 const ProductData = [
   {
@@ -81,7 +82,10 @@ const ProductData = [
       image:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MXQT2_AV1?wid=1144&hei=1144&fmt=jpeg&qlt=80&.v=1594854054000"
     }
 ]
+
+
 const ProductCard = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="row ml-10 mt-10 mb-4">
@@ -93,7 +97,8 @@ const ProductCard = () => {
             <Dropdown.Item href="#/action-3">Price: High to Low</Dropdown.Item>
           </DropdownButton>
 
-          <button className="btn btn-primary">Add Product</button>
+          <button className="btn btn-primary" onClick={()=>navigate("/create-product")}>Add Product</button>
+        
         </Flex>
       </div>
 
