@@ -5,6 +5,7 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 const Users = require("./models/User");
+const Product = require("./models/Product");
 const jwtSecret = "dsadsadS43tr4rwfdg";
 const generateResetToken = require("./middlewares/AuthToken");
 const generateLoginToken = require("./middlewares/AuthToken");
@@ -21,10 +22,7 @@ app.get("/api/test", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/auth", require("./routes/auth"));
-/*app.use("/api/product", require("./routes/product"));
-
-
-
+app.use("/api/product", require("./routes/product"));
 
 /** 
 app.post("/signup", async (req, res) => {
@@ -56,8 +54,8 @@ app.post("/forgot-password", async (req, res) => {
 });
 */
 
-app.get("/products", async (req, res) => {
-  const { token } = req.cookies;
-});
+// app.get("/products", async (req, res) => {
+//   const { token } = req.cookies;
+// });
 
 app.listen(4000, () => console.log("Server running on port 4000"));
