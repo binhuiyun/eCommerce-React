@@ -5,14 +5,20 @@ import { Flex } from "antd";
 import "./card.css";
 import PaginationBasic from "./PaginationBasic";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ProductCard = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await axios.get("/api/product/products");
+      setProducts(response.data);
+    };
+    fetchProducts();
+  }, []);
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/create-product");
-  };
-
+  console.log(products);
   return (
     <div className="">
       <div className="row ml-10 mt-10 mb-4">
@@ -24,13 +30,29 @@ const ProductCard = () => {
             <Dropdown.Item href="#/action-3">Price: High to Low</Dropdown.Item>
           </DropdownButton>
 
-          <button className="btn btn-primary" onClick={handleClick}>Add Product</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate("/create-product")}
+          >
+            Add Product
+          </button>
         </Flex>
       </div>
 
       <div className="display-field">
         <Flex wrap="wrap" gap="middle">
-          {Array.from({ length: 10 }, () => ProductCardItem())}
+          {products.map((product) => (
+            <ProductCardItem
+              key={product._id}
+              _id={product._id}
+              title={product.name}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              image={product.image}
+              quantity={product.quantity}
+            />
+          ))}
         </Flex>
         <div className="d-flex justify-content-end m-5">
           <PaginationBasic />
