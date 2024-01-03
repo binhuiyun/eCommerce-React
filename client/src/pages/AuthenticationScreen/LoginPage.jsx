@@ -7,7 +7,7 @@ const { Content } = Layout;
 export default function LoginPage() {
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header />
+      <Header loggedIn="false" />
       <Content
         style={{
           display: "flex",

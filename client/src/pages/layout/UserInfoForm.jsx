@@ -101,7 +101,8 @@ const UserInfoForm = ({ status, msg }) => {
         /*setUser(response); */
       }
       dispatch(login_({ email: email, password: password }));
-      localStorage.setItem("user", response.loginToken);
+      localStorage.setItem("loginToken", response.loginToken);
+      localStorage.setItem("user", JSON.stringify(response));
       console.log("Login successful", response);
     } catch (err) {
       console.log("Login failed", err);

@@ -7,7 +7,7 @@ const { Content } = Layout;
 export default function ForgotPasswordPage() {
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header />
+      <Header loggedIn="false"/>
       <Content
         style={{
           display: "flex",

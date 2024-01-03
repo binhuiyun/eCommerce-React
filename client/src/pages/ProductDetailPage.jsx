@@ -2,6 +2,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Layout } from "antd";
 
 // const mockInfo = {
 //   productName: "Apple Macbook Pro",
@@ -29,7 +30,7 @@ export default function ProductDetailPage() {
   if (!state) return <>Loading...</>;
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header />
+      <Header loggedIn="true"/>
 
       <div className="flex flex-col w-screen h-screen items-center mb-12">
         <h2 className="w-[90%] mt-12 mb-6 text-3xl font-bold text-black xs:text-center md:text-left">

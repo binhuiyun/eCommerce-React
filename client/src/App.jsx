@@ -23,15 +23,25 @@ function App() {
   return (
     <Provider store={store}>
       <Routes>
-        <Route index element={isLoggedIn ? <ProductDisplayScreen /> : <HomePage />} />
-        {/* <Route index element={<HomePage />} /> */}
+        {/* <Route
+          index
+          element={isLoggedIn ? <ProductDisplayScreen /> : <HomePage />}
+        /> */}
+        <Route index element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/create-product" element={<ProductCreateScreen />} />
-        <Route path="/display-product" element={<ProductDisplayScreen />} />
+        <Route
+          path="/display-product"
+          element={
+            //<PrivateRoute isAuth={isLoggedIn}>
+              <ProductDisplayScreen />
+            ///* </PrivateRoute> */
+          }
+        />
       </Routes>
     </Provider>
   );

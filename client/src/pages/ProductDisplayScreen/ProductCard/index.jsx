@@ -20,27 +20,43 @@ const ProductCard = () => {
   const navigate = useNavigate();
   console.log(products);
   return (
-    <div className="">
-      <div className="row ml-10 mt-10 mb-4">
-        <p className="col-md-8 p-title">Products</p>
-        <Flex className="col-md-4" wrap="wrap" gap="small">
-          <DropdownButton title="Sort By" variant="light">
-            <Dropdown.Item href="#/action-1">Last added</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Price: Low to High</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Price: High to Low</Dropdown.Item>
-          </DropdownButton>
+    <div className="m-5">
+      <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
+        <p className="flex text-3xl font-bold xs:justify-center md:justify-start">
+          Products
+        </p>
+        <div className="flex justify-end xs:row-start-2 xs:justify-center md:row-start-1 md:col-start-2 md:justify-end space-x-4">
+          <div>
+            <DropdownButton title="Sort By" variant="light">
+              <Dropdown.Item href="#/action-1">Last added</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">
+                Price: Low to High
+              </Dropdown.Item>
+              <Dropdown.Item href="#/action-3">
+                Price: High to Low
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
+          <div>
+            <button
+              className="hidden md:inline px-4 py-2 text-base bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+              onClick={() => navigate("/create-product")}
+            >
+              Add Product
+            </button>
 
-          <button
-            className="btn btn-primary"
-            onClick={() => navigate("/create-product")}
-          >
-            Add Product
-          </button>
-        </Flex>
+            <button
+              className="md:hidden px-4 py-2 font-bold text-base bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+              onClick={() => navigate("/create-product")}
+            >
+              Add
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div className="display-field">
-        <Flex wrap="wrap" gap="middle">
+      <div className="flex flex-col bg-white rounded p-4">
+        <Flex wrap="wrap" gap="middle" className="flex justify-between">
           {products.map((product) => (
             <ProductCardItem
               key={product._id}

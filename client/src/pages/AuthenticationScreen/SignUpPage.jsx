@@ -7,7 +7,7 @@ const { Content } = Layout;
 export default function SignUpPage() {
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header />
+      <Header loggedIn="false" />
       <Content
         style={{
           display: "flex",

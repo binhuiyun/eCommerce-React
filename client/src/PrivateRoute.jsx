@@ -9,7 +9,9 @@ import {
   Outlet,
 } from "react-router-dom";
 
-export const PrivateRoute = ({ children }) => {
-  const isAuthenticated = false;
-  return isAuthenticated ? children : <Navigate to="/" />;
+export const PrivateRoute = ({ isAuth, children }) => {
+  if (!isAuth) {
+    return <Navigate to="/" replace />;
+  }
+  return isAuth ? children : <Navigate to="/" />;
 };

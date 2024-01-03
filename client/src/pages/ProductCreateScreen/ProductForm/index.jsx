@@ -57,7 +57,7 @@ const ProductForm = () => {
             <InputGroup>
               <Form.Control type="text" placeholder="http://" />
 
-              <button className="btn btn-primary">Upload</button>
+              <button className="btn btn-primary bg-[#5048e5] ">Upload</button>
             </InputGroup>
           </Form.Group>
         </Row>
@@ -67,7 +67,7 @@ const ProductForm = () => {
           </div>
           <div>Image Preview!</div>
         </Form.Group>
-        <button className="btn btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleClick}>
+        <button className="btn bg-[#5048e5] btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleClick}>
           Add Product
         </button>
       </Form>

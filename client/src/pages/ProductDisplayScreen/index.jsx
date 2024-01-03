@@ -7,8 +7,8 @@ import Footer from "../layout/Footer";
 
 const ProductDisplayScreen = () => {
   return (
-    <Layout style={{height:"100vh"}}>
-      <Header />
+    <Layout>
+      <Header loggedIn="true"/>
       <Content>
         <ProductCard />
       </Content>

@@ -2,16 +2,21 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login_, logout_, selectUser } from "../../redux/auth.slice";
+import { useNavigate } from "react-router";
 import ShoppingCart from "./ShoppingCart";
 
-export default function Header() {
+const Header = ({ loggedIn }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleLogout = (e) => {
     e.preventDefault();
+    localStorage.clear();
     dispatch(logout_(null));
+    console.log("Logged out");
+    navigate("/");
   };
 
   const handleCartClick = () => {
@@ -37,7 +42,7 @@ export default function Header() {
   return (
     <header className="bg-black w-full px-4 py-3">
       <div className="grid gap-y-4 grid-rows-1 xs:grid-rows-2 md:grid-rows-1 grid-cols-3 xs:grid-cols-2 md:grid-cols-3">
-        <div className="flex pl-14 xs:pl-0 md:pl-14 bg-pink-20 justify-start">
+        <div className="flex pl-14 xs:pl-0 md:pl-14 justify-start">
           <a href="/" className="w-full">
             <p className="md:space-x-3">
               <span className="hidden text-white text-3xl font-bold md:inline overflow-hidden">
@@ -77,18 +82,32 @@ export default function Header() {
         </div>
 
         <div className="flex items-center justify-end pr-14 xs:pr-0 md:pr-14 space-x-8">
-          {user && (
+          {loggedIn === "true" && (
             <div
               to="/"
               onClick={(e) => handleLogout(e)}
               className="flex items-center space-x-3"
             >
-              <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
-                {user.email}
-              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="white"
+                className="w-8 h-8"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                />
+              </svg>
+              <p className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300 hidden md:block">
+                Sign out
+              </p>
             </div>
           )}
-          {!user && (
+          {loggedIn === "false" && (
             <Link to="/login" className="flex items-center space-x-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,4 +169,6 @@ export default function Header() {
       )}
     </header>
   );
-}
+};
+
+export default Header;

@@ -27,7 +27,7 @@ export default function HomePage() {
 
   return (
     <div className="w-screen h-screen flex flex-col">
-      <Header />
+      <Header loggedIn="false"/>
       {user && (
         <div className="flex flex-grow">
           <button className="m-auto" type="button" onClick={handleLogout}>
