@@ -4,19 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../redux/cart.slice";
 
 const mockCartItems = [
-
-  {
-    productName: "Apple Macbook Pro",
-    price: 1599,
-    quantity: 1,
-    _id: 123,
-  },
-  {
-    productName: "Apple Watch",
-    price: 299,
-    quantity: 3,
-    _id: 345,
-  },
+  // {
+  //   productName: "Apple Macbook Pro",
+  //   price: 1599,
+  //   quantity: 1,
+  //   _id: 123,
+  // },
+  // {
+  //   productName: "Apple Watch",
+  //   price: 299,
+  //   quantity: 3,
+  //   _id: 345,
+  // },
 ];
 
 const mockDiscount = -20;
@@ -25,7 +24,7 @@ const ShoppingCart = ({ handleCartClick }) => {
   const cart = useSelector(selectCart);
   const dispatch = useDispatch();
   console.log(cart);
-  
+
   return (
     <>
       <div className="absolute top-0 right-0 sm:w-full md:w-1/3 bg-indigo-600 z-50">
@@ -78,11 +77,20 @@ const ShoppingCart = ({ handleCartClick }) => {
           <ul>
             <li className="flex justify-between mt-4">
               <p className="font-bold">Subtotal</p>
-              <p className="font-bold">{`$${mockCartItems
+              {/* <p className="font-bold">{`$${mockCartItems
                 .reduce((accumulator, item) => {
                   return accumulator + item.quantity * parseInt(item.price);
                 }, 0)
-                .toFixed(2)}`}</p>
+                .toFixed(2)}`}</p> */}
+
+              <p className="font-bold">
+                $
+                {cart
+                  .reduce((acc, item) => {
+                    return acc + item.quantity * item.productPrice;
+                  }, 0)
+                  .toFixed(2)}
+              </p>
             </li>
             <li className="flex justify-between mt-4">
               <p className="font-bold">Tax</p>

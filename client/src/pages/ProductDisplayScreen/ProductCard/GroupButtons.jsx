@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart_ } from "../../../redux/cart.slice";
+import { addToCart_} from "../../../redux/cart.slice";
 
-const GroupButtons = (productID) => {
+const GroupButtons = (props) => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
-  //console.log(productID);
 
   const handleIncrement = (data) => {
     setCount(count + 1);
-    //console.log(data);
     dispatch(addToCart_(data));
   };
 
@@ -42,7 +40,7 @@ const GroupButtons = (productID) => {
       {displayCount && (
         <Button
           className="flex justify-center items-center border-none focus:outline-none focus:shadow-outline text-white  text-base bg-[#5048e5] hover:bg-gray-500"
-          onClick={() => handleIncrement(productID)}
+          onClick={() => handleIncrement(props.productData)}
           disabled={count === 0}
         >
           {" "}
@@ -52,7 +50,7 @@ const GroupButtons = (productID) => {
       {!displayCount && (
         <Button
           className="flex w-full justify-center items-center border-none focus:outline-none focus:shadow-outline text-white  text-base bg-[#5048e5] hover:bg-gray-500"
-          onClick={() => handleIncrement(productID)}
+          onClick={() => handleIncrement(props.productData)}
         >
           Add
         </Button>

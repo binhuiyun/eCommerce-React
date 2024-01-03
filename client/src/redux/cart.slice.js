@@ -1,14 +1,17 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cart: [],
-    // total: 0,
+    // total: 0*,
   },
   reducers: {
     addToCart_: (state, action) => {
+        
       const found = state.cart.find((item) => {
+        //console.log(item);
         return item.productID == action.payload.productID;
       });
 
