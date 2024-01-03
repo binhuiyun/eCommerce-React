@@ -4,16 +4,17 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cart: [],
-    total: 0,
+    // total: 0,
   },
   reducers: {
     addToCart_: (state, action) => {
-      console.log(current(state.cart));
       const found = state.cart.find((item) => {
         return item.productID == action.payload.productID;
       });
+
       if (found) {
-        return state.cart.map((item) =>
+        console.log("found");
+        const temp = state.cart.map((item) =>
           item.productID == action.payload.productID
             ? {
                 ...item,
@@ -21,6 +22,7 @@ const cartSlice = createSlice({
               }
             : item
         );
+        state.cart = temp;
       } else {
         state.cart.push({
           ...action.payload,
