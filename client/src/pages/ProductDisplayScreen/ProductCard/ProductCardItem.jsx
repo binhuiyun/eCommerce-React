@@ -37,7 +37,7 @@ const ProductCardItem = ({
         <Card.Title className=" title-font">{title}</Card.Title>
         <Card.Text className="price-font">{price}</Card.Text>
         <Flex gap="small">
-          <GroupButtons />
+          <GroupButtons productID={_id} />
           <Button className="w-1/2 border-2">Edit</Button>
         </Flex>
       </Card.Body>

@@ -60,7 +60,7 @@ export default function ProductDetailPage() {
                 {productInfo.productDescription}
               </p>
               <div className="flex flex-row xs:mt-4 md:mt-8 mb-10">
-                <button className="bg-purple-900 text-white flex justify-center items-center px-6 py-2 border-purple-900 rounded-md xs:text-[10px] md:text-md">
+                <button className="bg-[#5048e5] text-white flex justify-center items-center px-6 py-2 border-purple-900 rounded-md xs:text-[10px] md:text-md">
                   Add To Cart
                 </button>
                 <button className="border border-[#6B7280] flex justify-center items-center bg-white px-12 py-2 rounded-md ml-4 xs:text-[10px] md:text-md">

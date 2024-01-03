@@ -7,18 +7,25 @@ import PaginationBasic from "./PaginationBasic";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { fetchTotal } from "../../../redux/product.slice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const productsList = useSelector(state => state.product.products);
+  //console.log(total);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await axios.get("/api/product/products");
       setProducts(response.data);
+      dispatch(fetchTotal());
     };
     fetchProducts();
   }, []);
-  const navigate = useNavigate();
-  console.log(products);
+
   return (
     <div className="m-5">
       <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">

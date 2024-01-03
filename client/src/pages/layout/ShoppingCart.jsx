@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import CartItem from "../CartItem";
-// redux
+import { useDispatch, useSelector } from "react-redux";
+import { selectCart } from "../../redux/cart.slice";
 
 const mockCartItems = [
+
   {
     productName: "Apple Macbook Pro",
     price: 1599,
@@ -20,6 +22,9 @@ const mockCartItems = [
 const mockDiscount = -20;
 
 const ShoppingCart = ({ handleCartClick }) => {
+  const cart = useSelector(selectCart);
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="absolute top-0 right-0 sm:w-full md:w-1/3 bg-indigo-600 z-50">

@@ -28,6 +28,10 @@ const productSchema = new mongoose.Schema({
         required: true,
         min: 0,
       },
+      Date: {
+        type: Date,
+        default: Date.now,
+      },
     });
     
     // Create a Product model based on the schema
