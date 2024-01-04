@@ -3,7 +3,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import "./product.css";
@@ -11,15 +10,29 @@ import axios from "axios";
 
 const ProductForm = () => {
   const navigate = useNavigate();
-  
-  const [product, setProduct] = useState({
+
+  const initialData = {
     name: "",
     description: "",
     price: 0,
     stockQuantity: 0,
     image: "",
-    category: "",
-  });
+    category: "Choose...",
+  };
+  
+  const [product, setProduct] = useState({ ...initialData});
+  const [errors, setErrors] = useState({ });
+   
+  const validate = () => {
+    const newErrors = {};
+    if (!product.name.trim()) newErrors.name = "Name is required!";
+    if (product.category === "Choose...") newErrors.category = "Category is required!";
+    if (isNaN(product.price) || product.price < 0) newErrors.price = "Price must be a positive number!";
+    if (isNaN(product.stockQuantity) || product.stockQuantity < 0) newErrors.stockQuantity = "Stock quantity must be a positive number!";
+    if (!product.image.trim()) newErrors.image = "Image is required!";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // useEffect(() => {
   //   if (initialData) {
@@ -37,8 +50,9 @@ const ProductForm = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if (!validate()) return;
     try{
-      const response = await axios.post("/api/product/products", product);
+      const response = await axios.post("/api/products", product);
       console.log(response.data);
       navigate("/display-product");
     }catch(error){
@@ -48,7 +62,7 @@ const ProductForm = () => {
 
   return (
     <div className="container">
-      <h1 className="title mb-4 text-center">{initialData ? "Edit Product" : "Create Product"}</h1>
+      <h1 className="title mb-4 text-center">Create Product</h1>
 
       <Form className="form-field">
         <Form.Group className="mb-3">
@@ -57,7 +71,11 @@ const ProductForm = () => {
             type="text" 
             name="name"
             value={product.name}
-            onChange={handleInputChange} />
+            onChange={handleInputChange} 
+            isInvalid={!!errors.name}/>
+          <Form.Control.Feedback type="invalid">
+            {errors.name}
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -65,7 +83,8 @@ const ProductForm = () => {
           <Form.Control as="textarea" style={{ height: "100px" }}
           name="description"
           value={product.description}
-          onChange={handleInputChange}   />
+          onChange={handleInputChange}  
+           />
         </Form.Group>
 
         <Row className="mb-3">
@@ -75,6 +94,7 @@ const ProductForm = () => {
               name="category"
               value={product.category}
               onChange={handleInputChange}
+              isInvalid={!!errors.category}
                defaultValue="Choose...">
                 <option value="Choose...">Choose...</option>
                 <option value="watch">watch</option>
@@ -83,6 +103,9 @@ const ProductForm = () => {
                 <option value="accessories">accessories</option>
           
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {errors.category} 
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group as={Col} md={6}>
@@ -91,7 +114,11 @@ const ProductForm = () => {
             type="number"
             name="price"
             value={product.price}
-            onChange={handleInputChange} />
+            onChange={handleInputChange} 
+            isInvalid={!!errors.price}/>
+            <Form.Control.Feedback type="invalid">
+              {errors.price}
+            </Form.Control.Feedback>
           </Form.Group>
         </Row>
 
@@ -103,7 +130,11 @@ const ProductForm = () => {
               name="stockQuantity"
               value={product.stockQuantity}
               onChange={handleInputChange}
+              isInvalid={!!errors.stockQuantity}
              />
+            <Form.Control.Feedback type="invalid">
+              {errors.stockQuantity}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group as={Col} md={8}>
@@ -112,7 +143,11 @@ const ProductForm = () => {
               <Form.Control type="text" placeholder="http://"
                name="image"
                value={product.image}
-               onChange={handleInputChange} />
+               onChange={handleInputChange}
+               isInvalid={!!errors.image} />
+              <Form.Control.Feedback type="invalid">
+                {errors.image}
+              </Form.Control.Feedback>
 
               <button className="btn btn-primary bg-[#5048e5] ">Upload</button>
             </InputGroup>

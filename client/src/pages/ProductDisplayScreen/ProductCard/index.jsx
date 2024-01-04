@@ -25,7 +25,7 @@ const ProductCard = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await axios.get("/api/product/products", {
+      const response = await axios.get("/api/products", {
         params:{
           page: currentPage,
           perPage: productsPerPage,

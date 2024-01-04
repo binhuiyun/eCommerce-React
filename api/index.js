@@ -23,7 +23,7 @@ app.get("/api/test", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/product", productRouter);
+app.use("/api", productRouter);
 
 /** 
 app.post("/signup", async (req, res) => {
