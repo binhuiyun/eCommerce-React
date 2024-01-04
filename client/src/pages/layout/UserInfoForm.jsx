@@ -185,7 +185,7 @@ const UserInfoForm = ({ status, msg }) => {
 
         <div className="mb-4">
           <button
-            className="flex w-full font-bold text-sm bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center py-3 rounded focus:outline-none focus:shadow-outline"
+            className="flex w-full font-bold text-sm bg-[#5048e5] hover:bg-gray-300 text-white justify-center items-center py-3 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             {msg.buttonText}

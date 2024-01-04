@@ -47,7 +47,9 @@ const ProductCardItem = ({
               productCategory: category,
             }}
           />
-          <Button className="w-1/2 border-2">Edit</Button>
+          <button className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300">
+            Edit
+          </button>
         </Flex>
       </Card.Body>
     </Card>

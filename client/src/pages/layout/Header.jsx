@@ -1,15 +1,15 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, createSearchParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login_, logout_, selectUser } from "../../redux/auth.slice";
-import { useNavigate } from "react-router";
 import ShoppingCart from "./ShoppingCart";
 
-const Header = ({ loggedIn }) => {
+const Header = ({ userInfo }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -39,6 +39,17 @@ const Header = ({ loggedIn }) => {
     },
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate({
+      pathname: "/search",
+      search: `${createSearchParams({
+        searchKey: `${searchKey}`,
+      })}`,
+    });
+    setSearchKey("");
+  };
+
   return (
     <header className="bg-black w-full px-4 py-3">
       <div className="grid gap-y-4 grid-rows-1 xs:grid-rows-2 md:grid-rows-1 grid-cols-3 xs:grid-cols-2 md:grid-cols-3">
@@ -53,36 +64,37 @@ const Header = ({ loggedIn }) => {
             </p>
           </a>
         </div>
-
-        <div className="xs:row-start-2 xs:col-span-2 md:row-start-1 md:col-span-1 md:col-start-2 flex w-full items-center bg-white rounded-md">
-          <input
-            className="text-base w-full text-gray-400 outline-none px-2 py-2 rounded-md"
-            type="search"
-            name="search"
-            placeholder="Search"
-          />
-          <div className=" items-center px-2 space-x-4 mx-auto">
-            <button type="submit" className="flex">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </button>
+        <form onSubmit={handleSubmit}>
+          <div className="xs:row-start-2 xs:col-span-2 md:row-start-1 md:col-span-1 md:col-start-2 flex w-full items-center bg-white rounded-md">
+            <input
+              className="text-base w-full text-gray-400 outline-none px-2 py-2 rounded-md"
+              type="search"
+              name="search"
+              placeholder="Search"
+              onChange={(e) => setSearchKey(e.target.value)}
+            />
+            <div className=" items-center px-2 space-x-4 mx-auto">
+              <button type="submit" className="flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
-
+        </form>
         <div className="flex items-center justify-end pr-14 xs:pr-0 md:pr-14 space-x-8">
-          {loggedIn === "true" && (
+          {userInfo && (
             <div
               to="/"
               onClick={(e) => handleLogout(e)}
@@ -107,7 +119,7 @@ const Header = ({ loggedIn }) => {
               </p>
             </div>
           )}
-          {loggedIn === "false" && (
+          {!userInfo && (
             <Link to="/login" className="flex items-center space-x-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

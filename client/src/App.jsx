@@ -14,6 +14,8 @@ import store from "./redux/store";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductCreateScreen from "./pages/ProductCreateScreen";
 import ProductDisplayScreen from "./pages/ProductDisplayScreen";
+import SearchResultPage from "./pages/SearchResultPage";
+
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
@@ -29,9 +31,9 @@ function App() {
         /> */}
         <Route index element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/search" element={<SearchResultPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/create-product" element={<ProductCreateScreen />} />
         <Route
