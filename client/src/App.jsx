@@ -5,6 +5,7 @@ import HomePage from "./pages/AuthenticationScreen/HomePage";
 import LoginPage from "./pages/AuthenticationScreen/LoginPage";
 import SignUpPage from "./pages/AuthenticationScreen/SignUpPage";
 import ForgotPasswordPage from "./pages/AuthenticationScreen/ForgotPasswordPage";
+import ErrorPage from "./pages/ErrorPage";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContextProvider } from "./UserContext";
@@ -44,6 +45,7 @@ function App() {
             ///* </PrivateRoute> */
           }
         />
+        <Route path='*' element={<ErrorPage />}/>
       </Routes>
     </Provider>
   );

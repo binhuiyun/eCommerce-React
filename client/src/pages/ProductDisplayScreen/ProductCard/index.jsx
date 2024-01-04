@@ -46,14 +46,14 @@ const ProductCard = () => {
           </div>
           <div>
             <button
-              className="hidden md:inline px-4 py-2 text-base bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+              className="hidden md:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
               onClick={() => navigate("/create-product")}
             >
               Add Product
             </button>
 
             <button
-              className="md:hidden px-4 py-2 font-bold text-base bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+              className="md:hidden px-4 py-2 font-bold text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
               onClick={() => navigate("/create-product")}
             >
               Add

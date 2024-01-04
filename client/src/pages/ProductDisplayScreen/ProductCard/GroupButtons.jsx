@@ -25,7 +25,7 @@ const GroupButtons = (props) => {
     <Button.Group className="w-1/2">
       {displayCount && (
         <Button
-          className="border-none flex justify-center items-center focus:outline-none focus:shadow-outline text-white text-base bg-[#5048e5] transition-colors duration-300 hover:bg-gray-300"
+          className="border-none flex justify-center items-center focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
           onClick={() => handleDecrement(props.productData)}
           disabled={count === 0}
         >
@@ -33,13 +33,13 @@ const GroupButtons = (props) => {
         </Button>
       )}
       {displayCount && (
-        <div className="w-1/2 bg-[#5048e5] flex items-center justify-center text-white">
+        <div className="w-1/2 bg-chuwa-blue flex items-center justify-center text-white">
           {count}
         </div>
       )}
       {displayCount && (
         <Button
-          className="flex justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-[#5048e5] transition-colors duration-300 hover:bg-gray-300"
+          className="flex justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
           onClick={() => handleIncrement(props.productData)}
           disabled={count === 0}
         >
@@ -48,7 +48,7 @@ const GroupButtons = (props) => {
       )}
       {!displayCount && (
         <Button
-          className="flex w-full justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-[#5048e5] transition-colors duration-300 hover:bg-gray-300 "
+          className="flex w-full justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300 "
           onClick={() => handleIncrement(props.productData)}
         >
           Add
