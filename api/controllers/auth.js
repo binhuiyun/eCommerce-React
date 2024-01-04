@@ -16,7 +16,7 @@ const login = async (req, res, next) => {
       const passwordMatch = await bcrypt.compareSync(password, user.password);
       if (passwordMatch) {
         const loginToken = await generateLoginToken(user);
-        console.log("Login token", loginToken);
+        console.log("Logged In");
         const { password, ...others } = user._doc;
         res
           .cookie("login_token", loginToken, {

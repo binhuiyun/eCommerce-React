@@ -2,7 +2,7 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import ProductForm from "./ProductForm";
 import "./ProductForm/product.css";
-import { Layout } from "antd";
+import { Layout} from "antd";
 const { Content, Sider } = Layout;
 
 const siderStyle = {
@@ -11,9 +11,8 @@ const siderStyle = {
 
 const ProductCreateScreen = () => {
   return (
-    <>
-      <Header />
-
+    <Layout style={{ height: "100vh" }}>
+      <Header loggedIn="true"/>
       <Layout>
         <Sider
           width="27%"
@@ -33,9 +32,8 @@ const ProductCreateScreen = () => {
           trigger={null}
         ></Sider>
       </Layout>
-
-      <Footer />
-    </>
+      <Footer/>
+    </Layout>
   );
 };
 

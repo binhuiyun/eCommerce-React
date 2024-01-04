@@ -33,12 +33,21 @@ const ProductCardItem = ({
           })
         }
       />
-      <Card.Body>
-        <Card.Title className="title-font">{title}</Card.Title>
-        <Card.Text>{price}</Card.Text>
-        <Flex wrap="wrap" gap="small">
-          <GroupButtons />
-          <Button className="btn-wide">Edit</Button>
+      <Card.Body className="grid gap-y-2">
+        <Card.Title className=" title-font">{title}</Card.Title>
+        <Card.Text className="price-font">{price}</Card.Text>
+        <Flex gap="small">
+          <GroupButtons
+            productData={{
+              productID: _id,
+              productPrice: price,
+              productQuantity: quantity,
+              productTitle: title,
+              productDescription: description,
+              productCategory: category,
+            }}
+          />
+          <Button className="w-1/2 border-2">Edit</Button>
         </Flex>
       </Card.Body>
     </Card>
