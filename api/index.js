@@ -15,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 const userRouter = require("./routes/user");
+const productRouter = require("./routes/product");
 mongoose.connect(process.env.MONGODB_URL);
 app.use(cookieParser());
 app.get("/api/test", (req, res) => {
@@ -22,7 +23,7 @@ app.get("/api/test", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/product", require("./routes/product"));
+app.use("/api/product", productRouter);
 
 /** 
 app.post("/signup", async (req, res) => {
