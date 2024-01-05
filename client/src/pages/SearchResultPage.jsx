@@ -22,6 +22,7 @@ const SearchResultPage = () => {
     const searchKey = searchParams.get("searchKey");
     try {
       await axios.get(`/api/search/${searchKey}`).then((response) => {
+        console.log(response.data);
         setProducts(response.data);
       });
     } catch (err) {
@@ -46,12 +47,12 @@ const SearchResultPage = () => {
                 <ProductCardItem
                   key={product._id}
                   _id={product._id}
-                  title={product.name}
+                  name={product.name}
                   description={product.description}
                   category={product.category}
                   price={product.price}
                   image={product.image}
-                  quantity={product.quantity}
+                  stockQuantity={product.quantity}
                 />
               ))}
           </Flex>
