@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'chuwa-blue': '#5048e5',
+      },
       screens: {
         xs: "320px",
         ...defaultTheme.screens,
