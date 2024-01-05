@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Header = ({ userInfo }) => {
   const user = useSelector(selectUser);
-  const userID = JSON.parse(localStorage.getItem("user")).others._id;
+  const userID = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).others._id : null;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
