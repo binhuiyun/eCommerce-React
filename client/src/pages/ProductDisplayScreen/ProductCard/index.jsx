@@ -12,19 +12,45 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const displayedProducts = products.slice(startIndex, endIndex);
   const navigate = useNavigate();
-  const productsList = useSelector(state => state.product.products);
-  //console.log(total);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await axios.get("/api/product/products");
+      const response = await axios.get("/api/products", {
+        params:{
+          page: currentPage,
+          perPage: productsPerPage,
+        }
+      });
       setProducts(response.data);
-      dispatch(fetchTotal());
+  //    dispatch(fetchTotal());
     };
     fetchProducts();
-  }, []);
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  } 
+
+  const setLastAdded = () => {
+    const sortedProducts = products.sort((a, b) => b._id - a._id);
+    setProducts([...sortedProducts]);
+  };
+
+  const setLowToHigh = () => {
+    const sortedProducts = products.sort((a, b) => a.price - b.price);
+    setProducts([...sortedProducts]);
+  };
+
+  const setHighToLow = () => {
+    const sortedProducts = products.sort((a, b) => b.price - a.price);
+    setProducts([...sortedProducts]);
+  };
 
   return (
     <div className="m-5">
@@ -35,11 +61,11 @@ const ProductCard = () => {
         <div className="flex justify-end xs:row-start-2 xs:justify-center md:row-start-1 md:col-start-2 md:justify-end space-x-4">
           <div>
             <DropdownButton title="Sort By" variant="light">
-              <Dropdown.Item href="#/action-1">Last added</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">
+              <Dropdown.Item onClick={setLastAdded}>Last added</Dropdown.Item>
+              <Dropdown.Item onClick={setLowToHigh}>
                 Price: Low to High
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3">
+              <Dropdown.Item onClick={setHighToLow}>
                 Price: High to Low
               </Dropdown.Item>
             </DropdownButton>
@@ -64,21 +90,15 @@ const ProductCard = () => {
 
       <div className="flex flex-col bg-white rounded p-4">
         <Flex wrap="wrap" gap="middle" className="flex justify-between">
-          {products.map((product) => (
+          {displayedProducts.map((product) => (
             <ProductCardItem
               key={product._id}
-              _id={product._id}
-              title={product.name}
-              description={product.description}
-              category={product.category}
-              price={product.price}
-              image={product.image}
-              quantity={product.quantity}
+              {...product}
             />
           ))}
         </Flex>
         <div className="d-flex justify-content-end m-5">
-          <PaginationBasic />
+          <PaginationBasic onPageChange={handlePageChange} />
         </div>
       </div>
     </div>

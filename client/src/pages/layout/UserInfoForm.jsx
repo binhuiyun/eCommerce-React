@@ -95,11 +95,7 @@ const UserInfoForm = ({ status, msg }) => {
         email,
         password,
       });
-
       setRedirect(true);
-      {
-        /*setUser(response); */
-      }
       dispatch(login_({ email: email, password: password }));
       localStorage.setItem("loginToken", response.loginToken);
       localStorage.setItem("user", JSON.stringify(response));
