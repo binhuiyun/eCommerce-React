@@ -52,7 +52,7 @@ const ProductForm = () => {
     e.preventDefault();
     if (!validate()) return;
     try{
-      const response = await axios.post("/api/products", product);
+      const response = await axios.post("/api/product", product);
       console.log(response.data);
       navigate("/display-product");
     }catch(error){
