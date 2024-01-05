@@ -15,10 +15,7 @@ import configureStore from "./redux/store";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductCreateScreen from "./pages/ProductCreateScreen";
 import ProductDisplayScreen from "./pages/ProductDisplayScreen";
-import SearchResultPage from "./pages/SearchResultPage";
-import { persistStore } from "redux-persist";
-import { PersistGate } from "redux-persist/integration/react";
-
+import Dummy from "./pages/Dummy";
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
@@ -27,31 +24,24 @@ function App() {
   var persistor = persistStore(configureStore);
 
   return (
-    <Provider store={configureStore}>
-      <PersistGate persistor={persistor}>
-        <Routes>
-          {/* <Route
-          index
-          element={isLoggedIn ? <ProductDisplayScreen /> : <HomePage />}
-        /> */}
-          <Route index element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/search" element={<SearchResultPage />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/create-product" element={<ProductCreateScreen />} />
-          <Route
-            path="/display-product"
-            element={
-              //<PrivateRoute isAuth={isLoggedIn}>
-              <ProductDisplayScreen />
-              ///* </PrivateRoute> */
-            }
-          />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </PersistGate>
+    <Provider store={store}>
+      <Routes>
+        <Route index element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/create-product" element={<ProductCreateScreen />} />
+        <Route
+          path="/display-product"
+          element={
+            //<PrivateRoute isAuth={isLoggedIn}>
+            <ProductDisplayScreen />
+            ///* </PrivateRoute> */
+          }
+        />
+        <Route path="/checkout" element={<Dummy />} />
+      </Routes>
     </Provider>
   );
 }

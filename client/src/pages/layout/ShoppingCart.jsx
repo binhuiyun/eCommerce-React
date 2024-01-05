@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import CartItem from "../CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../redux/cart.slice";
+import { useNavigate } from "react-router-dom";
 
 const mockCartItems = [
   // {
@@ -22,8 +23,7 @@ const mockDiscount = -20;
 
 const ShoppingCart = ({ handleCartClick }) => {
   const cart = useSelector(selectCart);
-  const dispatch = useDispatch();
-  console.log(cart);
+  const navigator = useNavigate();
 
   return (
     <>
@@ -117,7 +117,13 @@ const ShoppingCart = ({ handleCartClick }) => {
               ).toFixed(2)}`}</p>
             </li>
           </ul>
-          <button className="bg-indigo-600 text-white text-sm px-5 py-3 rounded mb-4">
+          <button
+            className="bg-indigo-600 text-white text-sm px-5 py-3 rounded mb-4"
+            onClick={(e) => {
+              e.preventDefault();
+              navigator("/checkout");
+            }}
+          >
             Continue to checkout
           </button>
         </div>
