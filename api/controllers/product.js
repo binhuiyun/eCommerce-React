@@ -1,9 +1,12 @@
+const { parse } = require("dotenv");
 const Product = require("../models/Product");
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => { 
   try {
     const products = await Product.find({});
+
     res.json(products);
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -22,7 +25,8 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const product = new Product(req.body);
+    await product.save();
     res.status(201).json(product);
   } catch (error) {
     console.error(error);
@@ -47,9 +51,23 @@ const updateProduct = async (req, res) => {
   }
 };
 
+const getSearchProductResults = async (req, res) => {
+  try {
+    const searchKey = req.params.searchKey;
+    const products = await Product.find({
+      name: { $regex: searchKey, $options: "i" },
+    });
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProduct,
+  getSearchProductResults,
 };

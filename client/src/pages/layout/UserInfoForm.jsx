@@ -95,11 +95,7 @@ const UserInfoForm = ({ status, msg }) => {
         email,
         password,
       });
-
       setRedirect(true);
-      {
-        /*setUser(response); */
-      }
       dispatch(login_({ email: email, password: password }));
       localStorage.setItem("loginToken", response.loginToken);
       localStorage.setItem("user", JSON.stringify(response));
@@ -185,7 +181,7 @@ const UserInfoForm = ({ status, msg }) => {
 
         <div className="mb-4">
           <button
-            className="flex w-full font-bold text-sm bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center py-3 rounded focus:outline-none focus:shadow-outline"
+            className="flex w-full font-bold text-sm bg-chuwa-blue hover:bg-gray-300 text-white justify-center items-center py-3 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             {msg.buttonText}
@@ -196,7 +192,7 @@ const UserInfoForm = ({ status, msg }) => {
           <span className="text-gray-500">
             {msg.message}
             <a
-              className="inline-block align-baseline text-sm underline text-[#5048e5] hover:text-blue-800"
+              className="inline-block align-baseline text-sm underline text-chuwa-blue hover:text-blue-800"
               href={msg.link}
             >
               {msg.linkText}
@@ -204,7 +200,7 @@ const UserInfoForm = ({ status, msg }) => {
           </span>
           {status == "login" && (
             <a
-              className="inline-block align-baseline underline text-sm text-[#5048e5] hover:text-blue-800"
+              className="inline-block align-baseline underline text-sm text-chuwa-blue hover:text-blue-800"
               href="/forgot-password"
             >
               Forgot Password?
