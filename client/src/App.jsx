@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Provider store={configureStore}>
-      <PersistGate persistor={persistor}>
+      {/* <PersistGate persistor={persistor}> */}
         <Routes>
           {/* <Route
           index
@@ -51,7 +51,7 @@ function App() {
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-      </PersistGate>
+      {/* </PersistGate> */}
     </Provider>
   );
 }
