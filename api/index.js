@@ -25,38 +25,4 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api", productRouter);
 
-/** 
-app.post("/signup", async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await Users.create({
-      email,
-      password: bcrypt.hashSync(password, bcryptSalt),
-    });
-    res.json(user);
-  } catch (err) {
-    res.status(422).json(err);
-  }
-});
-
-app.post("/forgot-password", async (req, res) => {
-  const { email } = req.body;
-  const user = await Users.findOne({ email });
-
-  if (user) {
-    const resetToken = await generateResetToken(user);
-    user.resetToken = resetToken;
-    await Users.findOneAndUpdate({ email }, user);
-    console.log("Reset link", user);
-  } else {
-    console.log("User not found");
-    res.json("User not found");
-  }
-});
-*/
-
-// app.get("/products", async (req, res) => {
-//   const { token } = req.cookies;
-// });
-
 app.listen(4000, () => console.log("Server running on port 4000"));

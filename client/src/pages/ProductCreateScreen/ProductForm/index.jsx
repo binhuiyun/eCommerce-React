@@ -149,7 +149,7 @@ const ProductForm = () => {
                 {errors.image}
               </Form.Control.Feedback>
 
-              <button className="btn btn-primary bg-[#5048e5] ">Upload</button>
+              <button className="btn btn-primary bg-chuwa-blue ">Upload</button>
             </InputGroup>
           </Form.Group>
         </Row>
@@ -159,7 +159,7 @@ const ProductForm = () => {
           </div>
           <div>Image Preview!</div>
         </Form.Group>
-        <button className="btn bg-[#5048e5] btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleSubmit}>
+        <button className="btn bg-chuwa-blue btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleSubmit}>
           Add Product
         </button>
       </Form>

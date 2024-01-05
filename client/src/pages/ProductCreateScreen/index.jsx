@@ -10,9 +10,11 @@ const siderStyle = {
 };
 
 const ProductCreateScreen = () => {
+  const userInfo = JSON.parse(localStorage.getItem("user"));
+
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header loggedIn="true"/>
+      <Header userInfo={userInfo}/>
       <Layout>
         <Sider
           width="27%"

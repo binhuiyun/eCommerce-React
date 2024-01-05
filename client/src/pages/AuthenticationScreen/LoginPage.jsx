@@ -5,9 +5,10 @@ import { Layout } from "antd";
 const { Content } = Layout;
 
 export default function LoginPage() {
+  const userInfo = JSON.parse(localStorage.getItem("user"));
   return (
     <Layout style={{ height: "100vh" }}>
-      <Header loggedIn="false" />
+      <Header userInfo={userInfo} />
       <Content
         style={{
           display: "flex",
