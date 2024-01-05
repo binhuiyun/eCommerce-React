@@ -9,20 +9,21 @@ const GroupButtons = (props) => {
   const dispatch = useDispatch();
 
   async function handleIncrement(data) {
+    const userID = JSON.parse(localStorage.getItem("user")).others._id;
+    console.log(userID);
 
-    console.log(data);
-    
     setCount(count + 1);
     dispatch(addToCart_(data));
     try{
-      const cart = await axios.post("/api/cart/add", {
-        product: data._id,
+      await axios.post("/api/cart/add", {
+        product: data,
         quantity: 1,
+        userID: userID,
       }).then((response) => {
         console.log(response);
       });
     } catch (err) {
-      console.log("sadadsadasdsaddsadsa");
+      console.log(err);
     }
   };
 

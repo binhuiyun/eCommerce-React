@@ -21,7 +21,7 @@ const SearchResultPage = () => {
   async function fetchResults() {
     const searchKey = searchParams.get("searchKey");
     try {
-      await axios.get(`/api/product/search/${searchKey}`).then((response) => {
+      await axios.get(`/api/search/${searchKey}`).then((response) => {
         setProducts(response.data);
       });
     } catch (err) {

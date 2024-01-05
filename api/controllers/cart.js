@@ -14,19 +14,26 @@ const getCart = async (req, res) => {
 };
 
 const addToCart = async (req, res) => {
-    console.log(req.body);
   try {
-    const cart = await Cart.findOne({ owner: req.user._id });
-    const product = req.body.product;
-    const quantity = req.body.quantity;
-    const item = cart.items.find((i) => i.product == product);
-    if (item) {
-      item.quantity += quantity;
+    const userID = req.body.userID;
+    const cart = await Cart.findOne({ owner: userID });
+    if (!cart) {
+      const newCart = await Cart.create({
+        owner: userID,
+        items: { product: req.body.product.productID, quantity: 1 },
+      });
+
+      await newCart.save();
     } else {
-      cart.items.push({ product, quantity });
+      const product = req.body.product.productID;
+      const item = cart.items.find((i) => i.product == product);
+      if (item) {
+        item.quantity += 1;
+      } else {
+        cart.items.push({ product: product, quantity: 1 });
+      }
+      await cart.save();
     }
-    await cart.save();
-    res.json(cart);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
