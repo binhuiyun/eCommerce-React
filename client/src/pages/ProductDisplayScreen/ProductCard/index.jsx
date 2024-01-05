@@ -7,8 +7,8 @@ import PaginationBasic from "./PaginationBasic";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { fetchTotal } from "../../../redux/product.slice";
-import { useDispatch, useSelector } from "react-redux";
+//import { fetchTotal } from "../../../redux/product.slice";
+//import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
@@ -67,12 +67,12 @@ const ProductCard = () => {
               Add Product
             </button>
 
-            <button
+            {/* <button
               className="md:hidden px-4 py-2 font-bold text-base bg-[#5048e5] hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
               onClick={() => navigate("/create-product")}
             >
               Add
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -83,6 +83,7 @@ const ProductCard = () => {
             <ProductCardItem
               key={product._id}
               {...product}
+            
             
             />
           ))}

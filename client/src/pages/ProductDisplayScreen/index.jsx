@@ -10,7 +10,7 @@ const ProductDisplayScreen = () => {
     <Layout>
       <Header loggedIn="true"/>
       <Content>
-        <ProductCard />
+        <ProductCard/>
       </Content>
       <Footer />
     </Layout>

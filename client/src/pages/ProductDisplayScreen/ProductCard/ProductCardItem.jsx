@@ -3,6 +3,8 @@ import { Button, Flex } from "antd";
 import "./card.css";
 import GroupButtons from "./GroupButtons";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {setEdit} from "../../../../reducers/editActions";
 
 const ProductCardItem = ({
   _id,
@@ -12,8 +14,18 @@ const ProductCardItem = ({
   title,
   price,
   quantity,
+ 
 }) => {
   const navigator = useNavigate();
+  const edit = useSelector((state) => state.edit);
+  const dispatch = useDispatch();
+
+  const handleEdit = () => {
+    dispatch(setEdit(!edit)); 
+
+    navigator(`/edit-product/${_id}`);
+  };
+  
   return (
     <Card className="custom-card">
       <Card.Img
@@ -47,7 +59,7 @@ const ProductCardItem = ({
               productCategory: category,
             }}
           />
-          <Button className="w-1/2 border-2">Edit</Button>
+          <Button className="w-1/2 border-2" onClick={handleEdit}>Edit</Button>
         </Flex>
       </Card.Body>
     </Card>

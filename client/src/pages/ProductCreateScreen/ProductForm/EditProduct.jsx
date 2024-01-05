@@ -7,18 +7,20 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import "./product.css";
-import axios from "axios";
-//import { getCurrentProduct } from "../../../services/productService";
+import { getCurrentProduct, updateCurrentProduct } from "../../../services/productService";
 
 
-const ProductForm = () => {
+
+const EditProduct= () => {
   const navigate = useNavigate();
-  let defaultProduct = useSelector((state) => state.product);
+  const product = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const [product, setProduct] = useState(defaultProduct);
-
   const [errors, setErrors] = useState({ });
-   
+
+  useEffect(() => {
+    ()=> getCurrentProduct(product._id, dispatch)
+    ,[];
+  });
   const validate = () => {
     const newErrors = {};
     if (!product.name.trim()) newErrors.name = "Name is required!";
@@ -30,36 +32,31 @@ const ProductForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // useEffect(() => {
-  //   if(product._id){
-  //     getCurrentProduct(product._id, dispatch);
-  //   }
-  // } , [product._id]);
-
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    dispatch({
+      type: "UPDATE",
+      payload: {
+        ...product,
+        [name]: value,
+      },
+    });
   };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  const handleSave= async() => {
     if (!validate()) return;
     try{
-      const response = await axios.post("/api/product", product);
-      console.log(response.data);
+      updateCurrentProduct(product, dispatch);
       navigate("/display-product");
     }catch(error){
-      console.log("error adding prodcut", error.message );
+      console.log("error editing prodcut", error.message );
     }
+    setEdit(false);
   };
 
   return (
     <div className="container">
-      <h1 className="title mb-4 text-center">Create Product</h1>
+      <h1 className="title mb-4 text-center">Edit Product</h1>
 
       <Form className="form-field">
         <Form.Group className="mb-3">
@@ -156,12 +153,12 @@ const ProductForm = () => {
           </div>
           <div>Image Preview!</div>
         </Form.Group>
-        <button className="btn bg-[#5048e5] btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleSubmit}>
-          Add Product
+        <button className="btn bg-[#5048e5] btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleSave}>
+          Save Product
         </button>
       </Form>
     </div>
   );
 };
 
-export default ProductForm;
+export default EditProduct;
