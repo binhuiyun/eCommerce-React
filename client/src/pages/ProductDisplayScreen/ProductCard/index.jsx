@@ -17,11 +17,7 @@ const ProductCard = () => {
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = products.slice(startIndex, endIndex);
- 
   const navigate = useNavigate();
- // const productsList = useSelector(state => state.product.products);
-  //console.log(total);
- // const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,6 +37,21 @@ const ProductCard = () => {
     setCurrentPage(newPage);
   } 
 
+  const setLastAdded = () => {
+    const sortedProducts = products.sort((a, b) => b._id - a._id);
+    setProducts([...sortedProducts]);
+  };
+
+  const setLowToHigh = () => {
+    const sortedProducts = products.sort((a, b) => a.price - b.price);
+    setProducts([...sortedProducts]);
+  };
+
+  const setHighToLow = () => {
+    const sortedProducts = products.sort((a, b) => b.price - a.price);
+    setProducts([...sortedProducts]);
+  };
+
   return (
     <div className="m-5">
       <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
@@ -50,11 +61,11 @@ const ProductCard = () => {
         <div className="flex justify-end xs:row-start-2 xs:justify-center md:row-start-1 md:col-start-2 md:justify-end space-x-4">
           <div>
             <DropdownButton title="Sort By" variant="light">
-              <Dropdown.Item href="#/action-1">Last added</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">
+              <Dropdown.Item onClick={setLastAdded}>Last added</Dropdown.Item>
+              <Dropdown.Item onClick={setLowToHigh}>
                 Price: Low to High
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3">
+              <Dropdown.Item onClick={setHighToLow}>
                 Price: High to Low
               </Dropdown.Item>
             </DropdownButton>
@@ -83,7 +94,6 @@ const ProductCard = () => {
             <ProductCardItem
               key={product._id}
               {...product}
-            
             />
           ))}
         </Flex>
