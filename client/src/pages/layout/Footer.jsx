@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-black w-full py-3 ">
+    <footer className="bg-black w-full py-3">
       <div className="grid grid-rows-1 xs:grid-rows-3 md:grid-rows-1 grid-cols-3 xs:grid-cols-1 md:grid-cols-3 xs:place-items-center">
         <p className="xs:row-start-3 md:row-start-1 text-base text-white caret-transparent">
           ©2022 All Rights Reserved.
@@ -67,7 +67,7 @@ export default function Footer() {
             </svg>
           </a>
         </div>
-
+       
         <ul className="flex text-base text-white font-base">
           <li>
             <a
