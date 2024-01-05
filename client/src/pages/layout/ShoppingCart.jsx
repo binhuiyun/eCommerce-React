@@ -26,9 +26,11 @@ const coupons = {
 };
 
 const ShoppingCart = ({ handleCartClick }) => {
-  const cart = useSelector(selectCart);
+  // Redux persist cart
+  // const cart = useSelector(selectCart);
+  // console.log(cart);
   const dispatch = useDispatch();
-  console.log(cart);
+
   const Navigate = useNavigate();
   const [discount, setDiscount] = useState(0);
   const [coupon, setCoupon] = useState("");
@@ -107,11 +109,11 @@ const ShoppingCart = ({ handleCartClick }) => {
 
               <p className="font-bold">
                 $
-                {cart
+                {/* {cart
                   .reduce((acc, item) => {
                     return acc + item.quantity * item.productPrice;
                   }, 0)
-                  .toFixed(2)}
+                  .toFixed(2)} */}
               </p>
             </li>
             <li className="flex justify-between mt-4">

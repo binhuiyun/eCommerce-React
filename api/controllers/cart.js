@@ -1,8 +1,9 @@
 const Cart = require("../models/Cart");
 
 const getCart = async (req, res) => {
+  const userID = req.query.userID;
   try {
-    const cart = await Cart.findOne({ owner: req.user._id }).populate({
+    const cart = await Cart.findOne({ owner: userID }).populate({
       path: "items.product",
       model: "Product",
     });
