@@ -93,11 +93,11 @@ const ProductCard = () => {
       </div>
 
       <div className="flex flex-col bg-white rounded p-4">
-        <Flex wrap="wrap" gap="middle" className="flex justify-between">
+        <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {displayedProducts.map((product) => (
             <ProductCardItem key={product._id} {...product} />
           ))}
-        </Flex>
+        </div>
         <div className="d-flex justify-content-end m-5">
           <PaginationBasic onPageChange={handlePageChange} />
         </div>

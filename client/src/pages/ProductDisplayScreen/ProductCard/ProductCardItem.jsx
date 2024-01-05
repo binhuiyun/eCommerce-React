@@ -17,7 +17,7 @@ const ProductCardItem = ({
   return (
     <Card className="custom-card">
       <Card.Img
-        className="img-size"
+        className="img-size p-3"
         variant="top"
         src={image}
         onClick={(e) =>
