@@ -9,7 +9,7 @@ const ProductCardItem = ({
   description,
   category,
   image,
-  title,
+  name,
   price,
   quantity,
 }) => {
@@ -23,7 +23,7 @@ const ProductCardItem = ({
         onClick={(e) =>
           navigator(`/product/${_id}`, {
             state: {
-              productName: title,
+              productName: name,
               productDescription: description,
               category: category,
               price: price,
@@ -34,7 +34,7 @@ const ProductCardItem = ({
         }
       />
       <Card.Body className="grid gap-y-2">
-        <Card.Title className=" title-font">{title}</Card.Title>
+        <Card.Title className=" title-font">{name}</Card.Title>
         <Card.Text className="price-font">${price}</Card.Text>
         <Flex gap="small">
           <GroupButtons
@@ -42,7 +42,7 @@ const ProductCardItem = ({
               productID: _id,
               productPrice: price,
               productQuantity: quantity,
-              productTitle: title,
+              productTitle: name,
               productDescription: description,
               productCategory: category,
             }}

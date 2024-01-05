@@ -17,29 +17,30 @@ const ProductCard = () => {
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = products.slice(startIndex, endIndex);
- 
+  console.log(displayedProducts);
+
   const navigate = useNavigate();
- // const productsList = useSelector(state => state.product.products);
+  // const productsList = useSelector(state => state.product.products);
   //console.log(total);
- // const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await axios.get("/api/products", {
-        params:{
+        params: {
           page: currentPage,
           perPage: productsPerPage,
-        }
+        },
       });
       setProducts(response.data);
-  //    dispatch(fetchTotal());
+      //    dispatch(fetchTotal());
     };
     fetchProducts();
   }, [currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-  } 
+  };
 
   return (
     <div className="m-5">
@@ -80,11 +81,7 @@ const ProductCard = () => {
       <div className="flex flex-col bg-white rounded p-4">
         <Flex wrap="wrap" gap="middle" className="flex justify-between">
           {displayedProducts.map((product) => (
-            <ProductCardItem
-              key={product._id}
-              {...product}
-            
-            />
+            <ProductCardItem key={product._id} {...product} />
           ))}
         </Flex>
         <div className="d-flex justify-content-end m-5">
