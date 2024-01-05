@@ -27,7 +27,7 @@ export default function ProductDetailPage() {
       setProductInfo({ ...state });
     }
   }, [state]);
-
+  // console.log(productInfo);
   if (!state) return <>Loading...</>;
   return (
     <Layout style={{ height: "100vh" }}>

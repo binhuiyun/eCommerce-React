@@ -22,23 +22,31 @@ const ProductCard = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await axios.get("/api/products", {
-        params:{
+        params: {
           page: currentPage,
           perPage: productsPerPage,
-        }
+        },
       });
       setProducts(response.data);
-  //    dispatch(fetchTotal());
+      //    dispatch(fetchTotal());
     };
     fetchProducts();
   }, [currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-  } 
+  };
 
   const setLastAdded = () => {
-    const sortedProducts = products.sort((a, b) => b._id - a._id);
+    const sortedProducts = products.sort((a, b) => {
+      if (a._id < b._id) {
+        return 1;
+      }
+      if (a._id > b._id) {
+        return -1;
+      }
+      return 0;
+    });
     setProducts([...sortedProducts]);
   };
 
@@ -91,10 +99,7 @@ const ProductCard = () => {
       <div className="flex flex-col bg-white rounded p-4">
         <Flex wrap="wrap" gap="middle" className="flex justify-between">
           {displayedProducts.map((product) => (
-            <ProductCardItem
-              key={product._id}
-              {...product}
-            />
+            <ProductCardItem key={product._id} {...product} />
           ))}
         </Flex>
         <div className="d-flex justify-content-end m-5">

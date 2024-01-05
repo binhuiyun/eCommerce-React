@@ -10,8 +10,7 @@ const GroupButtons = (props) => {
 
   async function handleIncrement(data) {
     const userID = JSON.parse(localStorage.getItem("user")).others._id;
-    console.log(userID);
-
+    console.log(data);
     setCount(count + 1);
     dispatch(addToCart_(data));
     try{
