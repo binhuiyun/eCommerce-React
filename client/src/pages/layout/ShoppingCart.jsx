@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import CartItem from "../CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../redux/cart.slice";
@@ -19,13 +19,26 @@ const mockCartItems = [
   // },
 ];
 
-const mockDiscount = -20;
+const coupons = {
+  GIMME20OFF: -20,
+  TENDOZENS: -120,
+  FIFTYONME: -50,
+};
 
 const ShoppingCart = ({ handleCartClick }) => {
   const cart = useSelector(selectCart);
   const dispatch = useDispatch();
   console.log(cart);
   const Navigate = useNavigate();
+  const [discount, setDiscount] = useState(0);
+  const [coupon, setCoupon] = useState("");
+
+  const handleCouponAdd = (e) => {
+    e.preventDefault();
+    if (coupons[coupon]) {
+      setDiscount(coupons[coupon]);
+    }
+  };
 
   return (
     <>
@@ -68,8 +81,15 @@ const ShoppingCart = ({ handleCartClick }) => {
               <input
                 type="text"
                 className="w-2/3 mt-3 mr-6 border border-stone-300 py-2 rounded"
+                value={coupon}
+                onChange={(e) => {
+                  return setCoupon(e.target.value);
+                }}
               />
-              <button className="bg-indigo-600 text-white text-sm px-5 py-3 mt-3 rounded">
+              <button
+                className="bg-indigo-600 text-white text-sm px-5 py-3 mt-3 rounded"
+                onClick={handleCouponAdd}
+              >
                 Apply
               </button>
             </div>
@@ -104,9 +124,9 @@ const ShoppingCart = ({ handleCartClick }) => {
             </li>
             <li className="flex justify-between mt-4">
               <p className="font-bold">Discount</p>
-              <p className="font-bold">{`${
-                mockDiscount < 0 ? "-" : ""
-              }$${Math.abs(mockDiscount).toFixed(2)}`}</p>
+              <p className="font-bold">{`${discount < 0 ? "-" : ""}$${Math.abs(
+                discount
+              ).toFixed(2)}`}</p>
             </li>
             <li className="flex justify-between mt-4 mb-4">
               <p className="font-bold">Estimated total</p>
@@ -115,7 +135,7 @@ const ShoppingCart = ({ handleCartClick }) => {
                   return accumulator + item.quantity * parseInt(item.price);
                 }, 0) *
                   1.1 +
-                mockDiscount
+                discount
               ).toFixed(2)}`}</p>
             </li>
           </ul>
