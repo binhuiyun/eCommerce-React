@@ -67,6 +67,11 @@ const cartSlice = createSlice({
         );
       }
     },
+    removeOneProductFromCart_: (state, action) => {
+      state.cart = state.cart.filter(
+        (item) => item.product._id != action.payload.productID
+      );
+    },
     clearCart_: (state) => {
       state.cart = [];
     },
@@ -83,8 +88,13 @@ const cartSlice = createSlice({
 
 const { reducer, actions } = cartSlice;
 export { fetchCart };
-export const { addToCart_, removeFromCart_, clearCart_, updateTotal_ } =
-  actions;
+export const {
+  addToCart_,
+  removeFromCart_,
+  clearCart_,
+  updateTotal_,
+  removeOneProductFromCart_,
+} = actions;
 export const selectCart = (state) => state.cart.cart;
 export const selectTotal = (state) => state.cart.total;
 export default reducer;

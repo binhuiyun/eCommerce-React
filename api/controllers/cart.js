@@ -61,4 +61,26 @@ const removeFromCart = async (req, res) => {
   }
 };
 
-module.exports = { getCart, addToCart, removeFromCart };
+const removeOneProductFromCart = async (req, res) => {
+  try {
+    const userID = req.body.userID;
+    const cart = await Cart.findOne({ owner: userID });
+    const product = req.body.product.productID;
+    const item = cart.items.find((i) => i.product == product);
+    if (item) {
+      cart.items.remove(item);
+    }
+    await cart.save();
+    res.json(cart);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+module.exports = {
+  getCart,
+  addToCart,
+  removeFromCart,
+  removeOneProductFromCart,
+};

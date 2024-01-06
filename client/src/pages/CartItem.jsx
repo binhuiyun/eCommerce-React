@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
-import { addToCart_, removeFromCart_ } from "../redux/cart.slice";
+import {
+  addToCart_,
+  removeFromCart_,
+  removeOneProductFromCart_,
+} from "../redux/cart.slice";
 
 import axios from "axios";
 
@@ -39,6 +43,22 @@ export default function CartItem({ product, quantity }) {
     try {
       await axios
         .post("/api/cart/remove", {
+          product: data,
+          userID: userID,
+        })
+        .then((response) => {
+          console.log(response);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleRemove = async (data) => {
+    const userID = JSON.parse(localStorage.getItem("user")).others._id;
+    dispatch(removeOneProductFromCart_(data));
+    try {
+      await axios
+        .post("/api/cart/removeOne", {
           product: data,
           userID: userID,
         })
@@ -104,7 +124,21 @@ export default function CartItem({ product, quantity }) {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 right-2 text-sm text-gray-600 underline cursor-pointer">
+        <div
+          className="absolute bottom-0 right-2 text-sm text-gray-600 underline cursor-pointer"
+          onClick={(e) => {
+            return handleRemove({
+              productID: _id,
+              productDate: Date,
+              productPrice: price,
+              productQuantity: stockQuantity,
+              productTitle: name,
+              productImage: image,
+              productDescription: description,
+              productCategory: category,
+            });
+          }}
+        >
           Remove
         </div>
       </div>
