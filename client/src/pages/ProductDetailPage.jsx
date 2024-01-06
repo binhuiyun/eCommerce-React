@@ -5,19 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Layout } from "antd";
 
-// const mockInfo = {
-//   productName: "Apple Macbook Pro",
-//   productDescription:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//   category: "Laptop",
-//   price: "1599",
-//   quantity: 0,
-//   link: "",
-// };
-
 export default function ProductDetailPage() {
-  // const { productName, productDescription, category, price, quantity, link } =
-  //   mockInfo;
   const [productInfo, setProductInfo] = useState({});
   const userInfo = JSON.parse(localStorage.getItem("user"));
   const { state } = useLocation();
@@ -27,7 +15,7 @@ export default function ProductDetailPage() {
       setProductInfo({ ...state });
     }
   }, [state]);
-  // console.log(productInfo);
+
   if (!state) return <>Loading...</>;
   return (
     <Layout>
