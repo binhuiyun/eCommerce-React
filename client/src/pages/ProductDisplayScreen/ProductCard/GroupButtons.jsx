@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart_, removeFromCart_ } from "../../../redux/cart.slice";
+import {
+  addToCart_,
+  removeFromCart_,
+  selectCart,
+} from "../../../redux/cart.slice";
 import axios from "axios";
 
 const GroupButtons = (props) => {
-  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
+  console.log(cart);
+  const count = cart.find(
+    (item) => item.product._id === props.productData.productID
+  )
+    ? cart.find((item) => item.product._id === props.productData.productID)
+        .quantity
+    : 0;
+  console.log(count);
 
   async function handleIncrement(data) {
     const userID = JSON.parse(localStorage.getItem("user")).others._id;
-    console.log(data);
-    setCount(count + 1);
+    // setCount(count + 1);
     dispatch(addToCart_(data));
     try {
       await axios
@@ -28,16 +39,27 @@ const GroupButtons = (props) => {
     }
   }
 
-  const handleDecrement = (data) => {
+  const handleDecrement = async (data) => {
+    const userID = JSON.parse(localStorage.getItem("user")).others._id;
     if (count > 0) {
-      setCount(count - 1);
+      // setCount(count - 1);
       dispatch(removeFromCart_(data));
+      try {
+        await axios
+          .post("/api/cart/remove", {
+            product: data,
+            userID: userID,
+          })
+          .then((response) => {
+            console.log(response);
+          });
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   const displayCount = count > 0;
-
-  console.log(props);
 
   return (
     <Button.Group className="w-1/2">

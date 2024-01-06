@@ -27,8 +27,8 @@ const coupons = {
 
 const ShoppingCart = ({ handleCartClick }) => {
   // Redux persist cart
-  // const cart = useSelector(selectCart);
-  // console.log(cart);
+  const cart = useSelector(selectCart);
+  console.log(cart);
   const dispatch = useDispatch();
 
   const Navigate = useNavigate();

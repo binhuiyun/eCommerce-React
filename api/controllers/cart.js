@@ -43,8 +43,9 @@ const addToCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ owner: req.user._id });
-    const product = req.body.product;
+    const userID = req.body.userID;
+    const cart = await Cart.findOne({ owner: userID });
+    const product = req.body.product.productID;
     const item = cart.items.find((i) => i.product == product);
     if (item) {
       item.quantity -= 1;
