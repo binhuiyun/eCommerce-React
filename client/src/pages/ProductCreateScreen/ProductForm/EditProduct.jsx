@@ -38,7 +38,7 @@ const EditProduct= () => {
     const { name, value } = e.target;
     dispatch({
       type: "UPDATE_PRODUCT_ITEM",
-      productItem: {
+      payload: {
         ...product,
         [name]: value,
       },
@@ -155,7 +155,7 @@ const EditProduct= () => {
           </div>
           <div>Image Preview!</div>
         </Form.Group>
-        <button className="btn bg-[#5048e5] btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleSave}>
+        <button className="btn bg-chuwa-blue btn-primary btn-size d-block mx-auto mx-md-0" onClick={handleSave}>
           Save Product
         </button>
       </Form>
