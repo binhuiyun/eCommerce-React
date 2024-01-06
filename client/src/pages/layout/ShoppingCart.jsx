@@ -28,7 +28,6 @@ const coupons = {
 const ShoppingCart = ({ handleCartClick }) => {
   // Redux persist cart
   const cart = useSelector(selectCart);
-  console.log(cart);
   const dispatch = useDispatch();
 
   const Navigate = useNavigate();
@@ -48,7 +47,7 @@ const ShoppingCart = ({ handleCartClick }) => {
         <div className="flex justify-between">
           <h2 className="mt-4 mb-4 ml-8 text-2xl font-bold text-white flex items-center">
             Cart
-            <span className="text-sm ml-2 font-normal">{`(${mockCartItems.reduce(
+            <span className="text-sm ml-2 font-normal">{`(${cart.reduce(
               (accumulator, item) => {
                 return accumulator + item.quantity;
               },
@@ -74,8 +73,14 @@ const ShoppingCart = ({ handleCartClick }) => {
           </div>
         </div>
         <div className="w-full pl-[5%] pr-[5%] pt-6 bg-white flex flex-col justify-center items-center border-b border-stone-300">
-          {mockCartItems.map((product, index) => {
-            return <CartItem product={product} key={index} />;
+          {cart.map((product, index) => {
+            return (
+              <CartItem
+                product={product.product}
+                key={index}
+                quantity={product.quantity}
+              />
+            );
           })}
           <div className="w-full pb-10">
             <p className="text-xs text-stone-500 mt-4">Apply Discount Code</p>
@@ -101,26 +106,21 @@ const ShoppingCart = ({ handleCartClick }) => {
           <ul>
             <li className="flex justify-between mt-4">
               <p className="font-bold">Subtotal</p>
-              {/* <p className="font-bold">{`$${mockCartItems
+              <p className="font-bold">{`$${cart
                 .reduce((accumulator, item) => {
-                  return accumulator + item.quantity * parseInt(item.price);
+                  return (
+                    accumulator + item.quantity * parseInt(item.product.price)
+                  );
                 }, 0)
-                .toFixed(2)}`}</p> */}
-
-              <p className="font-bold">
-                $
-                {/* {cart
-                  .reduce((acc, item) => {
-                    return acc + item.quantity * item.productPrice;
-                  }, 0)
-                  .toFixed(2)} */}
-              </p>
+                .toFixed(2)}`}</p>
             </li>
             <li className="flex justify-between mt-4">
               <p className="font-bold">Tax</p>
               <p className="font-bold">{`$${(
-                mockCartItems.reduce((accumulator, item) => {
-                  return accumulator + item.quantity * parseInt(item.price);
+                cart.reduce((accumulator, item) => {
+                  return (
+                    accumulator + item.quantity * parseInt(item.product.price)
+                  );
                 }, 0) * 0.1
               ).toFixed(2)}`}</p>
             </li>
@@ -133,8 +133,10 @@ const ShoppingCart = ({ handleCartClick }) => {
             <li className="flex justify-between mt-4 mb-4">
               <p className="font-bold">Estimated total</p>
               <p className="font-bold">{`$${(
-                mockCartItems.reduce((accumulator, item) => {
-                  return accumulator + item.quantity * parseInt(item.price);
+                cart.reduce((accumulator, item) => {
+                  return (
+                    accumulator + item.quantity * parseInt(item.product.price)
+                  );
                 }, 0) *
                   1.1 +
                 discount

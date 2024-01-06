@@ -27,6 +27,7 @@ const ProductCard = () => {
           perPage: productsPerPage,
         },
       });
+      console.log(response.data);
       setProducts(response.data);
       //    dispatch(fetchTotal());
     };

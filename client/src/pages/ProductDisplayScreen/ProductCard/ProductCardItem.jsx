@@ -5,6 +5,7 @@ import GroupButtons from "./GroupButtons";
 import { useNavigate } from "react-router-dom";
 
 const ProductCardItem = ({
+  Date,
   _id,
   description,
   category,
@@ -41,9 +42,11 @@ const ProductCardItem = ({
           <GroupButtons
             productData={{
               productID: _id,
+              productDate: Date,
               productPrice: price,
               productQuantity: stockQuantity,
               productTitle: name,
+              productImage: image,
               productDescription: description,
               productCategory: category,
             }}

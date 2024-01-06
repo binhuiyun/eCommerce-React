@@ -18,12 +18,12 @@ const cartSlice = createSlice({
     addToCart_: (state, action) => {
       const found = state.cart.find((item) => {
         //console.log(item);
-        return item.product.productID == action.payload.productID;
+        return item.product._id == action.payload.productID;
       });
       if (found) {
         console.log("found");
         const temp = state.cart.map((item) =>
-          item.productID == action.payload.productID
+          item.product._id == action.payload.productID
             ? {
                 ...item,
                 quantity: item.quantity + 1,
@@ -33,28 +33,37 @@ const cartSlice = createSlice({
         state.cart = temp;
       } else {
         state.cart.push({
-          ...action.payload,
+          product: {
+            Date: action.payload.productDate,
+            category: action.payload.productCategory,
+            description: action.payload.productDescription,
+            image: action.payload.productImage,
+            name: action.payload.productTitle,
+            price: action.payload.productPrice,
+            stockQuantity: action.payload.productQuantity,
+            _id: action.payload.productID,
+          },
           quantity: 1,
         });
       }
     },
     removeFromCart_: (state, action) => {
       const found = state.cart.find((item) => {
-        return item.productID == action.payload.productID;
+        return item.product._id == action.payload.productID;
       });
       if (found) {
         const temp = state.cart.map((item) =>
-          item.productID == action.payload.productID
-            ? {
+          item.product._id != action.payload.productID
+            ? item
+            : item.quantity > 1 && {
                 ...item,
                 quantity: item.quantity - 1,
               }
-            : item
         );
         state.cart = temp;
       } else {
         state.cart = state.cart.filter(
-          (item) => item.productID != action.payload.productID
+          (item) => item.product._id != action.payload.productID
         );
       }
     },
