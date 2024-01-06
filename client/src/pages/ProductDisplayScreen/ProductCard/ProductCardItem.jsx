@@ -23,6 +23,7 @@ const ProductCardItem = ({
         onClick={(e) =>
           navigator(`/product/${_id}`, {
             state: {
+              _id: _id,
               productName: name,
               productDescription: description,
               category: category,

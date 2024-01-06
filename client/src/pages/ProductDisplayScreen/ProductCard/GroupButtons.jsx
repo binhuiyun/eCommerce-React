@@ -13,18 +13,20 @@ const GroupButtons = (props) => {
     console.log(data);
     setCount(count + 1);
     dispatch(addToCart_(data));
-    try{
-      await axios.post("/api/cart/add", {
-        product: data,
-        quantity: 1,
-        userID: userID,
-      }).then((response) => {
-        console.log(response);
-      });
+    try {
+      await axios
+        .post("/api/cart/add", {
+          product: data,
+          quantity: 1,
+          userID: userID,
+        })
+        .then((response) => {
+          console.log(response);
+        });
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   const handleDecrement = (data) => {
     if (count > 0) {
@@ -34,6 +36,8 @@ const GroupButtons = (props) => {
   };
 
   const displayCount = count > 0;
+
+  console.log(props);
 
   return (
     <Button.Group className="w-1/2">
@@ -64,6 +68,7 @@ const GroupButtons = (props) => {
         <Button
           className="flex w-full justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300 "
           onClick={() => handleIncrement(props.productData)}
+          disabled={props.productData.productQuantity === 0}
         >
           Add
         </Button>
