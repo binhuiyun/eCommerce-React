@@ -5,6 +5,8 @@ const productList = (state = initialState, action) => {
       return [action.productList, ...state];
     case 'FETCH_ALL_PRODUCTS':
         return action.productList;
+    case "SORT_PRODUCTS":
+      return action.productList;
     default:
       return state;
   }

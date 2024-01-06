@@ -38,7 +38,7 @@ const EditProduct= () => {
     const { name, value } = e.target;
     dispatch({
       type: "UPDATE_PRODUCT_ITEM",
-      payload: {
+      productItem: {
         ...product,
         [name]: value,
       },

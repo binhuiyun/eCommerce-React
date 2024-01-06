@@ -1,7 +1,6 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ProductCardItem from "./ProductCardItem";
-import { Flex } from "antd";
 import "./card.css";
 import PaginationBasic from "./PaginationBasic";
 import { useNavigate } from "react-router-dom";
@@ -11,40 +10,46 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = () => {
   const products = useSelector((state) => state.productList);
+  const [sort, setSort] = useState(false);
+  const [sortedProducts, setSortedProducts] = useState([...products]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
-  const displayedProducts = products.slice(startIndex, endIndex);
+  const displayedProducts = sort ? sortedProducts.slice(startIndex, endIndex) : products.slice(startIndex, endIndex);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => 
     fetchAllProducts(dispatch),
-   [currentPage, dispatch]);
+   []);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  // const setLastAdded = () => {
-  //   const sortedProducts = products.sort((a, b) => {
-  //     if (a._id < b._id) return 1;
-  //     if (a._id > b._id) return -1;
-  //     return 0;
-  //   });
-  //   setProducts([...sortedProducts]);
-  // };
+  const updateSortedProducts = (sortingFunction) => {
+    const sorted = [...products].sort(sortingFunction);
+    setSortedProducts(sorted);
+    setSort(true);
+  };
 
-  // const setLowToHigh = () => {
-  //   const sortedProducts = products.sort((a, b) => a.price - b.price);
-  //   setProducts([...sortedProducts]);
-  // };
+  const sortLastAdded = () => {
+    updateSortedProducts((a, b) => {
+      if (a._id < b._id) return 1;
+      if (a._id > b._id) return -1;
+      return 0;
+    }
+    );
+  };
+  const sortLowToHigh = () => {
+    updateSortedProducts((a, b) => a.price - b.price);
+  };
 
-  // const setHighToLow = () => {
-  //   const sortedProducts = products.sort((a, b) => b.price - a.price);
-  //   setProducts([...sortedProducts]);
-  // };
+  const sortHighToLow = () => {
+    updateSortedProducts((a, b) => b.price - a.price);
+  };
+
 
   return (
     <div className="m-5">
@@ -55,13 +60,13 @@ const ProductCard = () => {
         <div className="flex justify-end xs:row-start-2 xs:justify-center md:row-start-1 md:col-start-2 md:justify-end space-x-4">
           <div>
             <DropdownButton title="Sort By" variant="light">
-              {/* <Dropdown.Item onClick={setLastAdded}>Last added</Dropdown.Item>
-              <Dropdown.Item onClick={setLowToHigh}>
+              <Dropdown.Item onClick={sortLastAdded}>Last added</Dropdown.Item>
+              <Dropdown.Item onClick={sortLowToHigh}>
                 Price: Low to High
               </Dropdown.Item>
-              <Dropdown.Item onClick={setHighToLow}>
+              <Dropdown.Item onClick={sortHighToLow}>
                 Price: High to Low
-              </Dropdown.Item> */}
+              </Dropdown.Item>
             </DropdownButton>
           </div>
           <div>

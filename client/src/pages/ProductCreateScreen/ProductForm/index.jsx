@@ -45,7 +45,7 @@ const ProductForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
     if (!validate()) return;
     try {
