@@ -1,5 +1,6 @@
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import GroupButtons from "./ProductDisplayScreen/ProductCard/GroupButtons";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Layout } from "antd";
@@ -18,7 +19,7 @@ export default function ProductDetailPage() {
   // const { productName, productDescription, category, price, quantity, link } =
   //   mockInfo;
   const [productInfo, setProductInfo] = useState({});
-
+  const userInfo = JSON.parse(localStorage.getItem("user"));
   const { state } = useLocation();
 
   useEffect(() => {
@@ -26,11 +27,11 @@ export default function ProductDetailPage() {
       setProductInfo({ ...state });
     }
   }, [state]);
-
+  // console.log(productInfo);
   if (!state) return <>Loading...</>;
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Header loggedIn="true"/>
+    <Layout>
+      <Header userInfo={userInfo} />
 
       <div className="flex flex-col w-screen h-screen items-center mb-12">
         <h2 className="w-[90%] mt-12 mb-6 text-3xl font-bold text-black xs:text-center md:text-left">
@@ -59,11 +60,18 @@ export default function ProductDetailPage() {
               <p className="text-[#6B7280] xs:mt-4 md:mt-6 xs:text-[10px] md:text-lg">
                 {productInfo.productDescription}
               </p>
-              <div className="flex flex-row xs:mt-4 md:mt-8 mb-10">
-                <button className="bg-[#5048e5] text-white flex justify-center items-center px-6 py-2 border-purple-900 rounded-md xs:text-[10px] md:text-md">
-                  Add To Cart
-                </button>
-                <button className="border border-[#6B7280] flex justify-center items-center bg-white px-12 py-2 rounded-md ml-4 xs:text-[10px] md:text-md">
+              <div className="flex flex-row w-1/2 xs:mt-4 md:mt-8 mb-10">
+                <GroupButtons
+                  productData={{
+                    productID: productInfo._id,
+                    productPrice: productInfo.price,
+                    productQuantity: productInfo.quantity,
+                    productTitle: productInfo.productName,
+                    productDescription: productInfo.productDescription,
+                    productCategory: productInfo.category,
+                  }}
+                />
+                <button className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md ml-4 transition-colors duration-300 hover:bg-gray-300">
                   Edit
                 </button>
               </div>

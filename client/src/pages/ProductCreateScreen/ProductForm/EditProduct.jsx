@@ -6,21 +6,23 @@ import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
 import "./product.css";
 import { getCurrentProduct, updateCurrentProduct } from "../../../services/productService";
-
-
+import {toggleEdit} from "../../../../reducers/editActions";
 
 const EditProduct= () => {
+  const {id } = useParams();
   const navigate = useNavigate();
-  const product = useSelector((state) => state.product);
+  const product = useSelector((state) => state.productItem);
+  const edit = useSelector((state) => state.edit);
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({ });
 
-  useEffect(() => {
-    ()=> getCurrentProduct(product._id, dispatch)
-    ,[];
-  });
+  useEffect(() => {  
+     getCurrentProduct(id, dispatch);
+  },[id, dispatch ]);
+
   const validate = () => {
     const newErrors = {};
     if (!product.name.trim()) newErrors.name = "Name is required!";
@@ -35,8 +37,8 @@ const EditProduct= () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     dispatch({
-      type: "UPDATE",
-      payload: {
+      type: "UPDATE_PRODUCT_ITEM",
+      productItem: {
         ...product,
         [name]: value,
       },
@@ -51,7 +53,7 @@ const EditProduct= () => {
     }catch(error){
       console.log("error editing prodcut", error.message );
     }
-    setEdit(false);
+    dispatch(toggleEdit(!edit)); 
   };
 
   return (

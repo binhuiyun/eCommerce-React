@@ -1,20 +1,35 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart_} from "../../../redux/cart.slice";
+import { addToCart_, removeFromCart_ } from "../../../redux/cart.slice";
+import axios from "axios";
 
 const GroupButtons = (props) => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
 
-  const handleIncrement = (data) => {
+  async function handleIncrement(data) {
+    const userID = JSON.parse(localStorage.getItem("user")).others._id;
+    console.log(data);
     setCount(count + 1);
     dispatch(addToCart_(data));
+    try{
+      await axios.post("/api/cart/add", {
+        product: data,
+        quantity: 1,
+        userID: userID,
+      }).then((response) => {
+        console.log(response);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleDecrement = () => {
+  const handleDecrement = (data) => {
     if (count > 0) {
       setCount(count - 1);
+      dispatch(removeFromCart_(data));
     }
   };
 
@@ -24,32 +39,30 @@ const GroupButtons = (props) => {
     <Button.Group className="w-1/2">
       {displayCount && (
         <Button
-          className="border-none flex justify-center items-center focus:outline-none focus:shadow-outline text-white  text-base bg-[#5048e5] hover:bg-gray-500"
-          onClick={handleDecrement}
+          className="border-none flex justify-center items-center focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
+          onClick={() => handleDecrement(props.productData)}
           disabled={count === 0}
         >
-          {" "}
           -
         </Button>
       )}
       {displayCount && (
-        <div className="w-1/2 bg-[#5048e5] flex items-center justify-center text-white">
+        <div className="w-1/2 bg-chuwa-blue flex items-center justify-center text-white">
           {count}
         </div>
       )}
       {displayCount && (
         <Button
-          className="flex justify-center items-center border-none focus:outline-none focus:shadow-outline text-white  text-base bg-[#5048e5] hover:bg-gray-500"
+          className="flex justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
           onClick={() => handleIncrement(props.productData)}
           disabled={count === 0}
         >
-          {" "}
           +
         </Button>
       )}
       {!displayCount && (
         <Button
-          className="flex w-full justify-center items-center border-none focus:outline-none focus:shadow-outline text-white  text-base bg-[#5048e5] hover:bg-gray-500"
+          className="flex w-full justify-center items-center border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300 "
           onClick={() => handleIncrement(props.productData)}
         >
           Add

@@ -1,4 +1,4 @@
-export const setEdit = (value) => (
+export const toggleEdit = (value) => (
     {
         type: 'EDIT',
         payload: value,

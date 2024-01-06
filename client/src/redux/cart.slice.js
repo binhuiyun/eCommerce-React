@@ -9,12 +9,10 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart_: (state, action) => {
-        
       const found = state.cart.find((item) => {
         //console.log(item);
         return item.productID == action.payload.productID;
       });
-
       if (found) {
         console.log("found");
         const temp = state.cart.map((item) =>
@@ -34,7 +32,24 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart_: (state, action) => {
-      state.cart = action.payload;
+      const found = state.cart.find((item) => {
+        return item.productID == action.payload.productID;
+      });
+      if (found) {
+        const temp = state.cart.map((item) =>
+          item.productID == action.payload.productID
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item
+        );
+        state.cart = temp;
+      } else {
+        state.cart = state.cart.filter(
+          (item) => item.productID != action.payload.productID
+        );
+      }
     },
     clearCart_: (state) => {
       state.cart = [];

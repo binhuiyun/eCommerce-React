@@ -34,11 +34,14 @@ const login = async (req, res, next) => {
 const signUp = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    
     const user = await Users.create({
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
       token: "",
+      cart: null,
     });
+
     console.log(user);
     res.json(user);
   } catch (err) {
