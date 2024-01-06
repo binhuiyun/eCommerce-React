@@ -2,14 +2,28 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart_, removeFromCart_ } from "../../../redux/cart.slice";
+import axios from "axios";
 
 const GroupButtons = (props) => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
 
-  const handleIncrement = (data) => {
+  async function handleIncrement(data) {
+    const userID = JSON.parse(localStorage.getItem("user")).others._id;
+    console.log(data);
     setCount(count + 1);
     dispatch(addToCart_(data));
+    try{
+      await axios.post("/api/cart/add", {
+        product: data,
+        quantity: 1,
+        userID: userID,
+      }).then((response) => {
+        console.log(response);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDecrement = (data) => {

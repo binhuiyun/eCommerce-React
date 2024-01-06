@@ -29,31 +29,30 @@ function App() {
 
   return (
     <Provider store={configureStore}>
-      <PersistGate persistor={persistor}>
-        <Routes>
-          {/* <Route
+      {/* <PersistGate persistor={persistor}> */}
+      <Routes>
+        {/* <Route
           index
           element={isLoggedIn ? <ProductDisplayScreen /> : <HomePage />}
         /> */}
-          <Route index element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/search" element={<SearchResultPage />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/create-product" element={<ProductCreateScreen />} />
-          <Route
-            path="/display-product"
-            element={
-              //<PrivateRoute isAuth={isLoggedIn}>
-              <ProductDisplayScreen />
-              ///* </PrivateRoute> */
-            }
-          />
-          <Route path="/checkout" element={<Dummy />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </PersistGate>
+        <Route index element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/search" element={<SearchResultPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/create-product" element={<ProductCreateScreen />} />
+        <Route
+          path="/display-product"
+          element={
+            //<PrivateRoute isAuth={isLoggedIn}>
+            <ProductDisplayScreen />
+            ///* </PrivateRoute> */
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+      {/* </PersistGate> */}
     </Provider>
   );
 }

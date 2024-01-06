@@ -11,13 +11,13 @@ const ProductCardItem = ({
   image,
   name,
   price,
-  quantity,
+  stockQuantity,
 }) => {
   const navigator = useNavigate();
   return (
     <Card className="custom-card">
       <Card.Img
-        className="img-size"
+        className="img-size p-3"
         variant="top"
         src={image}
         onClick={(e) =>
@@ -27,7 +27,7 @@ const ProductCardItem = ({
               productDescription: description,
               category: category,
               price: price,
-              quantity: quantity,
+              quantity: stockQuantity,
               link: image,
             },
           })
@@ -41,7 +41,7 @@ const ProductCardItem = ({
             productData={{
               productID: _id,
               productPrice: price,
-              productQuantity: quantity,
+              productQuantity: stockQuantity,
               productTitle: name,
               productDescription: description,
               productCategory: category,

@@ -3,9 +3,11 @@ import { useNavigate, createSearchParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login_, logout_, selectUser } from "../../redux/auth.slice";
 import ShoppingCart from "./ShoppingCart";
+import axios from "axios";
 
 const Header = ({ userInfo }) => {
   const user = useSelector(selectUser);
+  const userID = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).others._id : null;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -19,9 +21,22 @@ const Header = ({ userInfo }) => {
     navigate("/");
   };
 
-  const handleCartClick = () => {
+  async function handleCartClick() {
     setIsCartOpen(!isCartOpen);
-  };
+    try {
+      await axios
+        .get("/api/cart", {
+          params: {
+            userID: userID,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // TODO: remove when redux all set up
   const mockCartItems = [

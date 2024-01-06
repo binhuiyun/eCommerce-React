@@ -27,10 +27,10 @@ export default function ProductDetailPage() {
       setProductInfo({ ...state });
     }
   }, [state]);
-
+  // console.log(productInfo);
   if (!state) return <>Loading...</>;
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout>
       <Header userInfo={userInfo} />
 
       <div className="flex flex-col w-screen h-screen items-center mb-12">
