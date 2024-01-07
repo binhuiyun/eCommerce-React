@@ -1,32 +1,30 @@
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import GroupButtons from "./ProductDisplayScreen/ProductCard/GroupButtons";
-import { useState, useEffect} from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "antd";
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getCurrentProduct } from "../services/productService";
-import { toggleEdit } from "../../reducers/editActions";
-
+import { toggleEdit } from "../redux/editSlice";
 
 export default function ProductDetailPage() {
-  const {id } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.productItem);
   const userInfo = JSON.parse(localStorage.getItem("user"));
-  const edit = useSelector((state)=>state.edit);
+  const edit = useSelector((state) => state.edit);
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    dispatch(toggleEdit(!edit)); 
+    dispatch(toggleEdit(!edit));
     navigate(`/edit-product/${product._id}`);
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     getCurrentProduct(id, dispatch);
- },[id, dispatch ]);
+  }, [id, dispatch]);
 
- 
   return (
     <Layout>
       <Header userInfo={userInfo} />
@@ -69,8 +67,10 @@ export default function ProductDetailPage() {
                     productCategory: product.category,
                   }}
                 />
-                <button className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md ml-4 transition-colors duration-300 hover:bg-gray-300"
-                onClick={handleEdit}>
+                <button
+                  className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md ml-4 transition-colors duration-300 hover:bg-gray-300"
+                  onClick={handleEdit}
+                >
                   Edit
                 </button>
               </div>
