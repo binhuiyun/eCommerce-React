@@ -26,12 +26,13 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
     min: 0,
-  },
-  Date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  }},
+  // Date: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
+  {timestamps: true}, // this will give us created at and updated at
+);
 
 // Create a Product model based on the schema
 const Product = mongoose.model("Product", productSchema);

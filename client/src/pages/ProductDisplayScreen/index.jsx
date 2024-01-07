@@ -18,7 +18,7 @@ const ProductDisplayScreen = () => {
     <Layout>
       <Header userInfo={userInfo} />
       <Content>
-        <ProductCard />
+        <ProductCard/>
       </Content>
       <Footer />
     </Layout>

@@ -9,10 +9,10 @@ const {
 
 const router = express.Router();
 
-router.get("/products", getAllProducts);
-router.get("/product/:id", getProductById);
+router.get("/", getAllProducts);
+router.get("/:id", getProductById);
 router.get("/search/:searchKey", getSearchProductResults);
-router.post("/product", createProduct);
-router.put("/product/:id", updateProduct);
+router.post("/", createProduct);
+router.put("/:id", updateProduct);
 
 module.exports = router;

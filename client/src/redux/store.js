@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth.slice";
-import productReducer from "./product.slice";
+import productListReducer from "../../reducers/productList";
 import cartReducer from "./cart.slice";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
+import editReducer from "../../reducers/edit";
+import productItemReducer from "../../reducers/productItem";
 import {
   persistReducer,
   FLUSH,
@@ -21,9 +23,11 @@ const persistConfig = {
 
 const reducer = {
   auth: authReducer,
-  product: productReducer,
+  productList: productListReducer,
+  productItem: productItemReducer,
   cart: cartReducer,
-};
+  edit: editReducer,
+}
 
 const store = configureStore({
   reducer: reducer,

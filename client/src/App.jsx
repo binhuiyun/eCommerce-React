@@ -8,7 +8,6 @@ import ForgotPasswordPage from "./pages/AuthenticationScreen/ForgotPasswordPage"
 import ErrorPage from "./pages/ErrorPage";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { UserContextProvider } from "./UserContext";
 import { PrivateRoute } from "./PrivateRoute";
 import { Provider } from "react-redux";
 import configureStore from "./redux/store";
@@ -19,6 +18,7 @@ import SearchResultPage from "./pages/SearchResultPage";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import Dummy from "./pages/Dummy";
+import  store  from "./redux/store";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -28,7 +28,7 @@ function App() {
   var persistor = persistStore(configureStore);
 
   return (
-    <Provider store={configureStore}>
+    <Provider store={store}>
       {/* <PersistGate persistor={persistor}> */}
       <Routes>
         {/* <Route
@@ -42,6 +42,7 @@ function App() {
         <Route path="/search" element={<SearchResultPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/create-product" element={<ProductCreateScreen />} />
+        <Route path="/edit-product/:id" element={<ProductCreateScreen />} />
         <Route
           path="/display-product"
           element={

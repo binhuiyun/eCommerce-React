@@ -1,22 +1,23 @@
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import GroupButtons from "./ProductDisplayScreen/ProductCard/GroupButtons";
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { Layout } from "antd";
+import { useParams } from "react-router-dom";
+import { getCurrentProduct } from "../services/productService";
 
 export default function ProductDetailPage() {
-  const [productInfo, setProductInfo] = useState({});
+  const {id } = useParams();
+  const dispatch = useDispatch();
+  const productInfo = useSelector((state) => state.productItem);
   const userInfo = JSON.parse(localStorage.getItem("user"));
-  const { state } = useLocation();
 
-  useEffect(() => {
-    if (state) {
-      setProductInfo({ ...state });
-    }
-  }, [state]);
+  useEffect(() => {  
+    getCurrentProduct(id, dispatch);
+ },[id, dispatch ]);
 
-  if (!state) return <>Loading...</>;
+ 
   return (
     <Layout>
       <Header userInfo={userInfo} />
