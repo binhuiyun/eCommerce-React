@@ -50,6 +50,7 @@ function App() {
             ///* </PrivateRoute> */
           }
         />
+        <Route path="/checkout" element={<Dummy />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       {/* </PersistGate> */}
