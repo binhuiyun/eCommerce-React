@@ -18,7 +18,7 @@ import SearchResultPage from "./pages/SearchResultPage";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import Dummy from "./pages/Dummy";
-import  store  from "./redux/store";
+import store from "./redux/store";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;

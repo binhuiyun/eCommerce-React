@@ -1,23 +1,24 @@
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import GroupButtons from "./ProductDisplayScreen/ProductCard/GroupButtons";
-import { useState, useEffect} from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "antd";
 import { useParams } from "react-router-dom";
 import { getCurrentProduct } from "../services/productService";
 
 export default function ProductDetailPage() {
-  const {id } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const productInfo = useSelector((state) => state.productItem);
   const userInfo = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {  
+  useEffect(() => {
     getCurrentProduct(id, dispatch);
- },[id, dispatch ]);
+  }, [id, dispatch]);
 
- 
+  console.log(productInfo);
+
   return (
     <Layout>
       <Header userInfo={userInfo} />
@@ -28,7 +29,7 @@ export default function ProductDetailPage() {
         </h2>
         <div className="xs:w-[80%] md:w-[90%] flex xs:flex-col md:flex-row bg-white shadow-lg items-center">
           <div className="xs:mt-5 md:mt-0 xs:w-[90%] md:w-1/2 xs:h-[50%] md:h-[90%] xs:ml-0 md:ml-[5%] flex justify-center items-center">
-            <img src={`${productInfo.link}`} />
+            <img src={`${productInfo.image}`} />
           </div>
           <div className="xs:w-[80%] md:w-[45%] h-full flex justify-center items-center">
             <div className="xs:w-[100%] md:w-[80%] h-[90%]">
@@ -36,27 +37,27 @@ export default function ProductDetailPage() {
                 {productInfo.category}
               </h3>
               <h2 className="xs:mt-2 md:mt-4 xs:text-md md:text-3xl font-bold text-black">
-                {productInfo.productName}
+                {productInfo.name}
               </h2>
               <div className="flex flex-row">
                 <h2 className="xs:mt-4 md:mt-6 xs:text-md md:text-3xl font-bold text-black">{`$${productInfo.price}`}</h2>
-                {productInfo.quantity <= 0 && (
+                {productInfo.stockQuantity <= 0 && (
                   <div className="xs:mt-2 md:mt-6 xs:ml-2 md:ml-4 xs:w-[60px] md:w-[90px] xs:h-[30px] md:h-[30px] bg-pink-300 text-red-600 xs:text-[8px] md:text-xs flex items-center justify-center border border-pink-300 rounded-md">
                     Out of Stock
                   </div>
                 )}
               </div>
               <p className="text-[#6B7280] xs:mt-4 md:mt-6 xs:text-[10px] md:text-lg">
-                {productInfo.productDescription}
+                {productInfo.description}
               </p>
               <div className="flex flex-row w-1/2 xs:mt-4 md:mt-8 mb-10">
                 <GroupButtons
                   productData={{
                     productID: productInfo._id,
                     productPrice: productInfo.price,
-                    productQuantity: productInfo.quantity,
-                    productTitle: productInfo.productName,
-                    productDescription: productInfo.productDescription,
+                    productQuantity: productInfo.stockQuantity,
+                    productTitle: productInfo.name,
+                    productDescription: productInfo.description,
                     productCategory: productInfo.category,
                   }}
                 />
