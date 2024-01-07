@@ -4,15 +4,15 @@ import "./card.css";
 import GroupButtons from "./GroupButtons";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {toggleEdit} from "../../../../reducers/editActions";
+import { toggleEdit } from "../../../redux/editSlice";
 
-const ProductCardItem = ({product}) => {
+const ProductCardItem = ({ product }) => {
   const navigate = useNavigate();
   const edit = useSelector((state) => state.edit);
   const dispatch = useDispatch();
 
   const handleEdit = () => {
-    dispatch(toggleEdit(!edit)); 
+    dispatch(toggleEdit(!edit));
     navigate(`/edit-product/${product._id}`);
   };
 
@@ -22,10 +22,7 @@ const ProductCardItem = ({product}) => {
         className="img-size p-3"
         variant="top"
         src={product.image}
-        onClick={(e) =>
-          navigate(`/product/${product._id}`)
-          }
-        
+        onClick={(e) => navigate(`/product/${product._id}`)}
       />
       <Card.Body className="grid gap-y-2">
         <Card.Title className=" title-font">{product.name}</Card.Title>
@@ -33,7 +30,7 @@ const ProductCardItem = ({product}) => {
         <Flex gap="small">
           <GroupButtons
             productData={{
-              productID:product._id,
+              productID: product._id,
               productPrice: product.price,
               productQuantity: product.stockQuantity,
               productTitle: product.name,
@@ -41,8 +38,10 @@ const ProductCardItem = ({product}) => {
               productCategory: product.category,
             }}
           />
-          <button className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300"
-          onClick={handleEdit}>
+          <button
+            className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300"
+            onClick={handleEdit}
+          >
             Edit
           </button>
         </Flex>
