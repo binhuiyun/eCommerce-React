@@ -3,8 +3,6 @@ import Footer from "./layout/Footer";
 import GroupButtons from "./ProductDisplayScreen/ProductCard/GroupButtons";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "antd";
 import { useParams, useNavigate} from "react-router-dom";
 import { getCurrentProduct } from "../services/productService";
