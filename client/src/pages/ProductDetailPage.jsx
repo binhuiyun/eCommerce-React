@@ -26,7 +26,6 @@ export default function ProductDetailPage() {
     getCurrentProduct(id, dispatch);
   }, [id, dispatch]);
 
-  console.log(productInfo);
 
   return (
     <Layout>
