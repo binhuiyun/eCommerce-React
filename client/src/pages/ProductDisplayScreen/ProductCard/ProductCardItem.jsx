@@ -23,7 +23,7 @@ const ProductCardItem = ({product}) => {
         variant="top"
         src={product.image}
         onClick={(e) =>
-          navigator(`/product/${product._id}`)
+          navigate(`/product/${product._id}`)
           }
         
       />
