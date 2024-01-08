@@ -10,6 +10,7 @@ const ProductCardItem = ({ product }) => {
   const navigate = useNavigate();
   const edit = useSelector((state) => state.edit);
   const dispatch = useDispatch();
+  const userAccess = JSON.parse(localStorage.getItem("user")).others.role;
 
   const handleEdit = () => {
     dispatch(toggleEdit(!edit));
@@ -17,7 +18,7 @@ const ProductCardItem = ({ product }) => {
   };
 
   return (
-    <Card className="custom-card">
+    <Card className="custom-card w-full">
       <Card.Img
         className="img-size p-3"
         variant="top"
@@ -39,12 +40,14 @@ const ProductCardItem = ({ product }) => {
               productImage: product.image,
             }}
           />
-          <button
-            className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300"
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
+          {userAccess === "admin" && (
+            <button
+              className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300"
+              onClick={handleEdit}
+            >
+              Edit
+            </button>
+          )}
         </Flex>
       </Card.Body>
     </Card>
