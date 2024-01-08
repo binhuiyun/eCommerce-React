@@ -1,8 +1,8 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useNavigate, createSearchParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login_, logout_, selectUser } from "../../redux/auth.slice";
-import { selectCart } from "../../redux/cart.slice";
+import { clearCart_, selectCart } from "../../redux/cart.slice";
 import ShoppingCart from "./ShoppingCart";
 import axios from "axios";
 
@@ -20,11 +20,11 @@ const Header = ({ userInfo }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.clear();
+    dispatch(clearCart_());
     dispatch(logout_(null));
     console.log("Logged out");
     navigate("/");
   };
-
   async function handleCartClick() {
     setIsCartOpen(!isCartOpen);
     try {
