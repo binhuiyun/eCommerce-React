@@ -50,67 +50,59 @@ const SearchResultPage = () => {
   };
 
   return (
-    <Layout>
+    <div className="flex flex-col h-screen overflow-y-scroll bg-gray-50">
       <Header userInfo={userInfo} />
-      <Content
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div className="flex flex-col w-full h-full p-5">
-          <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
-            <p className="flex text-3xl font-bold xs:justify-center md:justify-start">
-              Products
-            </p>
-            <div className="flex justify-end xs:row-start-2 xs:justify-center md:row-start-1 md:col-start-2 md:justify-end space-x-4">
-              <div>
-                <DropdownButton title="Sort By" variant="light">
-                  <Dropdown.Item onClick={setLastAdded}>
-                    Last added
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={setLowToHigh}>
-                    Price: Low to High
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={setHighToLow}>
-                    Price: High to Low
-                  </Dropdown.Item>
-                </DropdownButton>
-              </div>
-              <div>
-                <button
-                  className="hidden md:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
-                  onClick={() => navigate("/create-product")}
-                >
-                  Add Product
-                </button>
 
-                <button
-                  className="md:hidden px-4 py-2 font-bold text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
-                  onClick={() => navigate("/create-product")}
-                >
-                  Add
-                </button>
-              </div>
+      <div className="flex flex-col w-full h-full p-5 min-h-[75dvh]">
+        <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
+          <p className="flex text-3xl font-bold xs:justify-center md:justify-start">
+            Products
+          </p>
+          <div className="flex justify-end xs:row-start-2 xs:justify-center md:row-start-1 md:col-start-2 md:justify-end space-x-4">
+            <div>
+              <DropdownButton title="Sort By" variant="light">
+                <Dropdown.Item onClick={setLastAdded}>Last added</Dropdown.Item>
+                <Dropdown.Item onClick={setLowToHigh}>
+                  Price: Low to High
+                </Dropdown.Item>
+                <Dropdown.Item onClick={setHighToLow}>
+                  Price: High to Low
+                </Dropdown.Item>
+              </DropdownButton>
             </div>
-          </div>
+            <div>
+              <button
+                className="hidden md:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+                onClick={() => navigate("/create-product")}
+              >
+                Add Product
+              </button>
 
-          <div className="flex flex-col bg-white rounded p-4">
-            <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-              {products &&
-                products.map((product) => (
-                  <ProductCardItem key={product._id} {...product} />
-                ))}
-            </div>
-            <div className="flex justify-content-end">
-              <PaginationBasic />
+              <button
+                className="md:hidden px-4 py-2 font-bold text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+                onClick={() => navigate("/create-product")}
+              >
+                Add
+              </button>
             </div>
           </div>
         </div>
-      </Content>
+
+        <div className="flex flex-col bg-white rounded p-4">
+          <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {products &&
+              products.map((product) => (
+                <ProductCardItem key={product._id} {...product} />
+              ))}
+          </div>
+          <div className="flex justify-content-end">
+            <PaginationBasic />
+          </div>
+        </div>
+      </div>
+
       <Footer />
-    </Layout>
+    </div>
   );
 };
 export default SearchResultPage;

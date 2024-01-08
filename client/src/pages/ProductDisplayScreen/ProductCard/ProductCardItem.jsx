@@ -15,7 +15,7 @@ const ProductCardItem = ({
 }) => {
   const navigator = useNavigate();
   return (
-    <Card className="custom-card">
+    <Card className="custom-card w-full">
       <Card.Img
         className="img-size p-3"
         variant="top"
