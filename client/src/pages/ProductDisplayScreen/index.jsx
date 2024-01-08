@@ -11,7 +11,7 @@ const ProductDisplayScreen = () => {
   const userInfo = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(userInfo.others._id);
+    //console.log(userInfo.others._id);
     dispatch(fetchCart(userInfo.others._id));
   }, []);
   return (

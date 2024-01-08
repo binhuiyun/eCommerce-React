@@ -35,7 +35,7 @@ const Header = ({ userInfo }) => {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          console.log("cart", response.data);
         });
     } catch (err) {
       console.log(err);

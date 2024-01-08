@@ -22,8 +22,8 @@ const SearchResultPage = () => {
   async function fetchResults() {
     const searchKey = searchParams.get("searchKey");
     try {
-      await axios.get(`/api/search/${searchKey}`).then((response) => {
-        console.log(response.data);
+      await axios.get(`/api/product/search/${searchKey}`).then((response) => {
+        //console.log(response.data);
         setProducts(response.data);
       });
     } catch (err) {
@@ -92,7 +92,7 @@ const SearchResultPage = () => {
           <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {products &&
               products.map((product) => (
-                <ProductCardItem key={product._id} {...product} />
+                <ProductCardItem key={product._id} product={product} />
               ))}
           </div>
           <div className="flex justify-content-end">

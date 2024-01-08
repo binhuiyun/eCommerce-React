@@ -10,6 +10,7 @@ const ProductCardItem = ({ product }) => {
   const navigate = useNavigate();
   const edit = useSelector((state) => state.edit);
   const dispatch = useDispatch();
+  const userAccess = JSON.parse(localStorage.getItem("user")).others.role;
 
   const handleEdit = () => {
     dispatch(toggleEdit(!edit));
@@ -38,12 +39,14 @@ const ProductCardItem = ({ product }) => {
               productCategory: product.category,
             }}
           />
-          <button
-            className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300"
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
+          {userAccess === "admin" && (
+            <button
+              className="flex items-center justify-center w-1/2 text-base border border-[#6B7280] rounded-md transition-colors duration-300 hover:bg-gray-300"
+              onClick={handleEdit}
+            >
+              Edit
+            </button>
+          )}
         </Flex>
       </Card.Body>
     </Card>
