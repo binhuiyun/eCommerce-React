@@ -21,7 +21,7 @@ const ProductCard = () => {
     : products.slice(startIndex, endIndex);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userAccess = JSON.parse(localStorage.getItem("user")).others.role;
+  const userAccess = localStorage.getItem("user") == null ? null : JSON.parse(localStorage.getItem("user")).others.role;
 
   useEffect(() => fetchAllProducts(dispatch), []);
 

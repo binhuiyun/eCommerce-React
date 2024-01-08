@@ -12,8 +12,14 @@ export default function ProductDetailPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.productItem);
-  const userInfo = JSON.parse(localStorage.getItem("user"));
-  const userAccess = JSON.parse(localStorage.getItem("user")).others.role;
+  const userInfo =
+    localStorage.getItem("user") == null
+      ? null
+      : JSON.parse(localStorage.getItem("user"));
+  const userAccess =
+    localStorage.getItem("user") == null
+      ? null
+      : JSON.parse(localStorage.getItem("user")).others.role;
   const edit = useSelector((state) => state.edit);
   const navigate = useNavigate();
   const handleEdit = () => {

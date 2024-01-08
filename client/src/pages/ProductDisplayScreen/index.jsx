@@ -8,11 +8,12 @@ import { fetchCart } from "../../redux/cart.slice";
 import { useDispatch } from "react-redux";
 
 const ProductDisplayScreen = () => {
-  const userInfo = JSON.parse(localStorage.getItem("user"));
+  const userInfo = localStorage.getItem("user") == null ? null :JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   useEffect(() => {
     //console.log(userInfo.others._id);
-    dispatch(fetchCart(userInfo.others._id));
+    if (userInfo)
+      dispatch(fetchCart(userInfo.others._id));
   }, []);
   return (
     <Layout>
