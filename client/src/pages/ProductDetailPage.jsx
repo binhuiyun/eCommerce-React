@@ -4,7 +4,7 @@ import GroupButtons from "./ProductDisplayScreen/ProductCard/GroupButtons";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "antd";
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getCurrentProduct } from "../services/productService";
 import { toggleEdit } from "../redux/editSlice";
 
@@ -15,7 +15,6 @@ export default function ProductDetailPage() {
   const userInfo = JSON.parse(localStorage.getItem("user"));
   const edit = useSelector((state) => state.edit);
   const navigate = useNavigate();
-
   const handleEdit = () => {
     dispatch(toggleEdit(!edit));
     navigate(`/edit-product/${product._id}`);

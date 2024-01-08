@@ -11,15 +11,12 @@ import axios from "axios";
 const GroupButtons = (props) => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-  console.log(cart);
   const count = cart.find(
     (item) => item.product._id === props.productData.productID
   )
     ? cart.find((item) => item.product._id === props.productData.productID)
         .quantity
     : 0;
-  console.log(count);
-
   async function handleIncrement(data) {
     const userID = JSON.parse(localStorage.getItem("user")).others._id;
     // setCount(count + 1);

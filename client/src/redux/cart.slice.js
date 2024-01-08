@@ -4,7 +4,6 @@ import axios from "axios";
 
 const fetchCart = createAsyncThunk("cart/fetchCart", async (userID) => {
   const response = await axios.get(`/api/cart?userID=${userID}`);
-  console.log(response.data.items);
   return response.data.items;
 });
 
@@ -52,14 +51,21 @@ const cartSlice = createSlice({
         return item.product._id == action.payload.productID;
       });
       if (found) {
-        const temp = state.cart.map((item) =>
-          item.product._id != action.payload.productID
-            ? item
-            : item.quantity > 1 && {
-                ...item,
-                quantity: item.quantity - 1,
-              }
-        );
+        let temp;
+        if (found.quantity === 1) {
+          temp = state.cart.filter(
+            (item) => item.product._id != action.payload.productID
+          );
+        } else {
+          temp = state.cart.map((item) =>
+            item.product._id != action.payload.productID
+              ? item
+              : item.quantity > 1 && {
+                  ...item,
+                  quantity: item.quantity - 1,
+                }
+          );
+        }
         state.cart = temp;
       } else {
         state.cart = state.cart.filter(
