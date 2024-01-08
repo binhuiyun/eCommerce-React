@@ -26,6 +26,6 @@ app.get("/api/test", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
-app.use("/api", productRouter);
+app.use("/api/product", productRouter);
 app.use("/api/cart", require("./routes/cart"));
 app.listen(4000, () => console.log("Server running on port 4000"));

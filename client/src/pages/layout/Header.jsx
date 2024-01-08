@@ -2,12 +2,16 @@ import { React, useState } from "react";
 import { useNavigate, createSearchParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login_, logout_, selectUser } from "../../redux/auth.slice";
+import { selectCart } from "../../redux/cart.slice";
 import ShoppingCart from "./ShoppingCart";
 import axios from "axios";
 
 const Header = ({ userInfo }) => {
   const user = useSelector(selectUser);
-  const userID = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).others._id : null;
+  const cart = useSelector(selectCart);
+  const userID = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).others._id
+    : null;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -173,7 +177,7 @@ const Header = ({ userInfo }) => {
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-            <div className="absolute bottom-4 left-5 bg-red-500 rounded-full w-6 h-6 flex justify-center items-center text-white">{`${mockCartItems.reduce(
+            <div className="absolute bottom-4 left-5 bg-red-500 rounded-full w-6 h-6 flex justify-center items-center text-white">{`${cart.reduce(
               (accumulator, item) => {
                 return accumulator + item.quantity;
               },
@@ -181,9 +185,9 @@ const Header = ({ userInfo }) => {
             )}`}</div>
           </div>
           <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
-            {`$${mockCartItems
+            {`$${cart
               .reduce((accumulator, item) => {
-                return accumulator + item.quantity * item.price;
+                return accumulator + item.quantity * item.product.price;
               }, 0)
               .toFixed(2)}`}
           </span>

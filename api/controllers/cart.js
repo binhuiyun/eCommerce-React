@@ -43,8 +43,9 @@ const addToCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ owner: req.user._id });
-    const product = req.body.product;
+    const userID = req.body.userID;
+    const cart = await Cart.findOne({ owner: userID });
+    const product = req.body.product.productID;
     const item = cart.items.find((i) => i.product == product);
     if (item) {
       item.quantity -= 1;
@@ -60,4 +61,26 @@ const removeFromCart = async (req, res) => {
   }
 };
 
-module.exports = { getCart, addToCart, removeFromCart };
+const removeOneProductFromCart = async (req, res) => {
+  try {
+    const userID = req.body.userID;
+    const cart = await Cart.findOne({ owner: userID });
+    const product = req.body.product.productID;
+    const item = cart.items.find((i) => i.product == product);
+    if (item) {
+      cart.items.remove(item);
+    }
+    await cart.save();
+    res.json(cart);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+module.exports = {
+  getCart,
+  addToCart,
+  removeFromCart,
+  removeOneProductFromCart,
+};

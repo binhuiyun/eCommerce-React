@@ -3,7 +3,7 @@ const Product = require("../models/Product");
 
 const getAllProducts = async (req, res) => { 
   try {
-    const products = await Product.find({});
+    const products = await Product.find().sort({ createdAt: -1 });
 
     res.json(products);
     
@@ -25,9 +25,8 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const product = new Product(req.body);
-    await product.save();
-    res.status(201).json(product);
+    const newProduct = await Product.create(req.body);
+    res.json(newProduct);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

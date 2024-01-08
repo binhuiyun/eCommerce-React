@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -6,23 +7,22 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import "./product.css";
-import axios from "axios";
+import { createProduct } from "../../../services/productService";
 
 const ProductForm = () => {
   const navigate = useNavigate();
-
-  const initialData = {
+  const dispatch = useDispatch();
+  const [product, setProduct] = useState({
     name: "",
     description: "",
+    category: "Choose...",
     price: 0,
     stockQuantity: 0,
     image: "",
-    category: "Choose...",
-  };
+});
 
-  const [product, setProduct] = useState({ ...initialData });
-  const [errors, setErrors] = useState({});
-
+  const [errors, setErrors] = useState({ });
+   
   const validate = () => {
     const newErrors = {};
     if (!product.name.trim()) newErrors.name = "Name is required!";
@@ -37,12 +37,6 @@ const ProductForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // useEffect(() => {
-  //   if (initialData) {
-  //     setProduct(initialData);
-  //   }
-  // } , [initialData]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProduct((prev) => ({
@@ -51,12 +45,11 @@ const ProductForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
     if (!validate()) return;
     try {
-      const response = await axios.post("/api/product", product);
-      console.log(response.data);
+      createProduct(product, dispatch);
       navigate("/display-product");
     } catch (error) {
       console.log("error adding prodcut", error.message);
