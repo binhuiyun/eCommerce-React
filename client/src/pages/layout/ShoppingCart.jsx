@@ -40,7 +40,7 @@ const ShoppingCart = ({ handleCartClick }) => {
       setDiscount(coupons[coupon]);
     }
   };
-
+  console.log(cart);
   return (
     <>
       <div className="absolute top-0 right-0 sm:w-full md:w-1/3 bg-indigo-600 z-50">

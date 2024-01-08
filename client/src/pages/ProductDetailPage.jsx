@@ -64,6 +64,7 @@ export default function ProductDetailPage() {
                     productTitle: product.name,
                     productDescription: product.description,
                     productCategory: product.category,
+                    productImage: product.image,
                   }}
                 />
                 <button
