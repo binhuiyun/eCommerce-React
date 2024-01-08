@@ -31,7 +31,6 @@ const cartSlice = createSlice({
         );
         state.cart = temp;
       } else {
-        console.log(action.payload.productImage);
         state.cart.push({
           product: {
             Date: action.payload.productDate,
