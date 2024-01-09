@@ -7,6 +7,7 @@ import {
   selectCart,
 } from "../../../redux/cart.slice";
 import axios from "axios";
+import { updateCurrentProduct } from "../../../services/productService";
 
 const GroupButtons = (props) => {
   const dispatch = useDispatch();
@@ -23,7 +24,10 @@ const GroupButtons = (props) => {
       : JSON.parse(localStorage.getItem("user")).others._id;
 
   async function handleIncrement(data) {
+    // TODO: Check quantity, increase quantity, and update stock quantity in DB
+    
     dispatch(addToCart_(data));
+    //dispatch(updateCurrentProduct(data));
     try {
       await axios
         .post("/api/cart/add", {
@@ -33,7 +37,6 @@ const GroupButtons = (props) => {
         })
         .then((response) => {
           console.log(response);
-          
         });
     } catch (err) {
       console.log(err);
