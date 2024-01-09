@@ -82,24 +82,12 @@ const ProductForm = () => {
     ],
     temperature: 0.7,
   });
-
-  let config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: "https://api.openai.com/v1/chat/completions",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer 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",
-    },
-    data: data,
-  };
-
+  
   async function CustomPlaceholder() {
     console.log("hello");
     try {
       const response = await axios.post("/api/generate-response", {
-        config: config,
+        data: data,
       });
       console.log(response.data.choices[0].message.content);
       setMyPlaceHolder(response.data.choices[0].message.content);

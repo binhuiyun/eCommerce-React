@@ -13,6 +13,7 @@ const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
+const { GPT_SECRET } = require("./util/secret");
 
 mongoose.connect(process.env.MONGODB_URL);
 app.use(cookieParser());
@@ -32,7 +33,18 @@ axios.interceptors.request.use((request) => {
 
 app.post("/api/generate-response", async (req, res) => {
   try {
-    const response = await axios.request(req.body.config);
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://api.openai.com/v1/chat/completions",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${GPT_SECRET}`,
+      },
+      data: req.body.data,
+    };
+    console.log(config);
+    const response = await axios.request(config);
     res.json(response.data);
   } catch (error) {
     console.error("Error generating response:", error);

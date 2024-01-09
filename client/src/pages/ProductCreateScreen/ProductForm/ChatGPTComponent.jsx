@@ -33,7 +33,7 @@ const ChatGPTComponent = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/generate-response", {
-        config: config,
+        data: data,
       });
 
       console.log("hello");

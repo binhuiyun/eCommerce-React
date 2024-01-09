@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../util/secret");
+const { JWT_SECRET } = require("../util/secret");
 const Users = require("../models/User");
 
 const generateLoginToken = async (user) => {
