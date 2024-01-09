@@ -21,7 +21,10 @@ const ProductCard = () => {
     : products.slice(startIndex, endIndex);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userAccess = localStorage.getItem("user") == null ? null : JSON.parse(localStorage.getItem("user")).others.role;
+  const userAccess =
+    localStorage.getItem("user") == null
+      ? null
+      : JSON.parse(localStorage.getItem("user")).others.role;
 
   useEffect(() => fetchAllProducts(dispatch), []);
 
@@ -70,12 +73,21 @@ const ProductCard = () => {
           </div>
           <div>
             {userAccess === "admin" && (
-              <button
-                className="hidden md:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
-                onClick={() => navigate("/create-product")}
-              >
-                Add Product
-              </button>
+              //TO DO add buck small button
+              <div>
+                <button
+                  className="md:hidden px-4 py-2 font-bold text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+                  onClick={() => navigate("/create-product")}
+                >
+                  Add
+                </button>
+                <button
+                  className="hidden md:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+                  onClick={() => navigate("/create-product")}
+                >
+                  Add Product
+                </button>
+              </div>
             )}
           </div>
         </div>
