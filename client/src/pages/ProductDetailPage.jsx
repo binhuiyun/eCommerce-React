@@ -34,14 +34,14 @@ export default function ProductDetailPage() {
   }, [id, dispatch]);
 
   return (
-    <Layout>
+    <Layout className="min-h-screen justify-between">
       <Header userInfo={userInfo} />
 
-      <div className="flex flex-col w-screen h-screen items-center mb-12">
+      <div className="flex flex-col mb-auto items-center">
         <h2 className="w-[90%] mt-12 mb-6 text-3xl font-bold text-black xs:text-center md:text-left">
           Product Details
         </h2>
-        <div className="xs:w-[80%] md:w-[90%] h-[90%] flex xs:flex-col md:flex-row bg-white shadow-lg items-center">
+        <div className="xs:w-[80%] md:w-[90%] flex xs:flex-col md:flex-row bg-white shadow-lg items-center">
           <div className="xs:mt-5 md:mt-0 xs:w-[90%] md:w-1/2 xs:h-[50%] md:h-[90%] xs:ml-0 md:ml-[5%] flex justify-center items-center">
             <img
               src={`${product.image}`}
