@@ -25,7 +25,7 @@ const GroupButtons = (props) => {
 
   async function handleIncrement(data) {
     // TODO: Check quantity, increase quantity, and update stock quantity in DB
-    
+
     dispatch(addToCart_(data));
     //dispatch(updateCurrentProduct(data));
     try {
@@ -65,9 +65,9 @@ const GroupButtons = (props) => {
   const displayCount = count > 0;
 
   return (
-    <div className="w-full">
+    <div className="flex w-1/2">
       {userID && (
-        <Button.Group className="w-1/2">
+        <Button.Group className="w-full">
           {displayCount && (
             <Button
               className="border-none flex justify-center items-center focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
