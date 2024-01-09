@@ -137,7 +137,6 @@ const Header = ({ userInfo }) => {
               type="search"
               name="search"
               placeholder="Search"
-           
               onChange={(e) => setSearchKey(e.target.value)}
             />
             <div className=" items-center px-2 space-x-4 mx-auto">

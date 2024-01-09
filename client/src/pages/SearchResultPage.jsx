@@ -35,15 +35,15 @@ const SearchResultPage = () => {
 
   useEffect(() => {
     fetchResults();
-    if (userInfo)
-      dispatch(fetchCart(userInfo.others._id));
+    if (userInfo) dispatch(fetchCart(userInfo.others._id));
   }, [searchParams]);
 
   async function fetchResults() {
     const searchKey = searchParams.get("searchKey");
-    if(searchKey == "") {
+    if (searchKey == "") {
       navigate("/display-product");
-      return;}
+      return;
+    }
     try {
       await axios.get(`/api/product/search/${searchKey}`).then((response) => {
         //console.log(response.data);
@@ -112,14 +112,16 @@ const SearchResultPage = () => {
         </div>
 
         <div className="flex flex-col rounded">
-        <div className=" bg-white p-6 grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className=" bg-white p-6 grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {products &&
-              products.slice(startIndex, endIndex).map((product) => (
-                <ProductCardItem key={product._id} product={product} />
-              ))}
+              products
+                .slice(startIndex, endIndex)
+                .map((product) => (
+                  <ProductCardItem key={product._id} product={product} />
+                ))}
           </div>
           <div className="flex justify-end xs:justify-center md:justify-end m-6">
-            <PaginationBasic onPageChange={handlePageChange}/>
+            <PaginationBasic onPageChange={handlePageChange} />
           </div>
         </div>
       </div>
