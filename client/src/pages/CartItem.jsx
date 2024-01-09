@@ -19,7 +19,7 @@ export default function CartItem({ product, quantity }) {
     stockQuantity,
   } = product;
   const dispatch = useDispatch();
-  
+
   async function handleIncrement(data) {
     const userID = JSON.parse(localStorage.getItem("user")).others._id;
     dispatch(addToCart_(data));
@@ -73,7 +73,7 @@ export default function CartItem({ product, quantity }) {
   return (
     <div className="w-full h-24 flex flex-row pb-6">
       <div className="w-[20%] h-full bg-white">
-        <img src={image} />
+        <img src={image} className="max-h-[60px] max-w-[60px]" />
       </div>
       <div className="relative w-[80%]">
         <h3 className="absolute top-0 left-2 font-bold">{name}</h3>

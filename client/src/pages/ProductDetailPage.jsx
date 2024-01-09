@@ -43,7 +43,10 @@ export default function ProductDetailPage() {
         </h2>
         <div className="xs:w-[80%] md:w-[90%] h-[90%] flex xs:flex-col md:flex-row bg-white shadow-lg items-center">
           <div className="xs:mt-5 md:mt-0 xs:w-[90%] md:w-1/2 xs:h-[50%] md:h-[90%] xs:ml-0 md:ml-[5%] flex justify-center items-center">
-            <img src={`${product.image}`} className="max-w-[500px]" />
+            <img
+              src={`${product.image}`}
+              className="max-w-[500px] max-h-[500px]"
+            />
           </div>
           <div className="xs:w-[80%] md:w-[45%] h-full flex justify-center items-center">
             <div className="xs:w-[100%] md:w-[80%] h-[90%]">
