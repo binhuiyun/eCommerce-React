@@ -87,7 +87,7 @@ const ProductCard = () => {
             return <ProductCardItem key={product._id} product={product} />;
           })}
         </div>
-        <div className="d-flex justify-content-end m-5">
+        <div className="flex justify-end xs:justify-center md:justify-end m-5">
           <PaginationBasic onPageChange={handlePageChange} />
         </div>
       </div>

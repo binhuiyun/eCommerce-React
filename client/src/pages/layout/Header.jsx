@@ -83,8 +83,11 @@ const Header = ({ userInfo }) => {
             </p>
           </a>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="xs:row-start-2 xs:col-span-2 md:row-start-1 md:col-span-1 md:col-start-2 flex w-full items-center bg-white rounded-md">
+        <form
+          className="xs:row-start-2 xs:col-span-2 md:row-start-1 md:col-span-1 md:col-start-2 "
+          onSubmit={handleSubmit}
+        >
+          <div className="flex w-full items-center bg-white rounded-md">
             <input
               className="text-base w-full text-gray-400 outline-none px-2 py-2 rounded-md"
               type="search"
@@ -160,37 +163,39 @@ const Header = ({ userInfo }) => {
               </p>
             </Link>
           )}
+          <div className="flex gap-4 items-center">
+            <div className="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="white"
+                className="w-8 h-8 cursor-pointer"
+                onClick={handleCartClick}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                />
+              </svg>
+              <div className="absolute bottom-4 left-5 bg-red-500 rounded-full w-6 h-6 flex justify-center items-center text-white">{`${cart.reduce(
+                (accumulator, item) => {
+                  return accumulator + item.quantity;
+                },
+                0
+              )}`}</div>
+            </div>
 
-          <div className="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="white"
-              className="w-8 h-8 cursor-pointer"
-              onClick={handleCartClick}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-              />
-            </svg>
-            <div className="absolute bottom-4 left-5 bg-red-500 rounded-full w-6 h-6 flex justify-center items-center text-white">{`${cart.reduce(
-              (accumulator, item) => {
-                return accumulator + item.quantity;
-              },
-              0
-            )}`}</div>
+            <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
+              {`$${cart
+                .reduce((accumulator, item) => {
+                  return accumulator + item.quantity * item.product.price;
+                }, 0)
+                .toFixed(2)}`}
+            </span>
           </div>
-          <span className="font-bold text-white text-base caret-transparent hover:text-gray-300 transition-colors duration-300">
-            {`$${cart
-              .reduce((accumulator, item) => {
-                return accumulator + item.quantity * item.product.price;
-              }, 0)
-              .toFixed(2)}`}
-          </span>
         </div>
       </div>
       {isCartOpen && (
