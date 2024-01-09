@@ -19,6 +19,7 @@ export default function CartItem({ product, quantity }) {
     stockQuantity,
   } = product;
   const dispatch = useDispatch();
+  
   async function handleIncrement(data) {
     const userID = JSON.parse(localStorage.getItem("user")).others._id;
     dispatch(addToCart_(data));

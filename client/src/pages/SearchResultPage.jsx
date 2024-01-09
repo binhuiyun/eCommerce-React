@@ -11,6 +11,8 @@ import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
 import PaginationBasic from "./ProductDisplayScreen/ProductCard/PaginationBasic";
 import { useNavigate } from "react-router-dom";
+import { fetchCart } from "../redux/cart.slice";
+import { useSelector, useDispatch } from "react-redux";
 
 const SearchResultPage = () => {
   const productsPerPage = 10;
@@ -20,7 +22,11 @@ const SearchResultPage = () => {
 
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState(null);
-  const userInfo = JSON.parse(localStorage.getItem("user"));
+  const dispatch = useDispatch();
+  const userInfo =
+    localStorage.getItem("user") == null
+      ? null
+      : JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
   const handlePageChange = (newPage) => {
@@ -29,6 +35,8 @@ const SearchResultPage = () => {
 
   useEffect(() => {
     fetchResults();
+    if (userInfo)
+      dispatch(fetchCart(userInfo.others._id));
   }, [searchParams]);
 
   async function fetchResults() {
