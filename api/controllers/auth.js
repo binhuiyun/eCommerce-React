@@ -23,7 +23,7 @@ const login = async (req, res, next) => {
             httpOnly: true,
           })
           .status(200)
-          .json({others, loginToken});
+          .json({ others, loginToken });
       } else res.status(422).json("Wrong password");
     } else res.status(422).json("User not found");
   } catch (err) {
@@ -34,16 +34,24 @@ const login = async (req, res, next) => {
 const signUp = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    
+
     const user = await Users.create({
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
       token: "",
       cart: null,
     });
-
-    console.log(user);
-    res.json(user);
+    if (user) {
+      const loginToken = await generateLoginToken(user);
+      console.log("Sign up successul and logged in");
+      const { password, ...others } = user._doc;
+      res
+        .cookie("login_token", loginToken, {
+          httpOnly: true,
+        })
+        .status(200)
+        .json({ others, loginToken });
+    } else res.status(422).json("User not created");
   } catch (err) {
     res.status(422).json(err);
   }
