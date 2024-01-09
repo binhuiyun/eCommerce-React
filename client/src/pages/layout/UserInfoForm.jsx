@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../UserContext";
 import { useDispatch, useSelector } from "react-redux";
-import { login_ } from "../../redux/auth.slice";
+import { login_, loginUser, signUpUser } from "../../redux/auth.slice";
 
 const UserInfoForm = ({ status, msg }) => {
   const [email, setEmail] = useState("");
@@ -77,33 +77,18 @@ const UserInfoForm = ({ status, msg }) => {
 
   async function login(e) {
     e.preventDefault();
-    try {
-      const { data: response } = await axios.post("/api/auth/login", {
-        email,
-        password,
-      });
+    const user = { email: email, password: password };
+    dispatch(loginUser(user)).then(() => {
       setRedirect(true);
-      dispatch(login_({ email: email, password: password }));
-      localStorage.setItem("loginToken", response.loginToken);
-      localStorage.setItem("user", JSON.stringify(response));
-      console.log("Login successful", response);
-    } catch (err) {
-      console.log("Login failed", err);
-    }
+    });
   }
 
   async function signUp(e) {
     e.preventDefault();
-    try {
-      const { data: response } = await axios.post("/api/auth/signup", { email, password });
-      dispatch(login_({ email: email, password: password }));
-      localStorage.setItem("loginToken", response.loginToken);
-      localStorage.setItem("user", JSON.stringify(response));
-      console.log("Login successful", response);
+    const user = { email: email, password: password };
+    dispatch(signUpUser(user)).then(() => {
       setRedirect(true);
-    } catch (err) {
-      console.log("Sign up failed", err);
-    }
+    });
   }
 
   async function forgotPassword(e) {

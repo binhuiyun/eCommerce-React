@@ -3,10 +3,15 @@ import axios from "axios";
 export async function login(e) {
   e.preventDefault();
   try {
-    const { data: response } = await axios.post("/login", { email, password });
+    const { data: response } = await axios.post("/api/auth/login", {
+      email,
+      password,
+    });
+    console.log("response", response);
     setRedirect(true);
-    setUser(response);
-    localStorage.setItem("user", JSON.stringify(response.user));
+    dispatch(login_({ email: email, password: password }));
+    localStorage.setItem("loginToken", response.loginToken);
+    localStorage.setItem("user", JSON.stringify(response));
     console.log("Login successful", response);
   } catch (err) {
     console.log("Login failed", err);
