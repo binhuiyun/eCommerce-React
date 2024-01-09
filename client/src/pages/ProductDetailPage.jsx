@@ -61,9 +61,10 @@ export default function ProductDetailPage() {
                   </div>
                 )}
               </div>
-              <p className="text-[#6B7280] xs:mt-4 md:mt-6 xs:text-[10px] md:text-lg">
+              <div className="whitespace-pre-line"><p className="text-[#6B7280] xs:mt-4 md:mt-6 xs:text-[10px] md:text-lg">
                 {product.description}
-              </p>
+              </p></div>
+              
               <div className="flex flex-row xl:w-1/2 xs:mt-4 md:mt-8 mb-10">
                 <GroupButtons
                   productData={{
