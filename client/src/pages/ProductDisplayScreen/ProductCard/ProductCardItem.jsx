@@ -49,6 +49,7 @@ const ProductCardItem = ({ product }) => {
             <GroupButtons
               productData={{
                 productID: product._id,
+                productImage: product.image,
                 productPrice: product.price,
                 productQuantity: product.stockQuantity,
                 productTitle: product.name,
