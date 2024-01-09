@@ -14,6 +14,8 @@ import {
 } from "../../../services/productService";
 import { toggleEdit } from "../../../redux/editSlice";
 import { updateProductItem } from "../../../redux/productItemSlice";
+import OpenAI from "openai";
+import ChatGPTComponent from "./ChatGPTComponent";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -61,7 +63,6 @@ const EditProduct = () => {
   return (
     <div className="container mb-5">
       <h1 className="title mb-4 text-center">Edit Product</h1>
-
       <Form className="form-field">
         <Form.Group className="mb-3">
           <Form.Label>Product name</Form.Label>

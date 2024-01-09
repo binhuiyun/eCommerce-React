@@ -1,12 +1,10 @@
 const { parse } = require("dotenv");
 const Product = require("../models/Product");
 
-const getAllProducts = async (req, res) => { 
+const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
-
     res.json(products);
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import "./product.css";
 import { createProduct } from "../../../services/productService";
+import axios from "axios";
+import { set } from "mongoose";
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -19,10 +21,15 @@ const ProductForm = () => {
     price: 0,
     stockQuantity: 0,
     image: "",
-});
+  });
+  const [myName, setMyName] = useState("");
+  const [myPlaceholder, setMyPlaceHolder] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const [errors, setErrors] = useState({ });
-   
+  useEffect(() => {
+    if (myName != "") CustomPlaceholder();
+  }, [myName]);
+
   const validate = () => {
     const newErrors = {};
     if (!product.name.trim()) newErrors.name = "Name is required!";
@@ -39,13 +46,22 @@ const ProductForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === "description")
+      setMyPlaceHolder(value);
     setProduct((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleSubmit =  (e) => {
+  const handleBlur = (e) => {
+    const { value } = e.target;
+    setMyName(value);
+    setMyPlaceHolder("Generating description...");
+    console.log(myName);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
     try {
@@ -55,6 +71,46 @@ const ProductForm = () => {
       console.log("error adding prodcut", error.message);
     }
   };
+
+  let data = JSON.stringify({
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "user",
+        content: `write me a product description of a ${myName}`,
+      },
+    ],
+    temperature: 0.7,
+  });
+
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: "https://api.openai.com/v1/chat/completions",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer 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",
+    },
+    data: data,
+  };
+
+  async function CustomPlaceholder() {
+    console.log("hello");
+    try {
+      const response = await axios.post("/api/generate-response", {
+        config: config,
+      });
+      console.log(response.data.choices[0].message.content);
+      setMyPlaceHolder(response.data.choices[0].message.content);
+      setProduct((prev) => ({
+        ...prev,
+        description: response.data.choices[0].message.content,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="container mb-5">
@@ -68,6 +124,7 @@ const ProductForm = () => {
             name="name"
             value={product.name}
             onChange={handleInputChange}
+            onBlur={handleBlur}
             isInvalid={!!errors.name}
           />
           <Form.Control.Feedback type="invalid">
@@ -81,7 +138,7 @@ const ProductForm = () => {
             as="textarea"
             style={{ height: "100px" }}
             name="description"
-            value={product.description}
+            value={myPlaceholder}
             onChange={handleInputChange}
           />
         </Form.Group>
