@@ -51,7 +51,7 @@ const ProductCard = () => {
   };
 
   return (
-    <div className="m-5">
+    <div className="flex flex-col m-20 mb-auto">
       <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
         <p className="flex text-3xl font-bold xs:justify-center md:justify-start">
           Products
@@ -81,13 +81,13 @@ const ProductCard = () => {
         </div>
       </div>
 
-      <div className="flex flex-col bg-white rounded p-4">
-        <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="flex flex-col rounded">
+        <div className=" bg-white p-6 grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {displayedProducts.map((product) => {
             return <ProductCardItem key={product._id} product={product} />;
           })}
         </div>
-        <div className="flex justify-end xs:justify-center md:justify-end m-5">
+        <div className="flex justify-end xs:justify-center md:justify-end my-6">
           <PaginationBasic onPageChange={handlePageChange} />
         </div>
       </div>

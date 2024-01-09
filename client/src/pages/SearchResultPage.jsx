@@ -41,6 +41,9 @@ const SearchResultPage = () => {
 
   async function fetchResults() {
     const searchKey = searchParams.get("searchKey");
+    if(searchKey == "") {
+      navigate("/display-product");
+      return;}
     try {
       await axios.get(`/api/product/search/${searchKey}`).then((response) => {
         //console.log(response.data);
@@ -70,10 +73,10 @@ const SearchResultPage = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-50">
+    <div className="flex flex-col min-h-screen justify-between bg-gray-50">
       <Header userInfo={userInfo} />
 
-      <div className="flex flex-col w-full h-screen p-5 min-h-[75dvh]">
+      <div className="flex flex-col mx-20 mt-12 mb-auto">
         <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
           <p className="flex text-3xl font-bold xs:justify-center md:justify-start">
             Products
@@ -108,14 +111,14 @@ const SearchResultPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col h-full  justify-between bg-white rounded p-4">
-          <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="flex flex-col rounded">
+        <div className=" bg-white p-6 grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {products &&
               products.slice(startIndex, endIndex).map((product) => (
                 <ProductCardItem key={product._id} product={product} />
               ))}
           </div>
-          <div className="flex justify-content-end">
+          <div className="flex justify-end xs:justify-center md:justify-end m-6">
             <PaginationBasic onPageChange={handlePageChange}/>
           </div>
         </div>

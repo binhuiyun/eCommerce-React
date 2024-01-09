@@ -18,7 +18,7 @@ const ProductCreateScreen = () => {
   const edit = useSelector((state) => state.edit);
   
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout className="flex flex-col min-h-screen justify-between bg-gray-50">
       <Header userInfo={userInfo}/>
       <Layout>
         <Sider
