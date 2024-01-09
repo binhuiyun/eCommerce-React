@@ -24,7 +24,7 @@ const ChatGPTComponent = () => {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer sk-??",
     },
     data: data,
   };

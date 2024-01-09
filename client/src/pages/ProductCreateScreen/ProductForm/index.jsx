@@ -77,7 +77,7 @@ const ProductForm = () => {
     messages: [
       {
         role: "user",
-        content: `write me a product description of a ${myName}`,
+        content: `write me a product description of a ${myName} maximum 150 words`,
       },
     ],
     temperature: 0.7,
@@ -90,7 +90,7 @@ const ProductForm = () => {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     },
     data: data,
   };

@@ -14,30 +14,6 @@ const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 
-let data = JSON.stringify({
-  model: "gpt-3.5-turbo",
-  messages: [
-    {
-      role: "user",
-      content: "write me a product description of a wireless magic mouse",
-    },
-  ],
-  temperature: 0.7,
-});
-
-let config = {
-  method: "post",
-  maxBodyLength: Infinity,
-  url: "https://api.openai.com/v1/chat/completions",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: "Bearer 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",
-    Cookie:
-      "__cf_bm=_5N3CvxRhN5gAGcgeWI8nhsNF_wPzeIfCOYmXIVsbzM-1704804324-1-AeNW0EyheIo8IxU5WoqX8iPpyMQnd0RQjCzSrTrWcOlSifeBQEIJBd/j1HkH8VJ/uQmLg2VbuN8N2xeHlfBWwWU=; _cfuvid=pTPsCJtN8i018Y90SfDsnfojQRRioOoxYcCTTKlzSgg-1704804324380-0-604800000",
-  },
-  data: data,
-};
-
 mongoose.connect(process.env.MONGODB_URL);
 app.use(cookieParser());
 app.get("/api/test", (req, res) => {
