@@ -4,21 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../redux/cart.slice";
 import { useNavigate } from "react-router-dom";
 
-const mockCartItems = [
-  // {
-  //   productName: "Apple Macbook Pro",
-  //   price: 1599,
-  //   quantity: 1,
-  //   _id: 123,
-  // },
-  // {
-  //   productName: "Apple Watch",
-  //   price: 299,
-  //   quantity: 3,
-  //   _id: 345,
-  // },
-];
-
 const coupons = {
   GIMME20OFF: -20,
   TENDOZENS: -120,
@@ -43,7 +28,7 @@ const ShoppingCart = ({ handleCartClick }) => {
 
   return (
     <>
-      <div className="absolute top-0 right-0 sm:w-full md:w-1/3 bg-indigo-600 z-50">
+      <div className="absolute xs:top-32 md:top-0 right-0 xs:w-full md:w-1/3 bg-indigo-600 z-50">
         <div className="flex justify-between">
           <h2 className="mt-4 mb-4 ml-8 text-2xl font-bold text-white flex items-center">
             Cart

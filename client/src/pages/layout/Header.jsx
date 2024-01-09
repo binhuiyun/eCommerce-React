@@ -200,7 +200,7 @@ const Header = ({ userInfo }) => {
       </div>
       {isCartOpen && (
         <>
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 md:z-30"></div>
+          <div className="fixed top-0 left-0 xs:w-0 md:w-full xs:h-0 md:h-full flex items-center justify-center bg-black bg-opacity-50 md:z-30"></div>
           <ShoppingCart handleCartClick={handleCartClick} />
         </>
       )}
