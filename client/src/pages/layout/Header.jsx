@@ -89,7 +89,7 @@ const Header = ({ userInfo }) => {
         >
           <div className="flex w-full items-center bg-white rounded-md">
             <input
-              className="text-base w-full text-gray-400 outline-none px-2 py-2 rounded-md"
+              className="text-base w-full text-gray-400 outline-none p-2 px-3 rounded-md"
               type="search"
               name="search"
               placeholder="Search"
