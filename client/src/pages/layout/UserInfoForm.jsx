@@ -68,19 +68,6 @@ const UserInfoForm = ({ status, msg }) => {
     return emailRegex.test(value);
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    setEmailValidation({
-      ...emailValidation,
-      errorEmailMessage: isEmailValid(emailValidation.email)
-        ? ""
-        : "Upps sorry wrong email  😔",
-    });
-
-    if (!isEmailValid(emailValidation.email)) return;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (status == "login") login(e);
@@ -108,8 +95,12 @@ const UserInfoForm = ({ status, msg }) => {
   async function signUp(e) {
     e.preventDefault();
     try {
-      await axios.post("/api/auth/signup", { email, password });
-      console.log("Sign up successful");
+      const { data: response } = await axios.post("/api/auth/signup", { email, password });
+      dispatch(login_({ email: email, password: password }));
+      localStorage.setItem("loginToken", response.loginToken);
+      localStorage.setItem("user", JSON.stringify(response));
+      console.log("Login successful", response);
+      setRedirect(true);
     } catch (err) {
       console.log("Sign up failed", err);
     }
