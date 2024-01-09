@@ -10,10 +10,22 @@ import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
 import PaginationBasic from "./ProductDisplayScreen/ProductCard/PaginationBasic";
+import { useNavigate } from "react-router-dom";
+
 const SearchResultPage = () => {
+  const productsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState(null);
   const userInfo = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   useEffect(() => {
     fetchResults();
@@ -50,10 +62,10 @@ const SearchResultPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen overflow-y-scroll bg-gray-50">
+    <div className="flex flex-col bg-gray-50">
       <Header userInfo={userInfo} />
 
-      <div className="flex flex-col w-full h-full p-5 min-h-[75dvh]">
+      <div className="flex flex-col w-full h-screen p-5 min-h-[75dvh]">
         <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
           <p className="flex text-3xl font-bold xs:justify-center md:justify-start">
             Products
@@ -88,15 +100,15 @@ const SearchResultPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white rounded p-4">
+        <div className="flex flex-col h-full  justify-between bg-white rounded p-4">
           <div className="grid grid-flow-row gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {products &&
-              products.map((product) => (
+              products.slice(startIndex, endIndex).map((product) => (
                 <ProductCardItem key={product._id} product={product} />
               ))}
           </div>
           <div className="flex justify-content-end">
-            <PaginationBasic />
+            <PaginationBasic onPageChange={handlePageChange}/>
           </div>
         </div>
       </div>
