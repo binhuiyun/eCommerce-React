@@ -23,8 +23,6 @@ const GroupButtons = (props) => {
       : JSON.parse(localStorage.getItem("user")).others._id;
 
   async function handleIncrement(data) {
-    const userID = JSON.parse(localStorage.getItem("user")).others._id;
-    // setCount(count + 1);
     dispatch(addToCart_(data));
     try {
       await axios
@@ -35,6 +33,7 @@ const GroupButtons = (props) => {
         })
         .then((response) => {
           console.log(response);
+          
         });
     } catch (err) {
       console.log(err);
@@ -42,7 +41,6 @@ const GroupButtons = (props) => {
   }
 
   const handleDecrement = async (data) => {
-    const userID = JSON.parse(localStorage.getItem("user")).others._id;
     if (count > 0) {
       // setCount(count - 1);
       dispatch(removeFromCart_(data));
@@ -64,7 +62,7 @@ const GroupButtons = (props) => {
   const displayCount = count > 0;
 
   return (
-    <div>
+    <div className="w-full">
       {userID && (
         <Button.Group className="w-1/2">
           {displayCount && (

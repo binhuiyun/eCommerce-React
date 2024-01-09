@@ -7,6 +7,7 @@ import { Layout } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 import { getCurrentProduct } from "../services/productService";
 import { toggleEdit } from "../redux/editSlice";
+import { fetchCart } from "../redux/cart.slice";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -29,7 +30,10 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     getCurrentProduct(id, dispatch);
+    if (userInfo)
+      dispatch(fetchCart(userInfo.others._id));
   }, [id, dispatch]);
+
 
   return (
     <Layout>
