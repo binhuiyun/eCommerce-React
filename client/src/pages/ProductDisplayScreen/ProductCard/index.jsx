@@ -71,16 +71,23 @@ const ProductCard = () => {
               </Dropdown.Item>
             </DropdownButton>
           </div>
-          <div>
-            {userAccess === "admin" && (
+
+          {userAccess === "admin" && (
+            <div>
               <button
-                className="hidden md:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+                className="lg:hidden px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
+                onClick={() => navigate("/create-product")}
+              >
+                Add
+              </button>
+              <button
+                className="hidden lg:inline px-4 py-2 text-base bg-chuwa-blue hover:bg-gray-500 text-white justify-center items-center rounded focus:outline-none focus:shadow-outline"
                 onClick={() => navigate("/create-product")}
               >
                 Add Product
-              </button>
-            )}
-          </div>
+              </button>{" "}
+            </div>
+          )}
         </div>
       </div>
 
