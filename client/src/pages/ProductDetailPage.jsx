@@ -41,7 +41,7 @@ export default function ProductDetailPage() {
         <h2 className="w-[90%] mt-12 mb-6 text-3xl font-bold text-black xs:text-center md:text-left">
           Product Details
         </h2>
-        <div className="xs:w-[80%] md:w-[90%] flex xs:flex-col md:flex-row bg-white shadow-lg items-center">
+        <div className="xs:w-[80%] md:w-[90%] flex xs:flex-col md:flex-row bg-white shadow-lg items-center mb-4">
           <div className="xs:mt-5 md:mt-0 xs:w-[90%] md:w-1/2 xs:h-[50%] md:h-[90%] xs:ml-0 md:ml-[5%] flex justify-center items-center">
             <img src={`${product.image}`} className="m-8 object-contain h-1/2 w-1/2" />
           </div>
@@ -64,7 +64,7 @@ export default function ProductDetailPage() {
               <p className="text-[#6B7280] xs:mt-4 md:mt-6 xs:text-[10px] md:text-lg">
                 {product.description}
               </p>
-              <div className="flex flex-row w-1/2 xs:mt-4 md:mt-8 mb-10">
+              <div className="flex flex-row xl:w-1/2 xs:mt-4 md:mt-8 mb-10">
                 <GroupButtons
                   productData={{
                     productID: product._id,
