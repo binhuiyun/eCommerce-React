@@ -20,20 +20,24 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const signUpUser = createAsyncThunk("auth/signUpUser", async (user) => {
-  try {
-    const { data: response } = await axios.post("/api/auth/signup", {
-      email: user.email,
-      password: user.password,
-    });
-    localStorage.setItem("loginToken", response.loginToken);
-    localStorage.setItem("user", JSON.stringify(response));
-    console.log("response", response);
-    return response;
-  } catch (err) {
-    console.log(err);
+export const signUpUser = createAsyncThunk(
+  "auth/signUpUser",
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data: response } = await axios.post("/api/auth/signup", {
+        email: user.email,
+        password: user.password,
+      });
+      localStorage.setItem("loginToken", response.loginToken);
+      localStorage.setItem("user", JSON.stringify(response));
+      console.log("response", response);
+      return response;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
   }
-});
+);
 
 const authSlice = createSlice({
   name: "auth",

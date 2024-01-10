@@ -78,7 +78,6 @@ const UserInfoForm = ({ status, msg }) => {
   async function login(e) {
     e.preventDefault();
     const user = { email: email, password: password };
-
     try {
       const originalPromiseResult = await dispatch(
         loginUser(user)
@@ -97,18 +96,33 @@ const UserInfoForm = ({ status, msg }) => {
   async function signUp(e) {
     e.preventDefault();
     const user = { email: email, password: password };
-    dispatch(signUpUser(user))
-      .unwrap()
-      .then((originalPromiseResult) => {
-        console.log("originalPromiseResult", originalPromiseResult);
-        setRedirect(true);
-      })
-      .catch((rejectedValueOrSerializedError) => {
-        console.log(
-          "rejectedValueOrSerializedError",
-          rejectedValueOrSerializedError
-        );
-      });
+    try {
+      const originalPromiseResult = await dispatch(
+        signUpUser(user)
+      ).unwrap();
+      console.log("originalPromiseResult", originalPromiseResult);
+      setRedirect(true);
+    } catch (rejectedValueOrSerializedError) {
+      console.log(
+        "rejectedValueOrSerializedError",
+        rejectedValueOrSerializedError
+      );
+      alert("User already exists");
+    }
+
+
+    // dispatch(signUpUser(user))
+    //   .unwrap()
+    //   .then((originalPromiseResult) => {
+    //     console.log("originalPromiseResult", originalPromiseResult);
+    //     setRedirect(true);
+    //   })
+    //   .catch((rejectedValueOrSerializedError) => {
+    //     console.log(
+    //       "rejectedValueOrSerializedError",
+    //       rejectedValueOrSerializedError
+    //     );
+    //   });
   }
 
   async function forgotPassword(e) {
