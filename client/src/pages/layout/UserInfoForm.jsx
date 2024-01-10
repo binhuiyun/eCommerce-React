@@ -109,20 +109,6 @@ const UserInfoForm = ({ status, msg }) => {
       );
       alert("User already exists");
     }
-
-
-    // dispatch(signUpUser(user))
-    //   .unwrap()
-    //   .then((originalPromiseResult) => {
-    //     console.log("originalPromiseResult", originalPromiseResult);
-    //     setRedirect(true);
-    //   })
-    //   .catch((rejectedValueOrSerializedError) => {
-    //     console.log(
-    //       "rejectedValueOrSerializedError",
-    //       rejectedValueOrSerializedError
-    //     );
-    //   });
   }
 
   async function forgotPassword(e) {
