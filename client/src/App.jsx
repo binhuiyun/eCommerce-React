@@ -9,6 +9,7 @@ import ErrorPage from "./pages/ErrorPage";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PrivateRoute } from "./PrivateRoute";
+//import { ProtectedRoute } from "./ProtectedRoute";
 import { Provider } from "react-redux";
 import configureStore from "./redux/store";
 import ProductDetailPage from "./pages/ProductDetailPage";
@@ -24,7 +25,7 @@ axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
 function App() {
-  var isLoggedIn = localStorage.getItem("user");
+ // var isLoggedIn = localStorage.getItem("user");
   var persistor = persistStore(configureStore);
 
   return (
@@ -41,7 +42,13 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/search" element={<SearchResultPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/create-product" element={<ProductCreateScreen />} />
+        <Route path="/create-product"
+         element={
+          <PrivateRoute>
+
+         <ProductCreateScreen />
+          </PrivateRoute>
+        } />
         <Route path="/edit-product/:id" element={<ProductCreateScreen />} />
        
         <Route

@@ -11,7 +11,7 @@ import {
 
 export const PrivateRoute = ({ isAuth, children }) => {
   if (!isAuth) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" />;
   }
   return isAuth ? children : <Navigate to="/" />;
 };
