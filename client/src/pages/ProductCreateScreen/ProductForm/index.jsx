@@ -26,6 +26,7 @@ const ProductForm = () => {
   const [myPlaceholder, setMyPlaceHolder] = useState("");
   const [errors, setErrors] = useState({});
   const [myImageURL, setMyImageURL] = useState("");
+  const [imagePreview, setImagePreview] = useState("");
 
   useEffect(() => {
     if (myName != "") {
@@ -57,6 +58,11 @@ const ProductForm = () => {
     }));
   };
 
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    setImagePreview(product.image);
+  }
   const handleBlur = (e) => {
     const { value } = e.target;
     setMyName(value);
@@ -224,15 +230,25 @@ const ProductForm = () => {
                 {errors.image}
               </Form.Control.Feedback>
 
-              <button className="btn btn-primary bg-chuwa-blue ">Upload</button>
+              <button className="btn btn-primary bg-chuwa-blue"
+            onClick={handleUpload}>Upload</button>
             </InputGroup>
           </Form.Group>
         </Row>
+
         <Form.Group className="image-field mb-3">
-          <div className="image-icon">
-            <FileImageOutlined />
-          </div>
-          <div>Image Preview!</div>
+          {!imagePreview && (
+            <>
+            <div className="image-icon">
+              <FileImageOutlined />
+            </div>
+            <div>Image Preview!</div>
+            </>
+
+          )}
+        
+          {imagePreview && <img className="image-size" src={imagePreview} alt="preview" />}
+        
         </Form.Group>
         <button
           className="btn bg-chuwa-blue btn-primary btn-size d-block mx-auto mx-md-0"

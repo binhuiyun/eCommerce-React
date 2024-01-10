@@ -44,10 +44,10 @@ function App() {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/create-product"
          element={
-          <PrivateRoute>
+          // <PrivateRoute>
 
          <ProductCreateScreen />
-          </PrivateRoute>
+          // </PrivateRoute>
         } />
         <Route path="/edit-product/:id" element={<ProductCreateScreen />} />
        

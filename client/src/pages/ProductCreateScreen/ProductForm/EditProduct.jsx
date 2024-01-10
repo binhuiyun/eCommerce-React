@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import "./product.css";
 import {
   getCurrentProduct,
-  updateCurrentProduct,
 } from "../../../services/productService";
 import { toggleEdit } from "../../../redux/editSlice";
 import { updateProductItem } from "../../../redux/productItemSlice";
@@ -27,7 +26,7 @@ const EditProduct = () => {
 
   useEffect(() => {
     getCurrentProduct(id, dispatch);
-  }, [id, dispatch]);
+  }, [id]);
 
   const validate = () => {
     const newErrors = {};
@@ -48,16 +47,13 @@ const EditProduct = () => {
     dispatch(updateProductItem({ ...product, [name]: value }));
   };
 
-  const handleSave = () => {
-    if (!validate()) return;
-    try {
-      updateCurrentProduct(product, dispatch);
+  const handleSave = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      console.log("form is valid");
       navigate("/display-product");
-    } catch (error) {
-      console.log("error editing prodcut", error.message);
+      dispatch(toggleEdit(!edit));
     }
-    dispatch(toggleEdit(!edit));
-    console.log("edit", edit);
   };
 
   return (
