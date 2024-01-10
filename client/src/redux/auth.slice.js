@@ -1,20 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const loginUser = createAsyncThunk("auth/loginUser", async (user) => {
-  try {
-    const { data: response } = await axios.post("/api/auth/login", {
-      email: user.email,
-      password: user.password,
-    });
-    localStorage.setItem("loginToken", response.loginToken);
-    localStorage.setItem("user", JSON.stringify(response));
-    console.log("response", response);
-    return response;
-  } catch (err) {
-    console.log(err);
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data: response } = await axios.post("/api/auth/login", {
+        email: user.email,
+        password: user.password,
+      });
+      localStorage.setItem("loginToken", response.loginToken);
+      localStorage.setItem("user", JSON.stringify(response));
+      console.log("response", response);
+      return response;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
   }
-});
+);
 
 export const signUpUser = createAsyncThunk("auth/signUpUser", async (user) => {
   try {
@@ -76,7 +80,6 @@ const authSlice = createSlice({
     builder.addCase(signUpUser.pending, (state, action) => {
       state.status = "pending";
     });
-    
   },
 });
 

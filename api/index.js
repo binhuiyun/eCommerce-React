@@ -52,4 +52,19 @@ app.post("/api/generate-response", async (req, res) => {
   }
 });
 
+app.post("/api/generate-image", async (req, res) => {
+  const config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: "https://api.openai.com/v1/dalle3/generate",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${GPT_SECRET}`,
+    },
+    data: req.body.data,
+  };
+  const response = await axios.request(config);
+  res.json(response.data);
+});
+
 app.listen(4000, () => console.log("Server running on port 4000"));

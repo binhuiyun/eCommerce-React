@@ -25,9 +25,13 @@ const ProductForm = () => {
   const [myName, setMyName] = useState("");
   const [myPlaceholder, setMyPlaceHolder] = useState("");
   const [errors, setErrors] = useState({});
+  const [myImageURL, setMyImageURL] = useState("");
 
   useEffect(() => {
-    if (myName != "") CustomPlaceholder();
+    if (myName != "") {
+      CustomPlaceholder();
+      //CustomImage();
+    }
   }, [myName]);
 
   const validate = () => {
@@ -46,8 +50,7 @@ const ProductForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "description")
-      setMyPlaceHolder(value);
+    if (name === "description") setMyPlaceHolder(value);
     setProduct((prev) => ({
       ...prev,
       [name]: value,
@@ -82,9 +85,33 @@ const ProductForm = () => {
     ],
     temperature: 0.7,
   });
-  
+
+  let image = JSON.stringify({
+    model: "dall-e-3",
+    prompt: `${myName}`,
+    n: 1,
+    size: "1024x1024",
+  });
+
+  async function CustomImage() {
+    console.log("hello, from image");
+    try {
+      const response = await axios.post("/api/generate-image", {
+        data: image,
+      });
+      console.log(response.data.choices[0]);
+      //setMyImageURL(response.data.choices[0].text);
+      // setProduct((prev) => ({
+      //   ...prev,
+      //   image: response.data.choices[0].text,
+      // }));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function CustomPlaceholder() {
-    console.log("hello");
+    console.log("hello from description");
     try {
       const response = await axios.post("/api/generate-response", {
         data: data,

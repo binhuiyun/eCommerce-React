@@ -78,17 +78,37 @@ const UserInfoForm = ({ status, msg }) => {
   async function login(e) {
     e.preventDefault();
     const user = { email: email, password: password };
-    dispatch(loginUser(user)).then(() => {
+
+    try {
+      const originalPromiseResult = await dispatch(
+        loginUser(user)
+      ).unwrap();
+      console.log("originalPromiseResult", originalPromiseResult);
       setRedirect(true);
-    });
+    } catch (rejectedValueOrSerializedError) {
+      console.log(
+        "rejectedValueOrSerializedError",
+        rejectedValueOrSerializedError
+      );
+      alert("Wrong email or password");
+    }
   }
 
   async function signUp(e) {
     e.preventDefault();
     const user = { email: email, password: password };
-    dispatch(signUpUser(user)).then(() => {
-      setRedirect(true);
-    });
+    dispatch(signUpUser(user))
+      .unwrap()
+      .then((originalPromiseResult) => {
+        console.log("originalPromiseResult", originalPromiseResult);
+        setRedirect(true);
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        console.log(
+          "rejectedValueOrSerializedError",
+          rejectedValueOrSerializedError
+        );
+      });
   }
 
   async function forgotPassword(e) {
