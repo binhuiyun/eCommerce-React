@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
-import { getCurrentProduct } from "../services/productService";
 import { toggleEdit } from "../redux/editSlice";
 import { fetchCart } from "../redux/cart.slice";
+import { getCurrentProductThunk } from "../thunks/product-thunk";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -29,7 +29,7 @@ export default function ProductDetailPage() {
   };
 
   useEffect(() => {
-    getCurrentProduct(id, dispatch);
+    dispatch(getCurrentProductThunk(id), [id]);
     if (userInfo) dispatch(fetchCart(userInfo.others._id));
   }, [id, dispatch]);
 

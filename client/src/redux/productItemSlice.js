@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  getCurrentProductThunk,
+  updateCurrentProductThunk,
+} from "../thunks/product-thunk";
 
 const initialState = {
   name: "",
@@ -12,15 +16,16 @@ const initialState = {
 const productItemSlice = createSlice({
   name: "productItem",
   initialState,
-  reducers: {
-    getProductItem: (state, action) => {
-      return action.payload;
-    },
-    updateProductItem: (state, action) => {
-      return action.payload;
-    },
-  },
-});
+  extraReducers: builder => {
+        builder.addCase(getCurrentProductThunk.fulfilled, (state, action) => {
+          return action.payload;
+        });
+        builder.addCase(updateCurrentProductThunk.pending, (state, action) => { 
+          return action.payload;
+        });
+      }
+      
+    });
 
-export const { getProductItem, updateProductItem } = productItemSlice.actions;
+
 export default productItemSlice.reducer;

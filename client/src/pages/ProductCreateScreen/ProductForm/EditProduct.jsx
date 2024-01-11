@@ -8,13 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import "./product.css";
-import {
-  getCurrentProduct,
-} from "../../../services/productService";
+import { getCurrentProductThunk, updateCurrentProductThunk } from "../../../thunks/product-thunk";
 import { toggleEdit } from "../../../redux/editSlice";
-import { updateProductItem } from "../../../redux/productItemSlice";
-import OpenAI from "openai";
-import ChatGPTComponent from "./ChatGPTComponent";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -25,7 +20,7 @@ const EditProduct = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    getCurrentProduct(id, dispatch);
+    dispatch(getCurrentProductThunk(id)); 
   }, [id]);
 
   const validate = () => {
@@ -44,7 +39,7 @@ const EditProduct = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    dispatch(updateProductItem({ ...product, [name]: value }));
+    dispatch(updateCurrentProductThunk({ ...product, [name]: value }));
   };
 
   const handleSave = (e) => {
