@@ -27,7 +27,7 @@ const GroupButton = ({ product }) => {
           onClick={() => {
             dispatch(increaseQuantity(product));
           
-        //   dispatch(addToCartThunk({userId:user.id, product}));
+           dispatch(addToCartThunk({userId:user.id, product}));
           }
           }
         >
@@ -42,7 +42,8 @@ const GroupButton = ({ product }) => {
             className="border-none text-white text-base"
             onClick={() => {
             dispatch(decreaseQuantity(product));
-      //     dispatch(decreaseOneThunk({ userId: user.id, product }));
+            console.log("decrease", product);
+             dispatch(decreaseOneThunk({ userId: user.id, product }));
             }
           }
           >
@@ -53,7 +54,7 @@ const GroupButton = ({ product }) => {
             className=" border-none text-white text-base"
             onClick={() => {
               dispatch(increaseQuantity(product));
-       //       dispatch(addToCartThunk({userId:user.id, product}));
+              dispatch(addToCartThunk({userId:user.id, product}));
             }
           }
           >

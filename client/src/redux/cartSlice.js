@@ -12,10 +12,10 @@ const shoppingCartSlice = createSlice({
   },
   reducers: {
     increaseQuantity(state, action) {
-      console.log("slice", action.payload);
+      console.log("slice add ", action.payload);
       const newProduct = action.payload;
       const selectedItem = state.items.find(
-        (item) => item.product._id === newProduct._id
+        (item) => item.product._id == newProduct._id
       );
 
       if (selectedItem) {
@@ -26,21 +26,24 @@ const shoppingCartSlice = createSlice({
     },
 
     decreaseQuantity(state, action) {
+      console.log("slice decrease ", action.payload);
       const newProduct = action.payload;
       const selectedItem = state.items.find(
-        (item) => item.product._id === newProduct._id
+        (item) => item.product._id == newProduct._id
       );
       if (selectedItem) {
+        console.log("selectedItem type", selectedItem);
         if (selectedItem.quantity === 1) {
-          state.items = state.items.filter((item) => item.product._id !== newProduct._id);
+          state.items = state.items.filter((item) => item.product._id != newProduct._id);
         } else {
+          console.log("decrease selected", selectedItem);
           selectedItem.quantity -= 1;
       }
     }
   },
     removeFromCart(state, action) {
       const newProduct = action.payload;
-      state.items = state.items.filter((item) => item.product._id !== newProduct._id);
+      state.items = state.items.filter((item) => item.product._id != newProduct._id);
     },
 
     toggleIsOpen(state, action) {
@@ -49,13 +52,13 @@ const shoppingCartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCartThunk.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.items = action.payload.items;
     });
     builder.addCase(addToCartThunk.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.items = action.payload.items;
     });
     builder.addCase(decreaseOneThunk.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.items = action.payload.items;
     });
   },
 });

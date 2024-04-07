@@ -12,7 +12,7 @@ import { logOutUser } from "../../redux/userSlice";
 const { Search } = Input;
 
 
-export function Header({toggleShow}) {
+export default function Header({toggleShow}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);

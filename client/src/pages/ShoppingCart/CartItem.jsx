@@ -9,7 +9,6 @@ import { formatCurrency } from "../../utils/formatCurrency";
 
 export default function CartItem({ product, quantity }) {
   console.log("cartItem component", product)
-  const storeItems = useSelector((state) => state.productList.products);
   const dispatch = useDispatch();
   // const product = storeItems.find((item) => item._id === product);
   // if (!product) return null;

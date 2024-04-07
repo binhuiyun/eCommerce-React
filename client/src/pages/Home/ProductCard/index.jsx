@@ -8,9 +8,10 @@ import { useState, useEffect } from "react";
 import { fetchAllProductsThunk} from "../../../thunks/products-thunk";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const ProductCard = () => {
   const {user} = useSelector((state) => state.auth);
-  console.log("user", user.email);
+  console.log("user", user.email, user.id);
   const {products} = useSelector((state) => state.productList);
   const [sort, setSort] = useState(false);
   const [sortedProducts, setSortedProducts] = useState([...products]);
@@ -26,6 +27,7 @@ const ProductCard = () => {
  
 
   useEffect(() => {dispatch(fetchAllProductsThunk())}, []);
+
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
