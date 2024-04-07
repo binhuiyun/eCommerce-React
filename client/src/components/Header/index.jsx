@@ -16,15 +16,16 @@ export function Header({toggleShow}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  const {user} = useSelector((state) => state.auth);
-
   const {isAuthenticated} = useSelector((state) => state.auth);
-  const userID = localStorage.getItem("user");
   const cartQuantity = cart.items.reduce((acc, item) => acc + item.quantity, 0);
-  const storeItems = useSelector((state) => state.productList.products);
+  // const storeItems = useSelector((state) => state.productList.products);
+  // const subtotal = cart.items.reduce((total, cartItem) => {
+  //   const item = storeItems.find((i) => i._id === cartItem.id);
+  //   return total + (item?.price || 0) * cartItem.quantity;
+  // }, 0);
   const subtotal = cart.items.reduce((total, cartItem) => {
-    const item = storeItems.find((i) => i._id === cartItem.id);
-    return total + (item?.price || 0) * cartItem.quantity;
+    console.log("header subtotal", cartItem)
+    return total + cartItem.product.price * cartItem.quantity;
   }, 0);
 
   const handleSignOut = (e) => {
@@ -38,23 +39,23 @@ export function Header({toggleShow}) {
 
   
   console.log("log in? ", isAuthenticated);
-  const handleCartClick = async () => {
-    // dispatch(toggleIsOpen(!isCartOpen));
+  // const handleCartClick = async () => {
+  //   // dispatch(toggleIsOpen(!isCartOpen));
 
-    try {
-      await axios
-        .get("/api/cart", {
-          params: {
-            userID: userID,
-          },
-        })
-        .then((response) => {
-          console.log("cart", response.data);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //   try {
+  //     await axios
+  //       .get("/api/cart", {
+  //         params: {
+  //           userID: userID,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log("cart", response.data);
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <NavbarBs sticky="top" className="bg-while shadow-sm py-3">

@@ -7,21 +7,22 @@ import {
 import axios from "axios";
 import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function CartItem({ pid, quantity }) {
+export default function CartItem({ product, quantity }) {
+  console.log("cartItem component", product)
   const storeItems = useSelector((state) => state.productList.products);
   const dispatch = useDispatch();
-  const product = storeItems.find((item) => item._id === pid);
-  if (!product) return null;
+  // const product = storeItems.find((item) => item._id === product);
+  // if (!product) return null;
 
-  const handleIncrement = async (pid) => {
-    dispatch(increaseQuantity(pid));
+  const handleIncrement = async (product) => {
+    dispatch(increaseQuantity(product));
   };
 
-  const handleDecrement = async (pid) => {
-    dispatch(decreaseQuantity(pid));
+  const handleDecrement = async (product) => {
+    dispatch(decreaseQuantity(product));
   };
-  const handleRemove = async (pid) => {
-    dispatch(removeFromCart(pid));
+  const handleRemove = async (product) => {
+    dispatch(removeFromCart(product));
   };
   return (
     <div className="w-full h-24 flex flex-row pb-6">
@@ -38,7 +39,7 @@ export default function CartItem({ pid, quantity }) {
           <div className="flex items-center justify-center w-[33%] h-full cursor-pointer">
             <div
               className="font-light text-sm text-grey-500"
-              onClick={() => handleDecrement(pid)}
+              onClick={() => handleDecrement(product)}
             >
               -
             </div>
@@ -51,7 +52,7 @@ export default function CartItem({ pid, quantity }) {
           <div className="flex items-center justify-center w-[33%] h-full cursor-pointer">
             <div
               className="font-light text-sm text-grey-500"
-              onClick={() => handleIncrement(pid)}
+              onClick={() => handleIncrement(product)}
             >
               +
             </div>
@@ -59,7 +60,7 @@ export default function CartItem({ pid, quantity }) {
         </div>
         <div
           className="absolute bottom-0 right-2 text-sm text-gray-600 underline cursor-pointer"
-          onClick={() => handleRemove(pid)}
+          onClick={() => handleRemove(product)}
         >
           Remove
         </div>

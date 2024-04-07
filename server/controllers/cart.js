@@ -1,7 +1,9 @@
 const Cart = require("../models/Cart");
 
-const getCart = async (req, res) => {
-  const userId = req.query.userId;
+const getCartByUid= async (req, res) => {
+  const userId = req.params.id;
+  console.log("getCart", userId, req.params);
+  
   try {
     const cart = await Cart.findOne({ owner: userId }).populate({
       path: "items.product",
@@ -87,7 +89,7 @@ const removeOneProductFromCart = async (req, res) => {
 };
 
 module.exports = {
-  getCart,
+  getCartByUid,
   addToCart,
   removeFromCart,
   removeOneProductFromCart,

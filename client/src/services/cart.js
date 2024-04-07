@@ -2,9 +2,9 @@ import apiCall from "./api";
 
 const CART_API = "/api/cart";
 
-export const fetchCart = async (userID) => {
+export const fetchCart = async (userId) => {
   return await apiCall({
-    url: `${CART_API}?userID=${userID}`,
+    url: `${CART_API}/${userId}`,
     method: "get",
 
   });

@@ -1,22 +1,29 @@
 import { Offcanvas, Stack, Form } from "react-bootstrap";
 import { Col, Row } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "../../utils/formatCurrency";
 import CartItem from "./CartItem";
 import "./ShoppingCart.css";
+import { fetchCartThunk } from "../../thunks/cart-thunk";
 
 export default function ShoppingCart({ show, onHide }) {
   const cart = useSelector((state) => state.cart);
-  const storeItems = useSelector((state) => state.productList.products);
+  const {user} = useSelector((state) => state.auth);
+//  const storeItems = useSelector((state) => state.productList.products);
   const cartItems = cart.items;
   const [coupon, setCoupon] = useState("");
   const [discountRate, setDiscountRate] = useState(0);
+  const dispatch = useDispatch();
 
+  // const subtotal = cartItems.reduce((total, cartItem) => {
+  //   const item = storeItems.find((i) => i._id === cartItem.id);
+  //   return total + (item?.price || 0) * cartItem.quantity;
+  // }, 0);
   const subtotal = cartItems.reduce((total, cartItem) => {
-    const item = storeItems.find((i) => i._id === cartItem.id);
-    return total + (item?.price || 0) * cartItem.quantity;
+    return total + cartItem.product.price * cartItem.quantity;
   }, 0);
+
 
   const handleCouponAdd = (e) => {
     e.preventDefault();
@@ -45,7 +52,8 @@ export default function ShoppingCart({ show, onHide }) {
       </Offcanvas.Header>
       <Offcanvas.Body>
         {cartItems.map((item) => (
-          <CartItem key={item.id} pid={item.id} quantity={item.quantity} />
+          console.log("cart item in shopping", typeof(item.product)),
+          <CartItem key={item.product._id} product={item.product} quantity={item.quantity} />
         ))}
         <p className="text-xs text-stone-500 mt-2">Apply Discount Code</p>
         <Stack direction="horizontal" gap={3} className="mb-4">

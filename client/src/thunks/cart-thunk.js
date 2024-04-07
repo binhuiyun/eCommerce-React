@@ -3,7 +3,7 @@ import { fetchCart, addToCart, decreaseOne} from "../services/cart";
 
 export const fetchCartThunk = createAsyncThunk(
     "fetchCart",
-    (userID) => fetchCart(userID)
+    (userId) => fetchCart(userId)
     );  
 
 export const addToCartThunk = createAsyncThunk(

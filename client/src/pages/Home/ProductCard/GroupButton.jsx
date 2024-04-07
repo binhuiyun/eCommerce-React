@@ -11,12 +11,12 @@ const GroupButton = ({ product }) => {
   const {user} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const getItemQuantity = (pid) => {
-    const selectedItem = cart.items.find((item) => item.id === product._id);
+  const getItemQuantity = (product) => {
+    const selectedItem = cart.items.find((item) => item.product._id === product._id);
     return selectedItem ? selectedItem.quantity : 0;
   };
 
-  const quantity = getItemQuantity(product._id);
+  const quantity = getItemQuantity(product);
 
   return (
     <div className="mt-auto">
@@ -25,9 +25,9 @@ const GroupButton = ({ product }) => {
           disabled={product.stockQuantity === 0}
           className="w-full border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
           onClick={() => {
-            dispatch(increaseQuantity(product._id));
+            dispatch(increaseQuantity(product));
           
-           dispatch(addToCartThunk({userId:user.id, product}));
+        //   dispatch(addToCartThunk({userId:user.id, product}));
           }
           }
         >
@@ -41,9 +41,8 @@ const GroupButton = ({ product }) => {
           <Button
             className="border-none text-white text-base"
             onClick={() => {
-            dispatch(decreaseQuantity(product._id));
-           dispatch(decreaseOneThunk({ userId: user.id, product }));
-           console.log("check", Array.isArray(cart.items));
+            dispatch(decreaseQuantity(product));
+      //     dispatch(decreaseOneThunk({ userId: user.id, product }));
             }
           }
           >
@@ -53,8 +52,8 @@ const GroupButton = ({ product }) => {
           <Button
             className=" border-none text-white text-base"
             onClick={() => {
-              dispatch(increaseQuantity(product._id));
-              dispatch(addToCartThunk({userId:user.id, product}));
+              dispatch(increaseQuantity(product));
+       //       dispatch(addToCartThunk({userId:user.id, product}));
             }
           }
           >
