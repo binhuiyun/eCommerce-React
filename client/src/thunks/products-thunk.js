@@ -9,8 +9,6 @@ export const createProductThunk = createAsyncThunk("createProduct", (newProduct)
   createProduct(newProduct)
 );
 
-
-
 export const fetchAllProductsThunk = createAsyncThunk("fetchAllProducts", () =>
   fetchAllProducts()
 );

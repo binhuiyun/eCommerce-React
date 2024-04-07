@@ -1,70 +1,50 @@
 import "./App.css";
-import React from "react";
+import React,{useState} from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/AuthenticationScreen/HomePage";
-import LoginPage from "./pages/AuthenticationScreen/LoginPage";
-import SignUpPage from "./pages/AuthenticationScreen/SignUpPage";
-import ForgotPasswordPage from "./pages/AuthenticationScreen/ForgotPasswordPage";
-import ErrorPage from "./pages/ErrorPage";
-import axios from "axios";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+//import ErrorPage from "./pages/ErrorPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PrivateRoute } from "./PrivateRoute";
 //import { ProtectedRoute } from "./ProtectedRoute";
-import { Provider } from "react-redux";
-import configureStore from "./redux/store";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import ProductCreateScreen from "./pages/ProductCreateScreen";
-import ProductDisplayScreen from "./pages/ProductDisplayScreen";
+import ProductDetail from "./pages/ProductDetail";
+import ProductCreate from "./pages/ProductCreate";
+import Home from "./pages/Home";
 import SearchResultPage from "./pages/SearchResultPage";
-import { persistStore } from "redux-persist";
-import { PersistGate } from "redux-persist/integration/react";
-import Dummy from "./pages/Dummy";
-import store from "./redux/store";
+import { Header } from "./components/Header";
+import ShoppingCart from "./pages/ShoppingCart";
 
-axios.defaults.baseURL = "http://localhost:4000";
-axios.defaults.withCredentials = true;
 
 function App() {
- // var isLoggedIn = localStorage.getItem("user");
-  var persistor = persistStore(configureStore);
+  const [showCart, setShowCart] = useState(false);
 
   return (
-    <Provider store={store}>
-      {/* <PersistGate persistor={persistor}> */}
-      <Routes>
-        {/* <Route
-          index
-          element={isLoggedIn ? <ProductDisplayScreen /> : <HomePage />}
-        /> */}
-        <Route index element={<ProductDisplayScreen />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+    <>
+    <Header toggleShow={()=>setShowCart(!showCart)}/>
+    <ShoppingCart show={showCart} onHide={()=> setShowCart(false)}/>
+
+      <Routes>  
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
         <Route path="/search" element={<SearchResultPage />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/create-product"
          element={
-          // <PrivateRoute>
-
-         <ProductCreateScreen />
-          // </PrivateRoute>
+         <ProductCreate/>
         } />
-        <Route path="/edit-product/:id" element={<ProductCreateScreen />} />
+        <Route path="/edit-product/:id" element={<ProductCreate />} />
        
         <Route
           path="/display-product"
           element={
-            //<PrivateRoute isAuth={isLoggedIn}>
-            <ProductDisplayScreen />
-            ///* </PrivateRoute> */
+            <Home />
           }
         />
-
-        <Route path="/checkout" element={<Dummy />} />
-        <Route path="*" element={<ErrorPage />} />
+        {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
-      {/* </PersistGate> */}
-    </Provider>
+ 
+      </>
   );
 }
 

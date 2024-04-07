@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add this CSS to your stylesheet or style block */
+.ant-form-item-label.password-field .ant-form-item-required::before {
+    display: none; /* Hide the asterisk */
+  }
+  

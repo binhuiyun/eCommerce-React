@@ -1,17 +1,15 @@
 import { Layout } from "antd";
-const { Content } = Layout;
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import ProductCard from "./ProductDisplayScreen/ProductCard";
-import ProductCardItem from "./ProductDisplayScreen/ProductCard/ProductCardItem";
-import React, { useContext, useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+// import Header from "./layout/Header";
+// import Footer from "./layout/Footer";
+import ProductCardItem from "./Home/ProductCard/ProductCardItem";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import PaginationBasic from "./ProductDisplayScreen/ProductCard/PaginationBasic";
+import PaginationBasic from "./Home/ProductCard/PaginationBasic";
 import { useNavigate } from "react-router-dom";
-import { fetchCart } from "../redux/cart.slice";
+import { fetchCartThunk } from "../thunks/cart-thunk";
 import { useSelector, useDispatch } from "react-redux";
 
 const SearchResultPage = () => {
@@ -23,10 +21,7 @@ const SearchResultPage = () => {
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState(null);
   const dispatch = useDispatch();
-  const userInfo =
-    localStorage.getItem("user") == null
-      ? null
-      : JSON.parse(localStorage.getItem("user"));
+
   const navigate = useNavigate();
 
   const handlePageChange = (newPage) => {
@@ -34,19 +29,19 @@ const SearchResultPage = () => {
   };
 
   useEffect(() => {
-    fetchResults();
-    if (userInfo) dispatch(fetchCart(userInfo.others._id));
+    fetchResults(); 
   }, [searchParams]);
 
   async function fetchResults() {
     const searchKey = searchParams.get("searchKey");
+    console.log("searchKey", searchKey);
     if (searchKey == "") {
       navigate("/display-product");
       return;
     }
     try {
-      await axios.get(`/api/product/search/${searchKey}`).then((response) => {
-        //console.log(response.data);
+      await axios.get(`http://localhost:4000/api/product/search/${searchKey}`).then((response) => {
+        console.log(response.data);
         setProducts(response.data);
       });
     } catch (err) {
@@ -74,7 +69,7 @@ const SearchResultPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen justify-between bg-gray-50">
-      <Header userInfo={userInfo} />
+      {/* <Header userInfo={userInfo} /> */}
 
       <div className="flex flex-col mx-20 mt-12 mb-auto">
         <div className="grid grid-rows-1 grid-cols-2 xs:grid-rows-2 xs:grid-cols-1 md:grid-rows-1 md:grid-cols-2 mb-4 gap-y-3">
@@ -126,7 +121,7 @@ const SearchResultPage = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -1,23 +1,34 @@
-import axios from "axios";
+import apiCall from "./api";
 
-const PRODUCT_API = "http://localhost:4000/api/product";
+const PRODUCT_API = "/api/product";
 
 export const getCurrentProduct = async (id) => {
-  const response = await axios.get(`${PRODUCT_API}/${id}`);
-  return response.data;
+  return await apiCall({
+    url: `${PRODUCT_API}/${id}`,
+    method: "get",
+  });
+
 };
 
 export const fetchAllProducts = async () => {
-  const response = await axios.get(PRODUCT_API);
-  return response.data;
+  return await apiCall({
+    url: `${PRODUCT_API}`,
+    method: "get",
+  });
 
 };
 export const updateCurrentProduct = async (product) => {
-  const response = await axios.put(`${PRODUCT_API}/${product._id}`, product);
-  return response.data;
+  return await apiCall({
+    url: `${PRODUCT_API}/${product._id}`,
+    method: "put",
+    data: product,
+  });
 };
 
 export const createProduct = async (newProduct) => {
-  const response = await axios.post(PRODUCT_API, newProduct);
-  return response.data;
+  return await apiCall({
+    url: `${PRODUCT_API}`,
+    method: "post",
+    data: newProduct,
+  });
 };

@@ -1,0 +1,13 @@
+.offcanvas-close{
+    cursor: pointer;
+    color: red;
+    border-radius: 50%;
+    z-index: 999;
+   
+}
+
+.custom-list-group{
+    border: none;
+  
+
+}
