@@ -13,6 +13,7 @@ import ProductDetail from "./pages/ProductDetail";
 import ProductCreate from "./pages/ProductCreate";
 import Home from "./pages/Home";
 import SearchResultPage from "./pages/SearchResultPage";
+import Header from "./components/Header";
 import ShoppingCart from "./pages/ShoppingCart";
 
 
@@ -27,8 +28,8 @@ function App() {
 
   return (
     <>
-    {/* <Header toggleShow={handleToggleCart}/>
-    <ShoppingCart show={showCart} onHide={()=> setShowCart(false)}/> */}
+    <Header toggleShow={handleToggleCart}/>
+    <ShoppingCart show={showCart} onHide={()=> setShowCart(false)}/>
 
       <Routes>  
         <Route index element={<Home />} />

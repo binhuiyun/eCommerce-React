@@ -6,7 +6,6 @@ import {
 } from "../../../redux/cartSlice";
 import { addToCartThunk, decreaseOneThunk } from "../../../thunks/cart-thunk";
 
-
 const GroupButton = ({ product }) => {
   const {user} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -18,16 +17,16 @@ const GroupButton = ({ product }) => {
 
   const quantity = getItemQuantity(product);
 
+
   return (
     <div className="mt-auto">
       {quantity === 0 ? (
         <Button
           disabled={product.stockQuantity === 0}
           className="w-full border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
-          onClick={() => {
+          onClick={ () => {
             dispatch(increaseQuantity(product));
-          
-           dispatch(addToCartThunk({userId:user.id, product}));
+            dispatch(addToCartThunk({userId:user.id, product}));
           }
           }
         >
@@ -41,11 +40,10 @@ const GroupButton = ({ product }) => {
           <Button
             className="border-none text-white text-base"
             onClick={() => {
-            dispatch(decreaseQuantity(product));
-            console.log("decrease", product);
-             dispatch(decreaseOneThunk({ userId: user.id, product }));
-            }
-          }
+           dispatch(decreaseQuantity(product));
+           dispatch(decreaseOneThunk({userId:user.id, product}));
+                  
+          }}
           >
             -
           </Button>

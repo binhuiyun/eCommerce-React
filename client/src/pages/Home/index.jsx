@@ -12,22 +12,19 @@ import ShoppingCart from "../ShoppingCart";
 const Home = () => {
   const {user} = useSelector((state) => state.auth);
   const [showCart, setShowCart] = useState(false);
-  const handleToggleCart = () => {
-    setShowCart(!showCart);
-  //  dispatch(fetchCartThunk(user.id));
-  }
+
   const dispatch = useDispatch();
   console.log("home", user.id);
   useEffect(() => {
+    if(user.id)
     dispatch(fetchCartThunk(user.id));
   }
-  , []);
+  , [user.id]);
 
   return (
     <Layout className="min-h-screen justify-between">
      {/* <Header userInfo={userInfo} /> */}
-     <Header toggleShow={handleToggleCart}/>
-    <ShoppingCart show={showCart} onHide={()=> setShowCart(false)}/>
+
       <ProductCard />
       {/* <Footer /> */}
     </Layout>

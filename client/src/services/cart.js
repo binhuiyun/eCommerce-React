@@ -20,8 +20,17 @@ export const addToCart = async (data) => {
 };
 
 export const decreaseOne= async (data) => {
+  console.log("decreaseOne service",data)
   return await apiCall({
     url: `${CART_API}/remove`,
+    method: "post",
+    data
+  });
+}
+
+export const removeItem = async (data) => {
+  return await apiCall({
+    url: `${CART_API}/removeOne`,
     method: "post",
     data
   });

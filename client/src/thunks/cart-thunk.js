@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchCart, addToCart, decreaseOne} from "../services/cart";
+import { fetchCart, addToCart, decreaseOne, removeItem} from "../services/cart";
 
 export const fetchCartThunk = createAsyncThunk(
     "fetchCart",
@@ -13,5 +13,14 @@ export const addToCartThunk = createAsyncThunk(
 
 export const decreaseOneThunk = createAsyncThunk(
     "decreaseOne",
-    (data) => decreaseOne(data)
+    (data) => {
+        decreaseOne(data)
+        console.log("decreaseOneThunk", data)
+    }
+
+    );
+
+export const removeItemThunk = createAsyncThunk(
+    "removeItem",
+    (data) => removeItem(data)
     );

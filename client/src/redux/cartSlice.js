@@ -3,12 +3,14 @@ import {
   fetchCartThunk,
   addToCartThunk,
   decreaseOneThunk,
+  removeItemThunk,
 } from "../thunks/cart-thunk";
 
 const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: {
     items: [],
+    status: "idle",
   },
   reducers: {
     increaseQuantity(state, action) {
@@ -19,7 +21,7 @@ const shoppingCartSlice = createSlice({
       );
 
       if (selectedItem) {
-        selectedItem.quantity += 1; 
+        selectedItem.quantity += 1;
       } else {
         state.items.push({ product: newProduct, quantity: 1 });
       }
@@ -32,18 +34,23 @@ const shoppingCartSlice = createSlice({
         (item) => item.product._id == newProduct._id
       );
       if (selectedItem) {
-        console.log("selectedItem type", selectedItem);
         if (selectedItem.quantity === 1) {
-          state.items = state.items.filter((item) => item.product._id != newProduct._id);
+          state.items = state.items.filter(
+            (item) => item.product._id != newProduct._id
+          );
         } else {
-          console.log("decrease selected", selectedItem);
           selectedItem.quantity -= 1;
+        }
       }
-    }
-  },
+    },
     removeFromCart(state, action) {
       const newProduct = action.payload;
-      state.items = state.items.filter((item) => item.product._id != newProduct._id);
+      state.items = state.items.filter(
+        (item) => item.product._id != newProduct._id
+      );
+    },
+    clearCart(state) {
+      state.items = [];
     },
 
     toggleIsOpen(state, action) {
@@ -56,8 +63,13 @@ const shoppingCartSlice = createSlice({
     });
     builder.addCase(addToCartThunk.fulfilled, (state, action) => {
       state.items = action.payload.items;
+      state.status = "fulfilled";
     });
+ 
     builder.addCase(decreaseOneThunk.fulfilled, (state, action) => {
+      state.items = action.payload.items;
+    });
+    builder.addCase(removeItemThunk.fulfilled, (state, action) => {
       state.items = action.payload.items;
     });
   },
@@ -68,6 +80,7 @@ export const {
   increaseQuantity,
   decreaseQuantity,
   toggleIsOpen,
+  clearCart,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

@@ -51,9 +51,9 @@ export default function ShoppingCart({ show, onHide }) {
         </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        {cartItems.map((item) => (
-          console.log("cart item in shopping", typeof(item.product)),
-          <CartItem key={item.product._id} product={item.product} quantity={item.quantity} />
+        {cartItems.map((item, index) => (
+          console.log("cart item in shopping",item.product),
+          <CartItem key={index} product={item.product} quantity={item.quantity} />
         ))}
         <p className="text-xs text-stone-500 mt-2">Apply Discount Code</p>
         <Stack direction="horizontal" gap={3} className="mb-4">

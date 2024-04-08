@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import "./product.css";
 import { getCurrentProductThunk, updateCurrentProductThunk } from "../../../thunks/product-thunk";
 import { toggleEdit } from "../../../redux/editSlice";
-import { set } from "mongoose";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -51,7 +50,7 @@ const EditProduct = () => {
   };
 
   const handleInputChange = (e) => {
-    console.log("input change event triggered")
+    //console.log("input change event triggered")
     const { name, value } = e.target;
     setFormData((formData) => ({ ...formData, [name]: value }));
 
@@ -61,7 +60,7 @@ const EditProduct = () => {
     e.preventDefault();
     if (validate()) {
       console.log("form is valid");
-      navigate("/display-product");
+      navigate("/");
       dispatch(toggleEdit(!edit));
       dispatch(updateCurrentProductThunk(formData));
     }

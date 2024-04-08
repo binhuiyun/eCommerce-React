@@ -17,20 +17,19 @@ const getCartByUid= async (req, res) => {
 };
 
 const addToCart = async (req, res) => {
-  console.log("addToCart", req.body);
+  //console.log("addToCart", req.body);
   try {
     const userId = req.body.userId;
-    let cart = await Cart.findOne({ owner: userId });
+    //If don't populate, the product will be an object id instead of the product object
+    let cart = await Cart.findOne({ owner: userId }).populate({
+      path: "items.product",
+      model: "Product",
+    });
     if (!cart) {
       cart = new Cart({ owner: userId, items: [] });
    
     } 
       const product = req.body.product;
-      // const productStockQuantity = req.body.product.productQuantity;
-      // const itemIndex = cart.items.findIndex(item => item.product.equals(product._id));
-      // if (itemIndex !== -1) {
-      //   // If the item exists, update its quantity
-      //   cart.items[itemIndex].quantity += 1;
       const item = cart.items.find((i) => i.product._id == product._id);
       if (item) {
         item.quantity += 1;
@@ -41,7 +40,7 @@ const addToCart = async (req, res) => {
   
       // Save the updated cart
       await cart.save();
-      return cart;
+      res.json(cart);
 
   } catch (error) {
     console.error(error);
@@ -53,7 +52,10 @@ const removeFromCart = async (req, res) => {
   console.log("removeFromCart", req.body.product);
   try {
     const userId = req.body.userId;
-    const cart = await Cart.findOne({ owner: userId });
+    const cart = await Cart.findOne({ owner: userId }).populate({
+      path: "items.product",
+      model: "Product",
+    });
     const product = req.body.product;
     const item = cart.items.find((i) => i.product._id == product._id);
     if (item) {
@@ -65,6 +67,7 @@ const removeFromCart = async (req, res) => {
     }
     await cart.save();
     res.json(cart);
+    console.log("down success", cart.items);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -73,10 +76,13 @@ const removeFromCart = async (req, res) => {
 
 const removeOneProductFromCart = async (req, res) => {
   try {
-    const userId = req.body.userID;
-    const cart = await Cart.findOne({ owner: userId });
-    const product = req.body.product.productID;
-    const item = cart.items.find((i) => i.product == product);
+    const userId = req.body.userId;
+    const cart = await Cart.findOne({ owner: userId }).populate({
+      path: "items.product",
+      model: "Product",
+    });
+    const product = req.body.product._id;
+    const item = cart.items.find((i) => i.product._id == product);
     if (item) {
       cart.items.remove(item);
     }

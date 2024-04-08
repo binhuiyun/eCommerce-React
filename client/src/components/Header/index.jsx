@@ -3,7 +3,7 @@ import { Input} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import { useSelector, useDispatch } from "react-redux";
 import {useNavigate, Link} from 'react-router-dom';
-import { toggleIsOpen } from "../../redux/cartSlice";
+import { clearCart, toggleIsOpen } from "../../redux/cartSlice";
 import { useState } from "react";
 import ShoppingCart from "../../pages/ShoppingCart";
 import axios from "axios";
@@ -18,11 +18,7 @@ export default function Header({toggleShow}) {
   const cart = useSelector((state) => state.cart);
   const {isAuthenticated} = useSelector((state) => state.auth);
   const cartQuantity = cart.items.reduce((acc, item) => acc + item.quantity, 0);
-  // const storeItems = useSelector((state) => state.productList.products);
-  // const subtotal = cart.items.reduce((total, cartItem) => {
-  //   const item = storeItems.find((i) => i._id === cartItem.id);
-  //   return total + (item?.price || 0) * cartItem.quantity;
-  // }, 0);
+
   const subtotal = cart.items.reduce((total, cartItem) => {
     console.log("header subtotal", cartItem)
     return total + cartItem.product.price * cartItem.quantity;
@@ -31,6 +27,7 @@ export default function Header({toggleShow}) {
   const handleSignOut = (e) => {
     e.preventDefault();
     dispatch(logOutUser());
+    dispatch(clearCart());
   };
 
   const onSearch = (value) => {

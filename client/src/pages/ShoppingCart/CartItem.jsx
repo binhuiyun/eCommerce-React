@@ -6,22 +6,24 @@ import {
 } from "../../redux/cartSlice";
 import axios from "axios";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { removeItemThunk } from "../../thunks/cart-thunk";
 
 export default function CartItem({ product, quantity }) {
   console.log("cartItem component", product)
+  const {user} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  // const product = storeItems.find((item) => item._id === product);
-  // if (!product) return null;
 
-  const handleIncrement = async (product) => {
+  const handleIncrement =  (product) => {
     dispatch(increaseQuantity(product));
   };
 
-  const handleDecrement = async (product) => {
+  const handleDecrement = (product) => {
     dispatch(decreaseQuantity(product));
   };
   const handleRemove = async (product) => {
     dispatch(removeFromCart(product));
+    dispatch(removeItemThunk({ userId:user.id, product }));
+    
   };
   return (
     <div className="w-full h-24 flex flex-row pb-6">
