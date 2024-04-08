@@ -12,6 +12,7 @@ const initialState = {
         image: "",
         category: "Choose...",
     },
+
 };
 
 const productSlice = createSlice({
@@ -27,7 +28,7 @@ const productSlice = createSlice({
         builder.addCase(getCurrentProductThunk.fulfilled, (state, action) => {
             state.product = action.payload;
         });
-        builder.addCase(updateCurrentProductThunk.pending, (state, action) => {
+        builder.addCase(updateCurrentProductThunk.fulfilled, (state, action) => {
             state.product = action.payload;
         });
     }

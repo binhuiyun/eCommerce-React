@@ -1,18 +1,15 @@
 import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { Input} from 'antd';
-import {UserOutlined} from '@ant-design/icons';
+import { UserOutlined} from '@ant-design/icons';
 import { useSelector, useDispatch } from "react-redux";
-import {useNavigate, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { clearCart, toggleIsOpen } from "../../redux/cartSlice";
-import { useState } from "react";
-import ShoppingCart from "../../pages/ShoppingCart";
-import axios from "axios";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { logOutUser } from "../../redux/userSlice";
 const { Search } = Input;
 
 
-export default function Header({toggleShow}) {
+export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
@@ -20,9 +17,10 @@ export default function Header({toggleShow}) {
   const cartQuantity = cart.items.reduce((acc, item) => acc + item.quantity, 0);
 
   const subtotal = cart.items.reduce((total, cartItem) => {
-    console.log("header subtotal", cartItem)
+  //  console.log("header subtotal", cartItem)
     return total + cartItem.product.price * cartItem.quantity;
   }, 0);
+
 
   const handleSignOut = (e) => {
     e.preventDefault();
@@ -33,26 +31,7 @@ export default function Header({toggleShow}) {
   const onSearch = (value) => {
     navigate(`/search?searchKey=${value}`);
   };
-
-  
   console.log("log in? ", isAuthenticated);
-  // const handleCartClick = async () => {
-  //   // dispatch(toggleIsOpen(!isCartOpen));
-
-  //   try {
-  //     await axios
-  //       .get("/api/cart", {
-  //         params: {
-  //           userID: userID,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         console.log("cart", response.data);
-  //       });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   return (
     <NavbarBs sticky="top" className="bg-while shadow-sm py-3">
@@ -81,7 +60,7 @@ export default function Header({toggleShow}) {
           style={{ width: "3rem", height: "3rem", position: "relative" }}
           variant="outline-primary"
           className="rounded-circle"
-          onClick={toggleShow}
+          onClick={() => dispatch(toggleIsOpen(!cart.isOpen))}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

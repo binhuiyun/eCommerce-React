@@ -59,10 +59,10 @@ const EditProduct = () => {
   const handleSave = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("form is valid");
-      navigate("/");
+      console.log("form is valid");      
       dispatch(toggleEdit(!edit));
       dispatch(updateCurrentProductThunk(formData));
+      navigate("/");
     }
   };
 

@@ -3,8 +3,6 @@ import React,{useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCartThunk } from "./thunks/cart-thunk";
 //import ErrorPage from "./pages/ErrorPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PrivateRoute } from "./PrivateRoute";
@@ -18,18 +16,10 @@ import ShoppingCart from "./pages/ShoppingCart";
 
 
 function App() {
-  const dispatch = useDispatch();
-  const {user} = useSelector((state) => state.auth);
-  const [showCart, setShowCart] = useState(false);
-  const handleToggleCart = () => {
-    setShowCart(!showCart);
-  //  dispatch(fetchCartThunk(user.id));
-  }
-
   return (
     <>
-    <Header toggleShow={handleToggleCart}/>
-    <ShoppingCart show={showCart} onHide={()=> setShowCart(false)}/>
+    <Header/>
+    <ShoppingCart/>
 
       <Routes>  
         <Route index element={<Home />} />

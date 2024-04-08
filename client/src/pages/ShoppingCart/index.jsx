@@ -1,20 +1,19 @@
 import { Offcanvas, Stack, Form } from "react-bootstrap";
 import { Col, Row } from "antd";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "../../utils/formatCurrency";
 import CartItem from "./CartItem";
+import { toggleIsOpen } from "../../redux/cartSlice";
 import "./ShoppingCart.css";
-import { fetchCartThunk } from "../../thunks/cart-thunk";
 
-export default function ShoppingCart({ show, onHide }) {
+export default function ShoppingCart() {
   const cart = useSelector((state) => state.cart);
-  const {user} = useSelector((state) => state.auth);
 //  const storeItems = useSelector((state) => state.productList.products);
   const cartItems = cart.items;
+  const dispatch = useDispatch();
   const [coupon, setCoupon] = useState("");
   const [discountRate, setDiscountRate] = useState(0);
-  const dispatch = useDispatch();
 
   // const subtotal = cartItems.reduce((total, cartItem) => {
   //   const item = storeItems.find((i) => i._id === cartItem.id);
@@ -38,7 +37,7 @@ export default function ShoppingCart({ show, onHide }) {
   };
 
   return (
-    <Offcanvas show={show} onHide={onHide} placement="end">
+    <Offcanvas show={cart.isOpen} onHide={()=>dispatch(toggleIsOpen(!cart.isOpen))} placement="end">
       <Offcanvas.Header closeButton className="bg-indigo-600">
         <Offcanvas.Title className="text-white">
           Cart
@@ -51,9 +50,9 @@ export default function ShoppingCart({ show, onHide }) {
         </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        {cartItems.map((item, index) => (
+        {cartItems.map((item) => (
           console.log("cart item in shopping",item.product),
-          <CartItem key={index} product={item.product} quantity={item.quantity} />
+          <CartItem key={item.product._id} product={item.product} quantity={item.quantity} />
         ))}
         <p className="text-xs text-stone-500 mt-2">Apply Discount Code</p>
         <Stack direction="horizontal" gap={3} className="mb-4">
