@@ -24,7 +24,8 @@ const ProductCard = () => {
     : products.slice(startIndex, endIndex);
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
+  let totalProduct = products.length;
+  let totalPages = Math.ceil(totalProduct / productsPerPage);
 
   useEffect(() => {dispatch(fetchAllProductsThunk())}, []);
 
@@ -41,8 +42,8 @@ const ProductCard = () => {
 
   const sortLastAdded = () => {
     updateSortedProducts((a, b) => {
-      if (a._id < b._id) return 1;
-      if (a._id > b._id) return -1;
+      if (a.createdAt < b.createdAt) return 1;
+      if (a.createdAt > b.createdAt) return -1;
       return 0;
     });
   };
@@ -99,7 +100,7 @@ const ProductCard = () => {
           })}
         </div>
         <div className="flex justify-end xs:justify-center md:justify-end my-6">
-          <PaginationBasic onPageChange={handlePageChange} />
+          <PaginationBasic onPageChange={handlePageChange} totalPages={totalPages}/>
         </div>
       </div>
     </div>

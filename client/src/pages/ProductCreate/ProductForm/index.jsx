@@ -7,8 +7,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useNavigate } from "react-router-dom";
 import { FileImageOutlined } from "@ant-design/icons";
 import "./product.css";
-import { createProduct } from "../../../services/productService";
 import axios from "axios";
+import { createProductThunk } from "../../../thunks/product-thunk";
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -70,12 +70,8 @@ const ProductForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    try {
-      createProduct(product, dispatch);
-      navigate("/display-product");
-    } catch (error) {
-      console.log("error adding prodcut", error.message);
-    }
+    dispatch(createProductThunk(product));
+    navigate("/");
   };
 
   let data = JSON.stringify({

@@ -34,17 +34,17 @@ export default function Header() {
   console.log("log in? ", isAuthenticated);
 
   return (
-    <NavbarBs sticky="top" className="bg-while shadow-sm py-3">
-      <Container>
-        <Nav className="justify-content-evenly flex-grow-1 pe-3">
+    <NavbarBs className="mb-4">
+      <Container >
+        <Nav className="justify-content-evenly flex-grow-1 pe-3 align-items-center">
           <Nav.Link href="/">Home</Nav.Link>
-          <Search className="mt-1"
+          <Search 
           placeholder="Search"
           onSearch={onSearch}
           style={{ width:400 }}
           />
           <div className="d-flex">
-          <UserOutlined style ={{fontSize: "26px",}}
+          <UserOutlined style ={{fontSize: "26px", color: "grey"}}
           />
           {isAuthenticated? (
             <Nav.Link onClick={handleSignOut}>Sign out</Nav.Link>
