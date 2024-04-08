@@ -12,7 +12,7 @@ import { getCurrentProductThunk } from "../../thunks/product-thunk";
 export default function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.productItem);
+  const {product} = useSelector((state) => state.product);
   const {user} = useSelector((state) => state.auth);
   const edit = useSelector((state) => state.edit);
   const navigate = useNavigate();

@@ -5,14 +5,14 @@ import "./card.css";
 import PaginationBasic from "./PaginationBasic";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchAllProductsThunk} from "../../../thunks/products-thunk";
+import { fetchAllProductsThunk} from "../../../thunks/product-thunk";
 import { useDispatch, useSelector } from "react-redux";
 
 
 const ProductCard = () => {
   const {user} = useSelector((state) => state.auth);
   console.log("user", user.email, user.id);
-  const {products} = useSelector((state) => state.productList);
+  const {products} = useSelector((state) => state.product);
   const [sort, setSort] = useState(false);
   const [sortedProducts, setSortedProducts] = useState([...products]);
   const [currentPage, setCurrentPage] = useState(1);

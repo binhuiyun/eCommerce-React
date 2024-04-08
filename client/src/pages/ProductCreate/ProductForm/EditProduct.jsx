@@ -14,7 +14,7 @@ import { toggleEdit } from "../../../redux/editSlice";
 const EditProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const product = useSelector((state) => state.productItem);
+  const{ product }= useSelector((state) => state.product);
   const [imagePreview, setImagePreview] = useState("");
   
   const edit = useSelector((state) => state.edit);

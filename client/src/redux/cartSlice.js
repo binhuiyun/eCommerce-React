@@ -10,7 +10,7 @@ const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: {
     items: [],
-    status: "idle",
+    isOpen: false,
   },
   reducers: {
     increaseQuantity(state, action) {
