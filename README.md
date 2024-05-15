@@ -5,6 +5,7 @@
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
 - Vite+React
+- Redux + Thunk
 - MongoDB
 - JWT Authentication
 - Node.js Express.js
@@ -13,8 +14,6 @@
 
 
 ## <a name="features">🔋 Features</a>
-
-👉 **Home Page**: Showcases charts for key metrics and latest properites.
 
 👉 **Product Display Page**: Allow users to search for products based on product title and sort by price combined with pagination.
 
