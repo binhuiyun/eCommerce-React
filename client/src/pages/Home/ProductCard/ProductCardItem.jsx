@@ -12,6 +12,7 @@ const ProductCardItem = ({ product }) => {
   const navigate = useNavigate();
   const edit = useSelector((state) => state.edit);
   const dispatch = useDispatch();
+  console.log("home", );
 
 
   const handleEdit = () => {

@@ -9,7 +9,6 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 const AuthForm = ({ method, path, title, buttonText, msg, linkText }) => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

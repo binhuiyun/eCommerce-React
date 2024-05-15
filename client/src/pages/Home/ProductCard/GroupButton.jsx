@@ -5,10 +5,13 @@ import {
   increaseQuantity,
 } from "../../../redux/cartSlice";
 import { addToCartThunk, decreaseOneThunk } from "../../../thunks/cart-thunk";
+import { useNavigate } from "react-router-dom";
 
 const GroupButton = ({ product }) => {
   const {user} = useSelector((state) => state.auth);
+  const {isAuthenticated} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const getItemQuantity = (product) => {
     const selectedItem = cart.items.find((item) => item.product._id === product._id);
@@ -16,15 +19,20 @@ const GroupButton = ({ product }) => {
   };
 
   const quantity = getItemQuantity(product);
+  if (!isAuthenticated) {
+    navigate("/login");
+  }
 
 
   return (
     <div className="mt-auto">
+      
       {quantity === 0 ? (
         <Button
           disabled={product.stockQuantity === 0}
           className="w-full border-none focus:outline-none focus:shadow-outline text-white text-base bg-chuwa-blue transition-colors duration-300 hover:bg-gray-300"
           onClick={ () => {
+
             dispatch(increaseQuantity(product));
             dispatch(addToCartThunk({userId:user.id, product}));
           }
