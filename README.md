@@ -22,7 +22,7 @@
 
 👉 **Product Detail Page**: Each product gets a dedicated  page showcasing product details.
 
-👉 **View Cart**: Users can view the products added to cart and total price
+👉 **View Cart**: Users can view the products added to cart and total price, add/remove products from cart.
 
 👉 **JWT Authentication**: Enable secure authentication using JWT, ensuring a streamlined and trustworthy login experience.
 
