@@ -1,6 +1,6 @@
 # A Full Stack MERN E-Commerce App 
 
-![home page](public/ecommerce.png)
+![home page](client/public/ecommerce.png)
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -24,7 +24,7 @@
 
 👉 **View Cart**: Users can view the products added to cart and total price
 
-👉 **JWT Authentication **: Enable secure authentication using JWT, ensuring a streamlined and trustworthy login experience.
+👉 **JWT Authentication**: Enable secure authentication using JWT, ensuring a streamlined and trustworthy login experience.
 
 👉 **Responsive Website**: Develop a fully responsive website to ensure optimal user experience across various devices, from desktops to smartphones
 
@@ -45,8 +45,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/binhuiyun/next_dashboard.git
-cd next_dashboard
+git clone https://github.com/binhuiyun//eCommerce-React.git
+cd /eCommerce-React/client
 ```
 
 **Installation**
@@ -73,6 +73,10 @@ Replace the placeholder values with your actual credentials.
 
 ```bash
 npm run dev
+```
+cd /eCommerce-React/server
+```bash
+node index.js
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser to view the project.
